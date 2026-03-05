@@ -1,0 +1,68 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.input_file_label {
+  @include dis-flex(center, center, $var-gap-xs);
+  color: $var-color-blue;
+  transition: background-color $var-transition-time-250ms ease;
+  border: 1px solid $var-color-blue;
+  padding: $var-padding-l;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $var-color-blue-hover;
+    transition: background-color $var-transition-time-250ms ease;
+  }
+}
+
+.input_file_list {
+  @include dis-flex(unset, unset, 0, column);
+  overflow-y: auto;
+  border: 1px solid $var-color-blue;
+  max-height: calc(10 * 51px);
+  color: $var-color-blue;
+
+  .input_file_item {
+    @include text-overflow();
+    @include dis-flex(center, space-between, $var-gap-xxxxl, row, nowrap, 1, 0);
+    border-bottom: 1px solid $var-color-blue;
+    padding: $var-padding-s $var-padding-l;
+    cursor: pointer;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .input_file_name {
+      @include text-overflow();
+    }
+
+    .input_file_data {
+      @include dis-flex(center, unset, $var-gap-s);
+
+      & > button {
+        color: $var-color-red;
+        padding: $var-padding-s $var-padding-s;
+        border-radius: 50%;
+
+        &:hover {
+          background-color: $var-color-red-hover;
+        }
+
+        & > svg {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+.input_file_error_message {
+  background-color: $var-color-red;
+  color: #ffffff;
+  padding: $var-padding-m;
+  font-size: $var-font-l;
+  text-align: center;
+  border-radius: $var-border-radius-xs;
+  word-break: break-all;
+}

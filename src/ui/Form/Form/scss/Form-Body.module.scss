@@ -1,0 +1,14 @@
+@use "@scss/mixins" as *;
+@use "@scss/variables" as *;
+
+.form_body {
+  @include dis-flex(normal, normal, $var-gap-xs, column);
+
+  .form_body_error {
+    color: $var-color-red;
+    font-size: $var-font-l;
+    padding: $var-padding-m $var-padding-l;
+    border: 1px solid $var-color-red;
+    box-shadow: 1px 2px 2px $var-background-color-red;
+  }
+}

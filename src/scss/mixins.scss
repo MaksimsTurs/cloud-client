@@ -1,0 +1,105 @@
+@use "variables" as *;
+
+@mixin pos-abs(
+  $first-pos-prop,
+  $second-pos-prop,
+  $first-pos-val:  0%,
+  $second-pos-val: 0%, 
+  $z-index:        0, 
+  $width:          100%, 
+  $height:         100%
+) {
+  #{$first-pos-prop}:  $first-pos-val;
+  #{$second-pos-prop}: $second-pos-val;
+  width:               $width;
+  height:              $height;
+  z-index:             $z-index;
+  position:            absolute;
+}
+
+@mixin pos-fixed(
+  $first-pos-prop,
+  $second-pos-prop,
+  $first-pos-val:  0%,
+  $second-pos-val: 0%, 
+  $z-index:        0, 
+  $width:          100%, 
+  $height:         100%
+) {
+  #{$first-pos-prop}:  $first-pos-val;
+  #{$second-pos-prop}: $second-pos-val;
+  width:              $width;
+  height:             $height;
+  z-index:            $z-index;
+  position: fixed;
+}
+
+@mixin pos-sticky(
+  $first-pos-prop,
+  $second-pos-prop,
+  $first-pos-val:  0%,
+  $second-pos-val: 0%, 
+  $z-index:        0, 
+  $width:          100%, 
+  $height:         100%
+) {
+  #{$first-pos-prop}:  $first-pos-val;
+  #{$second-pos-prop}: $second-pos-val;
+  width:              $width;
+  height:             $height;
+  z-index:            $z-index;
+  position: sticky;
+}
+
+@mixin dis-flex(
+  $align-items:     unset,
+  $justify-content: unset,
+  $gap:             unset,
+  $flex-direction:  unset,
+  $flex-wrap:       unset,
+  $flex-grow:       unset,
+  $flex-shrink:     unset
+) {
+  align-items:     $align-items;
+  justify-content: $justify-content;
+  gap:             $gap;
+  flex-direction:  $flex-direction;
+  flex-wrap:       $flex-wrap;
+  flex-grow:       $flex-grow;
+  flex-shrink:     $flex-shrink;
+  display: flex;
+}
+
+@mixin text-overflow($width: 100%, $text-overflow: ellipsis) {
+  width:         $width;
+  text-overflow: $text-overflow;
+  white-space:   nowrap;
+  overflow:      hidden;
+}
+
+@mixin skeleton() {
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: "";
+    @include pos-abs(top, left, 0%, 0%, 10%, 80%);
+    background-image: linear-gradient(90deg, 
+      rgba(220, 220, 220, 0.1) 0%, 
+      rgba(160, 160, 160, 0.2) 50%, 
+      rgba(220, 220, 220, 0.1) 100%);
+    animation: skeleton 1s infinite;
+  }
+}
+
+@mixin skeleton-keyframe() {
+  @keyframes skeleton {
+    from {
+      left: -70%;
+    }
+
+    to {
+      left: 100%;
+    }
+  }
+}

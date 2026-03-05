@@ -1,0 +1,13 @@
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
+
+.text_renderer {
+  word-break: break-all;
+  display: block;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  height: 100%;
+  flex-grow: 1;
+  width: 100%;
+}

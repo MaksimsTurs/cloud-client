@@ -1,0 +1,11 @@
+@forward "reset/default.scss";
+@forward "reset/input.scss";
+
+@forward "mixins.scss";
+@forward "variables.scss";
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}

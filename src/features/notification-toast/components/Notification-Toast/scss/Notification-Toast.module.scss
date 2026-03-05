@@ -1,0 +1,47 @@
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
+
+.notification_toast_item {
+  @include dis-flex(flex-end, center, $var-gap-xl);
+  border: 1px solid $var-border-color-black;
+  padding: $var-padding-l;
+  box-shadow: 0px 2px 2px $var-box-shadow-color-black;
+  max-width: calc($var-size-xxxxl * 8);
+  transition: all $var-transition-time-250ms ease;
+  position: relative;
+  color: #ffffff;
+
+  > svg {
+    flex-shrink: 0;
+  }
+
+  .notification_toast_message {
+    @include dis-flex(center, center, $var-gap-xs);
+    font-size: $var-font-m;
+    word-break: break-all;
+  }
+
+  .notification_close_button {
+    @include pos-abs(top, right, $var-margin-xs, $var-margin-xs, 0, fit-content, fit-content);
+    color: #ffffff;
+  }
+
+  .notification_timeline {
+    @include pos-abs(bottom, left, 0%, 0%, 1, 0, 0.2rem);
+    background-color: #ffffff;
+  }
+}
+
+.notification_toast_remove_animation {
+  animation: slide-right $var-transition-time-250ms forwards;
+}
+
+@keyframes slide-right {
+  from {
+    left: 0%;
+  }
+
+  to {
+    left: 100%;
+  }
+}

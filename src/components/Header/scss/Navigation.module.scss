@@ -1,0 +1,6 @@
+@use "@scss/mixins" as *; 
+@use "@scss/variables" as *; 
+
+.header_nav_container {
+  @include dis-flex(unset, unset, $var-gap-xs);
+}

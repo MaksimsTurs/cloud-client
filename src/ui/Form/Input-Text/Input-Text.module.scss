@@ -1,0 +1,59 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.input_text_label {
+  @include dis-flex(normal, normal, 0.2rem, column);
+  width: 100%;
+
+  .input_text_container {
+    position: relative;
+
+    & > input {
+      padding: $var-padding-m $var-padding-xxxl $var-padding-m $var-padding-m;
+      border-bottom: 1px solid $var-border-color-blue;
+      box-shadow: 1px 3px 3px $var-box-shadow-color-black;
+      transition: background-color $var-transition-time-100ms ease;
+      width: 100%;
+
+      &:focus {
+        background-color: $var-background-color-black;
+        transition: background-color $var-transition-time-100ms ease;
+      }
+
+      &:hover {
+        background-color: $var-background-color-black;
+        transition: background-color $var-transition-time-100ms ease;
+      }
+    }
+
+    .input_text_error {
+      border-bottom: 1px solid $var-border-color-red;
+      background-color: $var-background-color-red;
+
+      &::placeholder {
+        color: $var-color-red;
+      }
+
+      &:focus {
+        background-color: $var-background-color-red;
+        transition: background-color $var-transition-time-100ms ease;
+      }
+
+      &:hover {
+        background-color: $var-background-color-red;
+        transition: background-color $var-transition-time-100ms ease;
+      }
+    }
+
+    .input_text_preview_button {
+      @include pos-abs(top, right, 50%, 0.5rem, 1, fit-content, fit-content);
+      transform: translateY(-50%);
+    }
+  }
+
+  .input_text_error_message {
+    color: $var-color-red;
+    font-size: $var-font-m;
+    word-break: break-all;
+  }
+}

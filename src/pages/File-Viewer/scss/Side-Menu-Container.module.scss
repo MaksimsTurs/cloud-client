@@ -1,0 +1,13 @@
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
+
+.side_menu_container {
+  @include dis-flex(unset, unset, $var-gap-xs, column);
+  border-right: 1px solid $var-border-color-black;
+  box-shadow: 0px 3px 5px $var-box-shadow-color-black;
+  padding: $var-padding-m;
+  background-color: #ffffff;
+  z-index: 1;
+  height: 100%;
+  width: 30rem;
+}

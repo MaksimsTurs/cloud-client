@@ -1,0 +1,16 @@
+@use "@scss/mixins" as *; 
+@use "@scss/variables" as *; 
+
+.header_loader_container {
+  @include dis-flex(unset, space-between, $var-gap-xs);
+  border-bottom: 1px solid $var-border-color-black;
+  box-shadow: 0px 1px 1px $var-box-shadow-color-black;
+  padding: $var-padding-m $var-padding-s;
+  position: relative;
+
+  > nav,
+  > section {
+    @include dis-flex(unset, unset, $var-gap-xs);
+  }
+}
+

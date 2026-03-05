@@ -1,0 +1,29 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.breadcrumbs_list {
+  @include dis-flex(unset, unset, $var-gap-xs);
+  margin: $var-margin-xs 0;
+
+  .breadcrumbs_list_item {
+    @include dis-flex(center, unset, $var-gap-xs);
+    color: $var-color-blue;
+    transition: background-color $var-transition-time-100ms ease;
+    width: fit-content;
+
+    > p:nth-child(1) {
+      padding: $var-padding-m 0;
+    }
+
+    > p:nth-child(2) {
+      @include text-overflow();
+      padding: $var-padding-m;
+      cursor: pointer;
+
+      &:hover {
+        transition: background-color $var-transition-time-100ms ease;
+        background-color: $var-color-blue-hover;
+      }
+    }
+  }
+}

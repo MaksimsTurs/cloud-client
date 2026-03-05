@@ -1,0 +1,31 @@
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
+
+.file_explorer_item_loader_container {
+  @include dis-flex(center, center, $var-gap-m);
+  font-size: $var-size-xs;
+  padding: $var-padding-l;
+  border: 1px solid $var-border-color-black;
+  height: calc($var-size-s * 6);
+  width: 100%;
+  position: relative;
+
+  .file_explorer_item_loader_icon {
+    @include skeleton();
+    width: $var-size-xxxl;
+    height: $var-size-xxl;
+    border-radius: $var-border-radius-xl;
+    background-color: #ededed;
+    flex-shrink: 0;
+ }
+
+  .file_explorer_item_loader_name {
+    @include skeleton();
+    border-radius: $var-border-radius-xl;
+    height: $var-size-xxl;
+    width: 100%;
+    background-color: #ededed;
+  }
+}
+
+@include skeleton-keyframe();

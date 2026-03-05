@@ -1,0 +1,7 @@
+@use "@scss/mixins" as *; 
+@use "@scss/variables" as *; 
+
+.create_item_form_container {
+  padding: $var-padding-s;
+  width: 100%;
+}

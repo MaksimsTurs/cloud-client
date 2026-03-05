@@ -1,0 +1,13 @@
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
+
+.explorer_container {
+  @include dis-flex(normal, normal, unset, column, 1, 1);
+  padding: 0 $var-padding-xs;
+
+  .explorer_body {
+    gap: $var-gap-xs;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  }
+}

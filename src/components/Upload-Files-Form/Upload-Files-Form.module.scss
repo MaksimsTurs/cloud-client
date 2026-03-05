@@ -1,0 +1,7 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.upload_files_container {
+  padding: $var-padding-s;
+  width: 100%;
+}

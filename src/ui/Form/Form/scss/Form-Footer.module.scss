@@ -1,0 +1,13 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.form_footer {
+  @include dis-flex(center, unset, $var-gap-xs);
+  
+  > a {
+    color: $var-color-blue;
+    font-size: $var-font-m;
+    flex-shrink: 0;
+    flex-grow: 1;
+  }
+}

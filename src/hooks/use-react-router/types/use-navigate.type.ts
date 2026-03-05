@@ -1,0 +1,1 @@
+export type UseNavigateReturn = (to: string | -1) => void;

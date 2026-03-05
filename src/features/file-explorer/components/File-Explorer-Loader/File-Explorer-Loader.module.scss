@@ -1,0 +1,8 @@
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
+
+.file_explorer_loader_container {
+  gap: $var-gap-xs;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+}

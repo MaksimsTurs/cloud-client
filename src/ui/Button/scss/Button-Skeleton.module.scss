@@ -1,0 +1,18 @@
+@use "@scss/mixins" as *; 
+@use "@scss/variables" as *; 
+
+.button_skeleton {
+  @include dis-flex(center, center);
+  @include skeleton();
+  transition: 
+    color $var-transition-time-100ms ease,
+    background-color $var-transition-time-100ms ease,
+    box-shadow $var-transition-time-100ms ease;
+  background-color: $var-background-color-black;
+  padding: $var-padding-l;
+  cursor: auto;
+  box-shadow: 0px 1px 1px $var-box-shadow-color-black;
+  border-radius: 50%;
+}
+
+@include skeleton-keyframe();

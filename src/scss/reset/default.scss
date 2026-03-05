@@ -1,0 +1,66 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+* {
+	// font-family: "Open Sans", sans-serif;
+	// font-family: "Lato", sans-serif;
+	// font-family: "Quicksand", sans-serif;
+	font-family: "Source Sans 3", sans-serif;
+  font-style: normal;
+  font-optical-sizing: auto;
+	user-select: none;
+	box-sizing: border-box;
+	padding: 0rem;
+	margin: 0rem;
+	border: none;
+
+	&:before, :after {
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
+		border: none;
+	}
+}
+
+form {
+	width: 100%;
+}
+
+body, html {
+	height: 100%;
+	width: 100%;
+	scroll-behavior: smooth;
+}
+
+header, main, footer {
+	width: 100%;
+}
+
+main {
+  width: 100%;
+	padding: 5rem 0rem 1rem 0rem;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+	color: #000000;
+	
+	&:visited, :hover { text-decoration: none; }
+}
+
+button {
+	@include dis-flex(center, center);
+	font: inherit;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+	width: fit-content;
+        height: fit-content;
+}
+
+button, input { outline: none; }
+
+textarea:focus, input:focus, select:focus { outline: none; }
+
+ul { list-style: none; }
