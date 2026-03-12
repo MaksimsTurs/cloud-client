@@ -1,9 +1,9 @@
-import scss from "./Button.module.scss";
+import scss from "./Icon-Button.module.scss";
 
 import type { ReactNode } from "react";
-import type { ButtonProps } from "./Button.type";
+import type { ButtonProps } from "./Icon-Button.type";
 
-export default function Button({ children, className, ...attributes }: ButtonProps): ReactNode {
+export default function IconButton({ children, className, ...attributes }: ButtonProps): ReactNode {
   return(
     <button 
       {...attributes } 

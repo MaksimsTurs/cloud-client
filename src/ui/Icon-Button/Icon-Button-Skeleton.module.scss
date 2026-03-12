@@ -13,6 +13,8 @@
   cursor: auto;
   box-shadow: 0px 1px 1px $var-box-shadow-color-black;
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 @include skeleton-keyframe();
