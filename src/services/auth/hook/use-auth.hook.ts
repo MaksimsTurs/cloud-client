@@ -6,6 +6,7 @@ import { AuthContext } from "../components/Auth-Provider/Auth-Provider.component
 import { useContext, useState } from "react";
 
 import AuthenticationError from "../utils/Authentication-Error.util";
+
 import scall from "@util/scall/scall.util";
 import { isString, isUndefined } from "@util/is.util";
 
@@ -26,10 +27,10 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
   };
 
   return {
-    isLoading,
-    error,
     isAuthorizing: context.isAuthorizing,    
     isAuthorized: !isUndefined(context?.tokens.access),
+    isLoading,
+    error,
     authorize: async function(callback) {
       context.setIsAuthorizing(true);
 
@@ -48,13 +49,11 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
       if(result.getError()) {
         handleFail(result.getError());
         context.setIsAuthorizing(false);
-        context.setHasAuthorized(true);
         return false;
       } 
 
       context.setTokens(result.getData()!.tokens);
       context.setIsAuthorizing(false);
-      context.setHasAuthorized(true);
 
       return true;
     },
