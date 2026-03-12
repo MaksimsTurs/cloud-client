@@ -1,3 +1,7 @@
-import type { PropsWithChildren } from "react";
+import type { ReactNode } from "react";
 
-export type EmptyProps = PropsWithChildren;
+export type EmptyProps = {
+  header: string
+  main: string
+  footer?: ReactNode
+};

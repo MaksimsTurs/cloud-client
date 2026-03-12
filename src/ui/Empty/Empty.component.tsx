@@ -3,6 +3,14 @@ import scss from "./Empty.module.scss";
 import type { ReactNode } from "react";
 import type { EmptyProps } from "./Empty.type";
 
-export default function Empty({ children }: EmptyProps): ReactNode {
-  return <div className={scss.empty_container}>{children}</div>;
+export default function Empty({ header, main, footer }: EmptyProps): ReactNode {
+  return(
+    <div className={scss.container}>
+      <div className={scss.body}>
+        <h3 className={scss.header}>{header}</h3>
+        <p className={scss.main}>{main}</p>
+        {footer ? <section className={scss.footer}>{footer}</section> : null}
+      </div>
+    </div>
+  );
 };
