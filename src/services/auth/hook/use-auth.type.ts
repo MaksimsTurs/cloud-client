@@ -21,18 +21,18 @@ export type UseAuthReturn<E = unknown> = {
   /**
     @description make request to you server to get access token.
   */
-  authorize: UseAuthAuthorize<E>
+  authorize: UseAuthAuthorize
   /**
     @description make log in/up request to you server, callback should return a 
     access token.
   */
-  authenticate: UseAuthAuthenticate<E>
+  authenticate: UseAuthAuthenticate
   /**
     @description make log out request to you server and
     remove all local information, server should clear http cookie.
     When user are loged out function return two undefineds, for data and error.
   */
-  logout: UseAuthLogout<E>
+  logout: UseAuthLogout
 };
 
 export type UseAuthOptions<E = unknown> = {
@@ -51,8 +51,8 @@ type SerializeError<E = unknown> = (error: unknown) => E;
 
 type UseAuthCallback = () => Promise<UseAuthEndpointResponse | undefined>;
 
-type UseAuthAuthorize<E = unknown> = (callback: UseAuthCallback) => Promise<E | undefined>;
+type UseAuthAuthorize = (callback: UseAuthCallback) => Promise<boolean>;
 
-type UseAuthLogout<E = unknown> = (callback: UseAuthCallback) => Promise<E | undefined>;
+type UseAuthLogout = (callback: UseAuthCallback) => Promise<boolean>;
 
-type UseAuthAuthenticate<E = unknown> = (callback: UseAuthCallback) => Promise<E | undefined>;
+type UseAuthAuthenticate = (callback: UseAuthCallback) => Promise<boolean>;

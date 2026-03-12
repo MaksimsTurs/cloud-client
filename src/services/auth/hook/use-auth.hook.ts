@@ -6,9 +6,8 @@ import { AuthContext } from "../components/Auth-Provider/Auth-Provider.component
 import { useContext, useState } from "react";
 
 import AuthenticationError from "../utils/Authentication-Error.util";
-import caller from "@util/caller/caller.util";
-import { isUndefined } from "@util/is.util";
-import { inObject } from "@util/std/std.util";
+import scall from "@util/scall/scall.util";
+import { isString, isUndefined } from "@util/is.util";
 
 export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseAuthReturn<E> {
   const context = useContext<AuthContextValue | undefined>(AuthContext);
@@ -19,13 +18,11 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
     throw new Error("Wrap you'r application into AuthProvider compontent!");
   }
 
-  const handleError = (error: unknown): E => {
+  const handleFail = (error: unknown): void => {
     const serializedError: E = options.serializeError(error);
 
     setError(serializedError);
     setIsLoading(false);
-
-    return serializedError;
   };
 
   return {
@@ -34,47 +31,72 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
     isAuthorizing: context.isAuthorizing,    
     isAuthorized: !isUndefined(context?.tokens.access),
     authorize: async function(callback) {
-      let serializedError: E | undefined;
-
       context.setIsAuthorizing(true);
 
-      const [data, error] = await caller<UseAuthEndpointResponse, E | undefined>(async() => {
+      const result = await scall<UseAuthEndpointResponse, E | undefined>(async() => {
         const response = await callback();
 
-        if(!response || !inObject(["access", "refresh"], response.tokens || {})) {
+        if(!response || 
+           !isString(response.tokens.access) || 
+           !isString(response.tokens.refresh)) {
           throw new AuthenticationError("Refresh and Access tokens must be returned from you authentication endpoint!");
         }
 
         return response;
       });
 
-      if(error) {
-        serializedError = handleError(error);
+      if(result.getError()) {
+        handleFail(result.getError());
         context.setIsAuthorizing(false);
         context.setHasAuthorized(true);
-        return serializedError;
+        return false;
       } 
 
-      context.setTokens(data!.tokens);
+      context.setTokens(result.getData()!.tokens);
       context.setIsAuthorizing(false);
       context.setHasAuthorized(true);
 
-      return undefined;
+      return true;
+    },
+    authenticate: async function(callback) {
+      setIsLoading(true);
+      setError(undefined);
+
+      const result = await scall<UseAuthEndpointResponse, E | undefined>(async() => {
+        const response = await callback();
+
+        if(!response || 
+           !isString(response.tokens.access) || 
+           !isString(response.tokens.refresh)) {
+          throw new AuthenticationError("Refresh and Access tokens must be returned from you authentication endpoint!");
+        }
+
+        return response;
+      });
+
+      if(result.getError()) {
+        handleFail(result.getError());
+        return false;
+      }
+
+      context?.setTokens(result.getData()!.tokens);
+      setIsLoading(false);
+      setError(undefined);
+
+      return true;
     },
     logout: async function(callback) {
-      let serializedError: E | undefined;
-
       if(context.tokens) {
         setIsLoading(true);
         setError(undefined);
 
-        const [_, error] = await caller<void, E>(async () => {
+        const result = await scall<void, E>(async () => {
           await callback();
         });
       
-        if(error) {
-          serializedError = handleError(error);
-          return serializedError;
+        if(result.getError()) {
+          handleFail(result.getError());
+          return false;
         }
 
         context.setTokens({});
@@ -82,37 +104,10 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
         setError(undefined);
         setIsLoading(false);
 
-        return undefined;
+        return true;
       }
 
-      return undefined;
-    },
-    authenticate: async function(callback) {
-      let serializedError: E | undefined;
-
-      setIsLoading(true);
-      setError(undefined);
-
-      const [data, error] = (await caller<UseAuthEndpointResponse, unknown>(async () => {
-        const response = await callback();
-
-        if(!response || !inObject(["access", "refresh"], response.tokens || {})) {
-          throw new AuthenticationError("Refresh and Access tokens must be returned from you authentication endpoint!");
-        }
-
-        return response;
-      }))
-
-      if(error) {
-        serializedError = handleError(error);
-        return serializedError;
-      }
-
-      context?.setTokens(data!.tokens);
-      setIsLoading(false);
-      setError(undefined);
-
-      return undefined;
+      return true;
     },
   };
 };
