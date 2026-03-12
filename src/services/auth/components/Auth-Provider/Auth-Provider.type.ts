@@ -1,4 +1,5 @@
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
+import type { UseAuthEndpointResponse } from "../../hook/use-auth.type";
 
 export type AuthContextValue = {
   isAuthorizing: boolean
@@ -9,9 +10,7 @@ export type AuthContextValue = {
   setIsAuthorizing: Dispatch<SetStateAction<boolean>>
 };
 
-export type AuthContextProps = PropsWithChildren<{
-  onSiteEnter?: () => void;
-}>
+export type AuthProviderProps = PropsWithChildren;
 
 export type AuthTokens = {
   refresh?: string

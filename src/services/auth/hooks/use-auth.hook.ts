@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 import AuthenticationError from "../utils/Authentication-Error.util";
 
 import scall from "@util/scall/scall.util";
-import { isString, isUndefined } from "@util/is.util";
+import { isString } from "@util/is.util";
 
 export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseAuthReturn<E> {
   const context = useContext<AuthContextValue | undefined>(AuthContext);
@@ -27,36 +27,8 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
   };
 
   return {
-    isAuthorizing: context.isAuthorizing,    
-    isAuthorized: !isUndefined(context?.tokens.access),
     isLoading,
     error,
-    authorize: async function(callback) {
-      context.setIsAuthorizing(true);
-
-      const result = await scall<UseAuthEndpointResponse, E | undefined>(async() => {
-        const response = await callback();
-
-        if(!response || 
-           !isString(response.tokens.access) || 
-           !isString(response.tokens.refresh)) {
-          throw new AuthenticationError("Refresh and Access tokens must be returned from you authentication endpoint!");
-        }
-
-        return response;
-      });
-
-      if(result.getError()) {
-        handleFail(result.getError());
-        context.setIsAuthorizing(false);
-        return false;
-      } 
-
-      context.setTokens(result.getData()!.tokens);
-      context.setIsAuthorizing(false);
-
-      return true;
-    },
     authenticate: async function(callback) {
       setIsLoading(true);
       setError(undefined);

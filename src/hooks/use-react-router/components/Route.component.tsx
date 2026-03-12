@@ -6,10 +6,9 @@ import { ReactRouterContext } from "./Routes.component";
 
 import { useContext } from "react";
 
-import { isUndefined } from "@util/is.util";
 import isPathMatchPattern from "../utils/is-path-match-pattern.util";
 
-export default function Route<P extends string>({ path, protect, children, fallback }: RouteProps<P>): ReactNode {
+export default function Route<P extends string>({ path, children }: RouteProps<P>): ReactNode {
   const context: ReactRouterContextValue<P> | undefined = useContext(ReactRouterContext);
   
   if(!context) {
@@ -18,13 +17,5 @@ export default function Route<P extends string>({ path, protect, children, fallb
   
   context.addPattern(path);
   
-  return(
-    isUndefined(protect) ? 
-      isPathMatchPattern(path, context.paths.at(-1)) ? 
-        children :
-      null :
-    protect ? 
-      fallback : 
-      children
-  );
+  return isPathMatchPattern(path, context.paths.at(-1)) ? children : null;
 };

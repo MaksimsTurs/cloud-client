@@ -2,14 +2,6 @@ import type { AuthTokens } from "../components/Auth-Provider/Auth-Provider.type"
 
 export type UseAuthReturn<E = unknown> = {
   /**
-    * @description indicator if the user is authorized, returning a true if both access and refresh tokens are defined.
-    */
-  isAuthorized: boolean
-  /**
-    * @description indicator if the authorization is running.
-    */
-  isAuthorizing: boolean
-  /**
     * @description indicator for local loading state.
     */
   isLoading: boolean
@@ -17,10 +9,6 @@ export type UseAuthReturn<E = unknown> = {
     * @description serialized error.
     */
   error?: E
-  /**
-    * @description make initial request to you server to get access and refresh tokens.
-    */
-  authorize: Authorize
   /**
     * @description make log in or log up request to you server to get access and refresh tokens.
     */
