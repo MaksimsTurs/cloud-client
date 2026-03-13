@@ -1,40 +1,39 @@
 import type { SerializedError } from "@root/global.type";
-import type { UseAuthEndpointResponse } from "@service/auth/hook/use-auth.type";
+import type { UseAuthEndpointResponse } from "@service/auth/hooks/use-auth.type";
+import type { ReactNode } from "react";
 
 import scss from "../scss/Navigation.module.scss";
 
-import useNavigate from "@hook/use-react-router/use-navigate.hook";
-import usePath from "@hook/use-react-router/use-path.hook";
+import { usePath, useNavigate } from "@hook/use-react-router/use-react-router.hook";
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
-import { useAuth, useWithAuth } from "@service/auth/auth.service";
+import { useAuth, useAuthIsAuthorized, useWithAuth } from "@service/auth/auth.service";
 import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 
-import { Link } from "@root/index";
+import IconButton from "@ui/Icon-Button/Icon-Button.component";
 
-import Button from "@ui/Button/Button.component";
+import { Link } from "@hook/use-react-router/use-react-router.hook";
 
 import { 
   ArrowLeftIcon, 
-  LogOutIcon, 
   UserCheck2Icon, 
-  UserPlus2Icon 
+  UserPlus2Icon, 
+  UserRoundXIcon
 } from "lucide-react";
 
 import { Fragment } from "react/jsx-runtime";
 
 import serializeError from "@util/serialize-error.util";
-import fetcher from "@util/fetcher/fetcher.util";
-import refreshUserRefreshToken from "@util/refresh-user-refresh-token.util";
+import http from "@util/http/http.util";
+import generateRefreshToken from "@util/refresh-user-refresh-token.util";
 
-import NOTIFICATION_TOAST_TYPES from "@feature/notification-toast/const/NOTIFICATION-TOAST-TYPES.const";
-
-export default function Navigation() {
+export default function Navigation(): ReactNode {
   const navigate = useNavigate();
   const path = usePath();
-  const notificationToast = useNotificationToastActions();
-  const withAuth = useWithAuth<SerializedError>({ serializeError })
-  const { logout, isAuthorized } = useAuth<SerializedError>({ serializeError });
+  const toast = useNotificationToastActions();
   const feHistory = useFileExplorerHistory();
+  const isAuthorized = useAuthIsAuthorized();
+  const withAuth = useWithAuth<SerializedError>({ serializeError });
+  const { logout } = useAuth<SerializedError>({ serializeError });
 
   const goBack = async (): Promise<void> => {
     if(path !== "/") {
@@ -45,54 +44,41 @@ export default function Navigation() {
   };
 
   const logoutUser = async (): Promise<void> => {
-    const [_, error] = await withAuth({
-      refreshRefreshToken: async () => {
-        return await refreshUserRefreshToken()
-      },
+    const result = await withAuth({
+      generateRefreshToken,
       apiRequest: async () => {
-        const error = await logout(async () => {
-          const { data, error } = await fetcher.get<UseAuthEndpointResponse>("/user/log-out", { credentials: "include" });
-
-          if(error) {
-            throw error;
-          }
-
-          return data;
+        await logout(async () => {
+          return await http.get<UseAuthEndpointResponse>("/user/log-out", { credentials: "include" });
         });
-
-        if(error) {
-          throw error
-        }
       } 
     });
 
-    if(error) {
-      notificationToast.add({ type: NOTIFICATION_TOAST_TYPES.ERROR, message: error.message });
+    if(result.getError()) {
+      toast.add("error", result.getError()!.message);
     } else {
       navigate("/");
     }
   };
 
-
   return(
     <nav className={scss.header_nav_container}>
-      <Button onClick={goBack}>
-        <ArrowLeftIcon strokeWidth={1} size={20}/>
-      </Button>
+      <IconButton onClick={goBack} disabled={!feHistory.parent && path === "/"}>
+        <ArrowLeftIcon/>
+      </IconButton>
       {isAuthorized ?
-      <Button onClick={logoutUser}>
-        <LogOutIcon strokeWidth={1} size={20}/> 
-      </Button> :
+      <IconButton onClick={logoutUser}>
+        <UserRoundXIcon/> 
+      </IconButton> :
       <Fragment>
         <Link href="/log-up">
-          <Button>
-            <UserPlus2Icon strokeWidth={1} size={20}/>
-          </Button>
+          <IconButton>
+          <UserPlus2Icon/>
+          </IconButton>
         </Link>
         <Link href="/log-in">
-          <Button>
-            <UserCheck2Icon strokeWidth={1} size={20}/>
-          </Button>
+          <IconButton>
+            <UserCheck2Icon/>
+          </IconButton>
         </Link>
       </Fragment>}
     </nav>
