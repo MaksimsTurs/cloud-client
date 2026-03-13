@@ -1,40 +1,40 @@
-import { Fragment, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { SubmitHandler } from "react-hook-form";
-import type { UseAuthEndpointResponse } from "@service/auth/hook/use-auth.type";
+import type { UseAuthEndpointResponse } from "@service/auth/hooks/use-auth.type";
 import type { UserLogUp } from "./Page.type";
 import type { SerializedError } from "@root/global.type";
 
-import Title from "@component/Title/Title.component";
+import Metadata from "@component/Metadata/Metadata.component";
 import InputText from "@ui/Form/Input-Text/Input-Text.component";
-import SubmitButton from "@ui/Submit-Button/Submit-Button.component";
-import { Link } from "@root/index";
+import TextButton from "@ui/Text-Button/Text-Button.component";
+import { Link } from "@hook/use-react-router/use-react-router.hook";
 import { FormContainer, FormBody, FormHeader, FormFooter } from "@ui/Form/Form/Form.component";
 
+import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
-import useAuth from "@service/auth/hook/use-auth.hook";
-import useNavigate from "@hook/use-react-router/use-navigate.hook";
+import { useAuth } from "@service/auth/auth.service";
+import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
 
-import fetcher from "@util/fetcher/fetcher.util";
+import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
 export default function Page(): ReactNode {
-  const { handleSubmit, register, getValues, formState: { errors }} = useForm<UserLogUp>({ mode: "onSubmit" });
+  const { 
+    handleSubmit, 
+    register, 
+    getValues, 
+    formState: { errors }
+  } = useForm<UserLogUp>();
   const { error, isLoading, authenticate } = useAuth<SerializedError>({ serializeError });
   const navigate = useNavigate();
 
-  const logUp: SubmitHandler<UserLogUp> = async (userData) => {
-    const error = await authenticate(async () => {
-      const { data, error } = await fetcher.post<UseAuthEndpointResponse>("/user/log-up", userData, { credentials: "include" })
-      
-      if(error) {
-        throw error;
-      }
-
-      return data;
+  const logUp: SubmitHandler<UserLogUp> = async (userData): Promise<void> => {
+    const isSucceed: boolean = await authenticate(async () => {
+      return await http.post<UseAuthEndpointResponse>("/user/log-up", { body: userData, credentials: "include" })
     });
 
-    if(!error) {
+    if(isSucceed) {
       navigate("/");
     }
   };
@@ -52,9 +52,9 @@ export default function Page(): ReactNode {
 
   return(
     <Fragment>
-      <Title>Log up</Title>
+      <Metadata title="Log up"/>
       <FormContainer>
-        <FormHeader title="Log Up"/>
+        <FormHeader title="Log up"/>
         <FormBody onSubmit={handleSubmit(logUp)} error={error?.message}>
           <InputText 
             register={register}
@@ -92,7 +92,7 @@ export default function Page(): ReactNode {
               validate: checkPasswordsEquality
             }}/>
           <FormFooter>
-            <SubmitButton text="Registrate" disabled={isLoading}/>
+            <TextButton text="Registrate" disabled={isLoading}/>
             <Link href="/log-in">Have account?</Link>
           </FormFooter>
         </FormBody>
