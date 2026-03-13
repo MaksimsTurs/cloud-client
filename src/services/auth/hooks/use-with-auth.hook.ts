@@ -12,65 +12,66 @@ import { AuthContext } from "../components/Auth-Provider/Auth-Provider.component
 import { useContext } from "react";
 
 import { isString } from "@util/is.util";
-import caller from "@util/caller/caller.util";
+import scall from "@util/scall/scall.util";
+import SCallResult from "@util/scall/SCall-Result.util";
 
 export default function useWithAuth<E extends { code?: number }>(options: UseWithAuthOptions<E>): UseWithAuthReturn<E> {
-  const context = useContext<AuthContextValue | undefined>(AuthContext);
+  const context: AuthContextValue | undefined = useContext<AuthContextValue | undefined>(AuthContext);
 
   if(!context) {
     throw new Error("Wrap you'r application into AuthProvider compontent!");
   }
 
-  const makeApiRequest = async <D = unknown>(apiRequest: UseWithAuthApiRequest<D>): Promise<[D | undefined, unknown]> => {
-    return await caller<D | undefined, unknown>(async () => {
+  const makeApiRequest = async <D = unknown>(apiRequest: UseWithAuthApiRequest<D>): Promise<SCallResult<D, unknown>> => {
+    return await scall<D, unknown>(async () => {
       return await apiRequest();
     });
   };
 
-  return async function<D = unknown>(callbacks: UseWithAuthCallbacks<D>): Promise<[D | undefined, E | undefined]> {
+  return async function<D = unknown>(callbacks: UseWithAuthCallbacks<D>) {
     let serializedError: E | undefined;
 
-    const { apiRequest, refreshRefreshToken } = callbacks;
+    const { apiRequest, generateRefreshToken } = callbacks;
 
     // First try to access user api endpoint.
-    const [firstTryData, firstTryError] = await makeApiRequest<D>(apiRequest);
+    const firstTryResult = await makeApiRequest<D>(apiRequest);
       
-    if(!firstTryError) {
-      return [firstTryData, undefined];
+    if(!firstTryResult.getError()) {
+      return new SCallResult<D, E>(firstTryResult.getData(), options.serializeError(firstTryResult.getError()));
     }
 
-    serializedError = options.serializeError(firstTryError);
+    serializedError = options.serializeError(firstTryResult.getError());
 
     if(serializedError.code != 401) {
-      return [undefined, serializedError];
+      return new SCallResult<D, E>(undefined, serializedError);
     }
 
     // Refresh the refresh token.
-    const [refreshToken, getRefreshTokenError] = await caller<UseWithAuthEndpointResponse | undefined, unknown>(async () => {
-      const newToken: unknown = await refreshRefreshToken();
+    const refreshTokenResult = await scall<UseWithAuthEndpointResponse | undefined, unknown>(async () => {
+      const newToken: unknown = await generateRefreshToken();
 
       if(!isString(newToken)) {
-        throw new TypeError("The refresh token is not of type string!");
+        throw new Error("The refresh token is not of type string!");
       }
 
       return newToken;
     });
 
-    if(getRefreshTokenError) {
-      serializedError = options.serializeError(getRefreshTokenError);
-      return [undefined, serializedError];
+    if(refreshTokenResult.getError()) {
+      serializedError = options.serializeError(refreshTokenResult.getError());
+      return new SCallResult<D, E>(undefined, serializedError);
     }
 
-    context?.setTokens(prev => ({...prev, refresh: refreshToken }));
+    context?.setTokens(prev => ({...prev, refresh: refreshTokenResult.getData() }));
 
     // Last try to access user api endpoint.
-    const [lastTryData, lastTryError] = await makeApiRequest<D>(apiRequest); 
+    const lastTryResult = await makeApiRequest<D>(apiRequest); 
 
-    if(lastTryError) {
-      serializedError = options.serializeError(lastTryError);
-      return [undefined, serializedError];
+    if(lastTryResult.getError()) {
+      serializedError = options.serializeError(lastTryResult.getError());
+      return new SCallResult<D, E>(undefined, serializedError);
     }
 
-    return [lastTryData, undefined];
+    return lastTryResult as SCallResult<D, E>;
   };
 };

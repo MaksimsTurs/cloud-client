@@ -1,4 +1,6 @@
-export type UseWithAuthReturn<E = unknown> = <D = unknown>(callbacks: UseWithAuthCallbacks<D>) => Promise<[D | undefined, E | undefined]>
+import SCallResult from "@util/scall/SCall-Result.util";
+
+export type UseWithAuthReturn<E = unknown> = <D = unknown>(callbacks: UseWithAuthCallbacks<D>) => Promise<SCallResult<D, E>>
 
 export type UseWithAuthEndpointResponse = string; 
 
@@ -10,9 +12,9 @@ type SerializeError<E = unknown> = (error: unknown) => E;
 
 export type UseWithAuthCallbacks<D = unknown> = {
   apiRequest: UseWithAuthApiRequest<D>
-  refreshRefreshToken: UseWithAuthRefreshRefreshToken
+  generateRefreshToken: UseWithAuthGenerateRefreshToken
 };
 
-export type UseWithAuthApiRequest<D = unknown> = () => Promise<D | undefined>;
+export type UseWithAuthApiRequest<D = unknown> = () => Promise<D>;
 
-export type UseWithAuthRefreshRefreshToken = () => Promise<UseWithAuthEndpointResponse | undefined>;
+export type UseWithAuthGenerateRefreshToken = () => Promise<UseWithAuthEndpointResponse | undefined>;
