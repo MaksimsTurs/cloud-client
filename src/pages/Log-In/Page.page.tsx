@@ -2,22 +2,22 @@ import type { ReactNode } from "react";
 import type { UserLogIn } from "./Page.type";
 import type { SubmitHandler } from "react-hook-form";
 import type { SerializedError } from "@root/global.type";
-import type { UseAuthEndpointResponse } from "@service/auth/hook/use-auth.type";
+import type { UseAuthEndpointResponse } from "@service/auth/hooks/use-auth.type";
 
 import { useForm } from "react-hook-form";
 import { Fragment } from "react";
 
 import InputText from "@ui/Form/Input-Text/Input-Text.component";
-import SubmitButton from "@ui/Submit-Button/Submit-Button.component";
-import Title from "@component/Title/Title.component";
-import { Link } from "@root/index";
+import TextButton from "@ui/Text-Button/Text-Button.component";
+import Metadata from "@component/Metadata/Metadata.component";
 import { FormBody, FormContainer, FormHeader, FormFooter } from "@ui/Form/Form/Form.component";
+import { Link } from "@hook/use-react-router/use-react-router.hook";
 
-import { useAuth } from "@service/auth/auth.service";
-import useNavigate from "@hook/use-react-router/use-navigate.hook";
+import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
+import { useAuth} from "@service/auth/auth.service";
 
 import serializeError from "@util/serialize-error.util";
-import fetcher from "@util/fetcher/fetcher.util";
+import http from "@util/http/http.util";
 
 export default function Page(): ReactNode {
   const { register, handleSubmit, formState: { errors }} = useForm<UserLogIn>();
@@ -25,24 +25,21 @@ export default function Page(): ReactNode {
   const navigate = useNavigate();
 
   const logIn: SubmitHandler<UserLogIn> = async (userData): Promise<void> => {
-    const error = await authenticate(async () => {
-      const { data, error } = await fetcher.post<UseAuthEndpointResponse>("/user/log-in", userData, { credentials: "include" });
-      
-      if(error) {
-        throw error;
-      }
-
-      return data;
+    const isSucceed: boolean = await authenticate(async () => {
+      return await http.post<UseAuthEndpointResponse>("/user/log-in", {
+        body: userData,
+        credentials: "include"
+      });
     });
 
-    if(!error) {
+    if(isSucceed) {
       navigate("/");
     }
   };
 
   return(
     <Fragment>
-      <Title>Log in</Title>
+      <Metadata title="Log in"/>
       <FormContainer>
         <FormHeader title="Log in"/>
         <FormBody onSubmit={handleSubmit(logIn)} error={error?.message}>
@@ -67,7 +64,7 @@ export default function Page(): ReactNode {
               minLength: { value: 12, message: "Password is to short!" },
             }}/>
           <FormFooter>
-            <SubmitButton text="Log in" disabled={isLoading}/>
+            <TextButton text="Log in" type="submit" disabled={isLoading}/>
             <Link href="/forgot-password">Forgot password?</Link>
           </FormFooter>
         </FormBody>
