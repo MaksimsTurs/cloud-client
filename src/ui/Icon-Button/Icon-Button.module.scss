@@ -22,16 +22,29 @@
     background-color: $var-color-blue-hover;
     box-shadow: 0px 2px 2px $var-color-blue-hover;
     color: $var-color-blue;
+
+
+    > svg {
+      color: $var-color-blue;
+      flex-shrink: 0;
+      flex-grow: 1;
+      stroke-width: 1.2;
+    }
   }
 
   &:disabled { 
     cursor: auto;
     pointer-events: none;
+
+    > svg {
+      color: #C0C0C0;
+    }
   }
 
   > svg {
     flex-shrink: 0;
     flex-grow: 1;
-    stroke-width: 1;
+    stroke-width: 1.2;
+    color: #646464;
   }
 }
