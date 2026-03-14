@@ -5,7 +5,6 @@ import type { SerializedError } from "@root/global.type";
 import type { UseAuthEndpointResponse } from "@service/auth/hooks/use-auth.type";
 
 import { useForm } from "react-hook-form";
-import { Fragment } from "react";
 
 import InputText from "@ui/Form/Input-Text/Input-Text.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
@@ -18,6 +17,8 @@ import { useAuth} from "@service/auth/auth.service";
 
 import serializeError from "@util/serialize-error.util";
 import http from "@util/http/http.util";
+
+import scss from "./Page.module.scss"
 
 export default function Page(): ReactNode {
   const { register, handleSubmit, formState: { errors }} = useForm<UserLogIn>();
@@ -38,8 +39,9 @@ export default function Page(): ReactNode {
   };
 
   return(
-    <Fragment>
+    <main className={scss.page_container}>
       <Metadata title="Log in"/>
+      <Metadata name="description" content="Log in you'r account."/>
       <FormContainer>
         <FormHeader title="Log in"/>
         <FormBody onSubmit={handleSubmit(logIn)} error={error?.message}>
@@ -65,10 +67,10 @@ export default function Page(): ReactNode {
             }}/>
           <FormFooter>
             <TextButton text="Log in" type="submit" disabled={isLoading}/>
-            <Link href="/forgot-password">Forgot password?</Link>
+            <Link href="/request-reset-password">Forgot password?</Link>
           </FormFooter>
         </FormBody>
       </FormContainer>
-    </Fragment>
+    </main>
  );
 };
