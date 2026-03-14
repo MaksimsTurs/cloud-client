@@ -9,8 +9,8 @@ import { isUndefined } from "@util/is.util";
 export default function useAuthIsAuthorized(): boolean {
   const context: AuthContextValue | undefined = useContext<AuthContextValue | undefined>(AuthContext);
 
-  if(!context) {
-    throw new Error("Wrap you'r application into AuthProvider compontent!");
+  if(isUndefined(context)) {
+    throw new TypeError("Wrap you'r application into AuthProvider compontent!");
   }
 
   return !isUndefined(context.tokens.access) && !isUndefined(context.tokens.refresh);
