@@ -1,0 +1,26 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.button {
+  background-color: $var-color-blue;
+  padding: $var-padding-s $var-padding-xl;
+  border-radius: $var-border-radius-xs;
+  border: 1px solid $var-color-blue;
+  box-shadow: 1px 3px 3px $var-box-shadow-color-black;
+  transition: background-color $var-transition-time-100ms ease;
+  color: #ffffff;
+  width: 100%;
+
+  &:hover {
+    color: $var-color-blue;
+    transition: background-color $var-transition-time-100ms ease;
+    background-color: #ffffff;
+  }
+
+  &:disabled {
+    background-color: $var-color-blue-hover;
+    border: 1px solid transparent;
+    color: $var-border-color-black;
+    cursor: auto;
+  }
+}
