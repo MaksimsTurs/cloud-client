@@ -8,7 +8,7 @@ export type UseWithAuthOptions<E = unknown> = {
   serializeError: SerializeError<E>
 };
 
-type SerializeError<E = unknown> = (error: unknown) => E;
+type SerializeError<E = unknown> = (error: unknown) => Promise<E>;
 
 export type UseWithAuthCallbacks<D = unknown> = {
   apiRequest: UseWithAuthApiRequest<D>

@@ -37,10 +37,10 @@ export default function useWithAuth<E extends { code?: number }>(options: UseWit
     const firstTryResult = await makeApiRequest<D>(apiRequest);
       
     if(!firstTryResult.getError()) {
-      return new SCallResult<D, E>(firstTryResult.getData(), options.serializeError(firstTryResult.getError()));
+      return new SCallResult<D, E>(firstTryResult.getData(), undefined);
     }
 
-    serializedError = options.serializeError(firstTryResult.getError());
+    serializedError = await options.serializeError(firstTryResult.getError());
 
     if(serializedError.code != 401) {
       return new SCallResult<D, E>(undefined, serializedError);
@@ -58,7 +58,7 @@ export default function useWithAuth<E extends { code?: number }>(options: UseWit
     });
 
     if(refreshTokenResult.getError()) {
-      serializedError = options.serializeError(refreshTokenResult.getError());
+      serializedError = await options.serializeError(refreshTokenResult.getError());
       return new SCallResult<D, E>(undefined, serializedError);
     }
 
@@ -68,7 +68,7 @@ export default function useWithAuth<E extends { code?: number }>(options: UseWit
     const lastTryResult = await makeApiRequest<D>(apiRequest); 
 
     if(lastTryResult.getError()) {
-      serializedError = options.serializeError(lastTryResult.getError());
+      serializedError = await options.serializeError(lastTryResult.getError());
       return new SCallResult<D, E>(undefined, serializedError);
     }
 

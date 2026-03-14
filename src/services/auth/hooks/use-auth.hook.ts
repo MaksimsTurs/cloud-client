@@ -8,19 +8,19 @@ import { useContext, useState } from "react";
 import AuthenticationError from "../utils/Authentication-Error.util";
 
 import scall from "@util/scall/scall.util";
-import { isString } from "@util/is.util";
+import { isString, isUndefined } from "@util/is.util";
 
 export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseAuthReturn<E> {
-  const context = useContext<AuthContextValue | undefined>(AuthContext);
+  const context: AuthContextValue | undefined = useContext<AuthContextValue | undefined>(AuthContext);
   const [error, setError] = useState<E | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  if(!context) {
-    throw new Error("Wrap you'r application into AuthProvider compontent!");
+  if(isUndefined(context)) {
+    throw new TypeError("Wrap you'r application into AuthProvider compontent!");
   }
 
-  const handleFail = (error: unknown): void => {
-    const serializedError: E = options.serializeError(error);
+  const handleFail = async (error: unknown): Promise<void> => {
+    const serializedError: E = await options.serializeError(error);
 
     setError(serializedError);
     setIsLoading(false);
@@ -31,7 +31,6 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
     error,
     authenticate: async function(callback) {
       setIsLoading(true);
-      setError(undefined);
 
       const result = await scall<UseAuthEndpointResponse, E | undefined>(async() => {
         const response = await callback();
@@ -46,11 +45,12 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
       });
 
       if(result.getError()) {
-        handleFail(result.getError());
+        await handleFail(result.getError());
         return false;
       }
 
-      context?.setTokens(result.getData()!.tokens);
+      context.setTokens(result.getData()!.tokens);
+      context.setUser(result.getData()?.user);
       setIsLoading(false);
       setError(undefined);
 
@@ -66,11 +66,12 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
         });
       
         if(result.getError()) {
-          handleFail(result.getError());
+          await handleFail(result.getError());
           return false;
         }
 
         context.setTokens({});
+        context.setUser(undefined);
 
         setError(undefined);
         setIsLoading(false);

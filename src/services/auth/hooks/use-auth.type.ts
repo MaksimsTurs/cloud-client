@@ -25,17 +25,16 @@ export type UseAuthOptions<E = unknown> = {
 
 export type UseAuthEndpointResponse = {
   tokens: AuthTokens
+  user?: unknown
 };
 
 // Options
 
-type SerializeError<E = unknown> = (error: unknown) => E;
+type SerializeError<E = unknown> = (error: unknown) => Promise<E>;
 
 // Functions
 
 type AuthCallback = () => Promise<UseAuthEndpointResponse | undefined>;
-
-type Authorize = (callback: AuthCallback) => Promise<boolean>;
 
 type Logout = (callback: AuthCallback) => Promise<boolean>;
 
