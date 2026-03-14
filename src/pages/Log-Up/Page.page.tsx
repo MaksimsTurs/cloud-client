@@ -10,11 +10,12 @@ import TextButton from "@ui/Text-Button/Text-Button.component";
 import { Link } from "@hook/use-react-router/use-react-router.hook";
 import { FormContainer, FormBody, FormHeader, FormFooter } from "@ui/Form/Form/Form.component";
 
-import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "@service/auth/auth.service";
 import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
+
+import scss from "./Page.module.scss";
 
 import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
@@ -51,8 +52,9 @@ export default function Page(): ReactNode {
   };
 
   return(
-    <Fragment>
+    <main className={scss.page_container}>
       <Metadata title="Log up"/>
+      <Metadata name="description" content="Create new user."/>
       <FormContainer>
         <FormHeader title="Log up"/>
         <FormBody onSubmit={handleSubmit(logUp)} error={error?.message}>
@@ -97,6 +99,6 @@ export default function Page(): ReactNode {
           </FormFooter>
         </FormBody>
       </FormContainer>
-    </Fragment>
+    </main>
   );
 };
