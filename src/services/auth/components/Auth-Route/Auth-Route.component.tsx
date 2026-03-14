@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import type { UseAuthEndpointResponse } from "../../hooks/use-auth.type";
 import type { AuthRoute } from "./Auth-Route.type";
+import type { AuthContextValue } from "../Auth-Provider/Auth-Provider.type";
 
 import { useContext, useEffect } from "react";
 
-import { isFunction, isString, isUndefined } from "@util/is.util";
+import { isString, isUndefined } from "@util/is.util";
 import scall from "@util/scall/scall.util";
 
 import { AuthContext } from "../Auth-Provider/Auth-Provider.component";
@@ -12,10 +13,10 @@ import { AuthContext } from "../Auth-Provider/Auth-Provider.component";
 import AuthenticationError from "../../utils/Authentication-Error.util";
 
 export default function AuthRoute({ authorize, children }: AuthRoute): ReactNode {
-  const context = useContext(AuthContext);
+  const context: AuthContextValue | undefined = useContext<AuthContextValue | undefined>(AuthContext);
 
-  if(!context) {
-    throw new Error("Wrap you'r application into AuthProvider compontent!");
+  if(isUndefined(context)) {
+    throw new TypeError("Wrap you'r application into AuthProvider compontent!");
   }
 
   useEffect(() => {
@@ -35,14 +36,14 @@ export default function AuthRoute({ authorize, children }: AuthRoute): ReactNode
       });
 
       context.setTokens(result.getData()?.tokens || {});
+      context.setUser(result.getData()?.user);
       context.setIsAuthorizing(false);
     };
 
-    if(!isUndefined(authorize) && !isFunction(authorize)) {
-      throw new Error("onEnter is not of type function!");
+    if(!isUndefined(authorize)) {
+      _onEnter();
     }
 
-    _onEnter();
   }, []);
 
   return children;
