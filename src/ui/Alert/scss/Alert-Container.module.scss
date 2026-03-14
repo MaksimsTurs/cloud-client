@@ -1,0 +1,23 @@
+@use "@scss/mixins" as *;
+@use "@scss/variables" as *;
+
+.alert_container {
+  background-color: $var-color-blue;
+  border-radius: $var-border-radius-m;
+  box-shadow: 1px 3px 3px $var-box-shadow-color-black;
+  font-size: $var-font-xl;
+  color: #ffffff;
+
+  .alert_header {
+    @include dis-flex(center, unset, $var-gap-xs);
+    font-size: $var-font-xxxl;
+    padding: $var-padding-m $var-padding-l;
+    font-weight: bold;
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .alert_body {
+    padding: $var-padding-m $var-padding-l;
+  }
+}

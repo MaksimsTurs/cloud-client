@@ -3,7 +3,7 @@ import type { AlertListProps } from "../Alert.type";
 
 import scss from "../scss/Alert-List.module.scss";
 
-import getDefaultTitle from "../utils/get-default-title.util";
+import formatTitle from "../utils/format-title.util";
 
 import { CircleAlertIcon } from "lucide-react";
 
@@ -12,7 +12,7 @@ export default function AlertList({ children, title, type }: AlertListProps): Re
     <div className={scss.alert_list_container}>
       <section className={scss.alert_list_header}>
         <CircleAlertIcon strokeWidth={2} size={20}/>
-        <p>{title || getDefaultTitle(type)}</p>
+        <p>{title || formatTitle(type)}</p>
       </section>
       <ul className={scss.alert_list}>{children}</ul>  
     </div>

@@ -9,4 +9,9 @@ export type AlertListItemProps = {
   text: string
 };
 
+export type AlertContainerProps = PropsWithChildren<{
+  type: AlertTypes
+  title?: string
+}>;
+
 export type AlertTypes = "info" | "warning" | "caution";
