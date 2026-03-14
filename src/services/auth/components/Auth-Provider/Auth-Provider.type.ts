@@ -1,12 +1,14 @@
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import type { UseAuthEndpointResponse } from "../../hook/use-auth.type";
 
 export type AuthContextValue = {
   isAuthorizing: boolean
 
   tokens: AuthTokens
 
+  user: unknown
+
   setTokens: Dispatch<SetStateAction<AuthTokens>>
+  setUser: Dispatch<SetStateAction<unknown>>
   setIsAuthorizing: Dispatch<SetStateAction<boolean>>
 };
 
