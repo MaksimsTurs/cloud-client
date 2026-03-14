@@ -16,6 +16,6 @@ export default function Route<P extends string>({ path, children }: RouteProps<P
   }
   
   context.addPattern(path);
-  
+
   return isPathMatchPattern(path, context.paths.at(-1)) ? children : null;
 };

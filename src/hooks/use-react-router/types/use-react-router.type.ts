@@ -1,8 +1,12 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type ReactRouterContextValue<P extends string> = {
-  paths:      P[]
-  patterns:   Set<string>
-  pushPath:   ReactRouterPushPath<P>
-  popPath:    ReactRouterPopPath
+  paths: P[]
+  patterns: Set<string>
+  searchParams: URLSearchParams
+  setSearchParams: Dispatch<SetStateAction<URLSearchParams>>
+  pushPath: ReactRouterPushPath<P>
+  popPath: ReactRouterPopPath
   addPattern: ReactRouterAddPathPattern;
 };
 

@@ -2,17 +2,20 @@ import type { ReactRouterContextValue } from "../types/use-react-router.type";
 import type { ReactNode, RefObject } from "react";
 import type { RoutesProps } from "../types/Routes.type";
 
-import { createContext, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 
 export const ReactRouterContext = createContext<ReactRouterContextValue<any> | undefined>(undefined);
 
 export default function Routes<P extends string>({ children }: RoutesProps): ReactNode {
   const [paths, setPath] = useState<P[]>([location.pathname] as P[]);
-  const patterns: RefObject<Set<string>> = useRef<Set<string>>(new Set<string>())
-
+  const [searchParams, setSearchParams] = useState<URLSearchParams>(new URLSearchParams(location.search));
+  const patterns: RefObject<Set<string>> = useRef<Set<string>>(new Set<string>());
+  
   const value: ReactRouterContextValue<P> = { 
     patterns: patterns.current,
     paths,
+    searchParams,
+    setSearchParams,
     pushPath: function(path: P): void {
       setPath(prev => [...prev, path]);
     },
@@ -33,6 +36,18 @@ export default function Routes<P extends string>({ children }: RoutesProps): Rea
       }
     },
   };
+
+  const popstate = (): void => {
+    value.popPath();
+  };
+
+  useEffect(() => {
+    window.addEventListener("popstate", popstate);
+
+    return () => {
+      window.removeEventListener("popstate", popstate);
+    };
+  }, []);
   
   return <ReactRouterContext value={value}>{children}</ReactRouterContext>
 };
