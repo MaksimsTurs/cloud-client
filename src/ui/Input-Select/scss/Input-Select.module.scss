@@ -1,0 +1,59 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.input_select_container {
+  @include dis-flex(null, null, $var-gap-xs, column);
+  
+  .input_select {
+    @include dis-flex(center, space-between, $var-gap-xxxxl);
+    padding: $var-padding-m $var-padding-l;
+    transition: background-color $var-transition-time-100ms ease;
+    box-shadow: 1px 3px 3px $var-box-shadow-color-black;
+    border-bottom: 1px solid $var-color-blue;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      background-color: $var-background-color-black;
+    }
+
+    .input_select_placeholder {
+      color: rgb(117, 117, 117);
+    }
+
+    .input_select_dropdown {
+      // + 1px to see border bottom
+      @include pos-abs(top, left, calc(100% + 1px), 0, 1, 100%, fit-content);
+      @include dis-flex(null, null, null, column);
+      transition: height $var-transition-time-250ms ease;
+      box-shadow: 0px 1px 3px $var-box-shadow-color-black;
+      display: none;
+      background-color: #ffffff;
+
+      > li {
+        padding: $var-padding-m $var-padding-l;
+        border-bottom: 1px solid $var-border-color-black;
+
+        &:hover {
+          background-color: $var-background-color-black;
+        }
+      }
+    }
+  }
+
+  .input_select_active {
+    .input_select_arrow {
+      transform: rotate(90deg);
+    }
+
+    .input_select_dropdown {
+      display: flex;
+    }
+  }
+
+  .input_select_error {
+    border-bottom: 1px solid $var-border-color-red;
+    color: $var-border-color-red;
+    background-color: $var-background-color-red;
+  }
+}
