@@ -9,6 +9,10 @@ const UNSUPPORTED_FILE_TYPES: Set<string> = new Set<string>([
 ]);
 
 export default function validateFiles(files: FileList): string | undefined {
+  if(files.length === 0) {
+    return "You need select at least one file!"
+  }
+
   if(files.length > MAX_FILES_COUNT) {
     return "You can upload only 10 files at once!";
   }
@@ -17,11 +21,11 @@ export default function validateFiles(files: FileList): string | undefined {
     const file: File = files.item(index)!;
 
     if(!file.type || UNSUPPORTED_FILE_TYPES.has(file.type)) {
-      return `${file.name} file has unsupported format!`;
+      return `${file.name} is unsupported file format!`;
     }
 
     if(file.size > MAX_FILE_SIZE) {
-      return `${file.name} is to big!`;
+      return `${file.name} file is to big!`;
     }
   }
 };
