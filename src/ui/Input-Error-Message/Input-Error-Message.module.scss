@@ -1,0 +1,9 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.input_error_message {
+  @include dis-flex(center, null, $var-gap-xs);
+  color: $var-color-red;
+  font-size: $var-font-l;
+  word-break: break-all;
+}
