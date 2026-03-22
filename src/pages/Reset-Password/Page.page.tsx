@@ -9,8 +9,8 @@ import { useForm } from "react-hook-form";
 import Metadata from "@component/Metadata/Metadata.component";
 import Empty from "@ui/Empty/Empty.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
-import InputText from "@ui/Form/Input-Text/Input-Text.component";
-import { FormContainer, FormBody, FormFooter } from "@ui/Form/Form/Form.component";
+import InputText from "@ui/Input-Text/Input-Text.component";
+import { FormContainer, FormBody, FormFooter } from "@ui/Form/Form.component";
 
 import { useNavigate, useSearchParams } from "@hook/use-react-router/use-react-router.hook";
 
@@ -19,14 +19,11 @@ import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
 export default function Page(): ReactNode {
-  const { 
-    handleSubmit, 
-    register,
-    setError,
-    formState: { errors, isSubmitting }
-  } = useForm<ResetPassword>();
+  const methods = useForm<ResetPassword>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const { setError, formState: { errors, isSubmitting }} = methods; 
 
   const resetPassword: SubmitHandler<ResetPassword> = async (resetPasswordData): Promise<void> => {
     const result = await scall<void>(async () => {
@@ -58,10 +55,9 @@ export default function Page(): ReactNode {
     <Fragment>
       <Metadata title="Reset password"/>
       <FormContainer>
-        <FormBody error={errors.root?.message} onSubmit={handleSubmit(resetPassword)}>
+        <FormBody {...methods } error={errors.root?.message} onSubmit={resetPassword}>
           <InputText
             name="password"
-            register={register}
             type="password"
             placeholder="New password"
             autoComplete="new-password"
