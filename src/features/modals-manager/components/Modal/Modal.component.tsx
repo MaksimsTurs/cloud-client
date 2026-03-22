@@ -3,7 +3,7 @@ import type { ModalProps } from "./Modal.type";
 
 import scss from "./Modal.module.scss";
 
-import Button from "@ui/Button/Button.component";
+import IconButton from "@ui/Icon-Button/Icon-Button.component";
 
 import { X } from "lucide-react";
 
@@ -21,9 +21,9 @@ export default function Modal({ children, title }: ModalProps): ReactNode {
       <div className={scss.modal_body}>
         <section className={scss.modal_header}>
           <p>{title}</p>
-          <Button onClick={closeModal}>
-            <X strokeWidth={2} size={15}/>
-          </Button>
+          <IconButton onClick={closeModal}>
+            <X/>
+          </IconButton>
         </section>
         {children}
       </div>

@@ -2,13 +2,14 @@
 @use '@scss/mixins' as *;
 
 .modal_container {
-  @include pos-fixed(top, left, 0%, 0%, 1, 100%, 100%);
   @include dis-flex(center, center);
+  @include pos-fixed(top, left, 0%, 0%, null, 100%, 100%);
+  z-index: 2;
   padding: $var-padding-xxxxl;
   background-color: #0000008a;
 
   .modal_body {
-    @include dis-flex(unset, unset, 0, column);
+    @include dis-flex(null, null, null, column);
     border: 1px solid $var-color-blue;
     background-color: #ffffff;
     max-width: 100%;
