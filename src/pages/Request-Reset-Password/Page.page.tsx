@@ -8,21 +8,18 @@ import { useForm } from "react-hook-form";
 
 import Metadata from "@component/Metadata/Metadata.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
-import InputText from "@ui/Form/Input-Text/Input-Text.component";
+import InputText from "@ui/Input-Text/Input-Text.component";
 import { AlertContainer } from "@ui/Alert/Alert.component";
-import { FormContainer, FormBody, FormFooter } from "@ui/Form/Form/Form.component";
+import { FormContainer, FormBody, FormFooter } from "@ui/Form/Form.component";
 
 import scall from "@util/scall/scall.util";
 import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
 export default function Page(): ReactNode {
-  const { 
-    handleSubmit, 
-    register,
-    setError,
-    formState: { errors, isSubmitting }
-  } = useForm<RequestResetPassword>();
+  const methods = useForm<RequestResetPassword>();
+
+  const { setError, formState: { errors, isSubmitting }} = methods;
 
   const requestResetPassword: SubmitHandler<RequestResetPassword> = async (body): Promise<void> => {
     const result = await scall<void>(async () => {
@@ -39,10 +36,9 @@ export default function Page(): ReactNode {
     <Fragment>
       <Metadata title="Request reset password"/>
       <FormContainer>
-        <FormBody error={errors.root?.message} onSubmit={handleSubmit(requestResetPassword)}>
+        <FormBody {...methods } error={errors.root?.message} onSubmit={requestResetPassword}>
           <InputText
             name="email"
-            register={register}
             type="email"
             placeholder="Confirm you E - mail"
             autoComplete="email"
