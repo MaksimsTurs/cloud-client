@@ -1,9 +1,15 @@
 export type MetadataProps = {
-  title?: string
-  name?: NameAttribute
-  charset?: CharsetAttribute
+  /**
+   *  @description must be used with `content` prop.
+   */
+  name?:      NameAttribute
+  /**
+   *  @description must be used with `content` prop.
+   */
   httpEquiv?: HTTPEquipAttribute
-  content?: string
+  content?:   string
+  title?:     string
+  charset?:   CharsetAttribute
 };
 
 type NameAttribute = 
