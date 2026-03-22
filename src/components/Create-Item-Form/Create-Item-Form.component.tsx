@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import type { FEItem } from "@feature/file-explorer/reducers/file-explorer/file-explorer.type";
 import type { SubmitHandler } from "react-hook-form";
 
-import { FormBody } from "@ui/Form/Form/Form.component";
-import InputText from "@ui/Form/Input-Text/Input-Text.component";
-import SubmitButton from "@ui/Submit-Button/Submit-Button.component";
+import { FormBody } from "@ui/Form/Form.component";
+import InputText from "@ui/Input-Text/Input-Text.component";
+import TextButton from "@ui/Text-Button/Text-Button.component";
 
 import { useForm } from "react-hook-form";
 
@@ -16,10 +16,12 @@ import scss from "./Create-Item-Form.module.scss";
 import FE_ITEM_TYPES from "@feature/file-explorer/const/FE-ITEM-TYPES.const";
 
 export default function CreateItemForm(): ReactNode {
-  const { handleSubmit, register, formState: { errors }} = useForm<FEItem>();
+  const methods = useForm<FEItem>();
   const fe = useFileExplorer();
   const feHistory = useFileExplorerHistory();
   const modalsManager = useModalsManager();
+
+  const { formState: { isSubmitting }} = methods;
 
   const createItem: SubmitHandler<FEItem> = async (dirData): Promise<void> => {
     const isOk: boolean = await fe.create(FE_ITEM_TYPES.DIRECTORY, dirData.name, feHistory.parent?.id);
@@ -31,10 +33,8 @@ export default function CreateItemForm(): ReactNode {
 
   return(
     <div className={scss.create_item_form_container}>
-      <FormBody onSubmit={handleSubmit(createItem)}>
+      <FormBody {...methods } onSubmit={createItem}>
         <InputText 
-          register={register}
-          error={errors.name?.message}
           name="name" 
           type="text"
           placeholder="Item name"
@@ -44,7 +44,7 @@ export default function CreateItemForm(): ReactNode {
             maxLength: { value: 64, message: "Name can be maximum 64 characters long!" },
             pattern: { value: /[a-zA-Z0-9\-\.]/, message: "Name have suspicous characters!" }
           }}/>
-        <SubmitButton text="Create" disabled={feHistory.isLoading}/>
+        <TextButton text="Create" disabled={isSubmitting}/>
       </FormBody>
     </div>
  );
