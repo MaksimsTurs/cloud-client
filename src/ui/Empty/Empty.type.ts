@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 export type EmptyProps = {
-  header: string
+  header?: string | number
   main: string
   footer?: ReactNode
 };
