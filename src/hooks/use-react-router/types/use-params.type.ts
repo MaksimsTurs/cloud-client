@@ -1,3 +1,1 @@
-import type { Dictionary } from "@root/global.type";
-
-export type UseParamsReturn<P extends string> = Dictionary<P, string>;
+export type UseParamsReturn<P extends string> = Partial<Record<P, string>>;

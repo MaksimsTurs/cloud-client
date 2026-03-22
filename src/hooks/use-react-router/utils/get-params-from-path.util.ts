@@ -1,7 +1,5 @@
-import type { Dictionary } from "@root/global.type";
-
-export default function getParamsFromPath<P extends string>(pattern: string, path: string): Dictionary<P, string> {
-  const params: Dictionary<P, string> = {};
+export default function getParamsFromPath<P extends string>(pattern: string, path: string): Partial<Record<P, string>> {
+  const params: Partial<Record<P, string>> = {};
 
   const patternParts: string[] = pattern.split("/");
   const pathParts: string[] = path.split("/");

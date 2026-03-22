@@ -11,11 +11,13 @@ test("Test the useParams hook, with paths that have valid params.", function() {
   const { result } = renderHook(() => useParams(), { wrapper: ({ children }: PropsWithChildren) => (
       <ReactRouterContext value={
         {
+          searchParams: new URLSearchParams(),
           paths: ["/", "/user/3fb433fk/article/4ff3n40f"],
           patterns: new Set<string>(["/", "/user/:userId/article/:articleId"]),
           pushPath: function(_: any): void {},
           popPath: function(): void {},
-          addPattern: function(_: string): void {},
+          addPattern: function(_: any): void {},
+          setSearchParams: function(_: any): void {}
         }
       }>
         {children}
@@ -34,11 +36,13 @@ test("Test the useParams hook, with paths that have no params.", function() {
   const { result } = renderHook(() => useParams(), { wrapper: ({ children }: PropsWithChildren) => (
       <ReactRouterContext value={
         {
+          searchParams: new URLSearchParams(),
           paths: ["/", "/home"],
           patterns: new Set<string>(["/", "/home"]),
           pushPath: function(_: any): void {},
           popPath: function(): void {},
-          addPattern: function(_: string): void {},
+          addPattern: function(_: any): void {},
+          setSearchParams: function(_: any): void {}
         }
       }>
         {children}
@@ -54,11 +58,13 @@ test("Test the useParams hook, wit invalid params.", function() {
   const { result } = renderHook(() => useParams(), { wrapper: ({ children }: PropsWithChildren) => (
       <ReactRouterContext value={
         {
+          searchParams: new URLSearchParams(),
           paths: ["/", "/49295/home"],
           patterns: new Set<string>(["/", "/home/:id"]),
           pushPath: function(_: any): void {},
           popPath: function(): void {},
-          addPattern: function(_: string): void {},
+          addPattern: function(_: any): void {},
+          setSearchParams: function(_: any): void {}
         }
       }>
         {children}

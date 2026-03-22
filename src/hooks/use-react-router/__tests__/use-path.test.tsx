@@ -12,10 +12,12 @@ test("Test the usePath hook with valid paths.", function() {
       <ReactRouterContext value={
         {
           paths: ["/"],
+          searchParams: new URLSearchParams(),
           patterns: new Set<string>(["/", "/user/:userId/article/:articleId"]),
           pushPath: function(_: any): void {},
           popPath: function(): void {},
-          addPattern: function(_: string): void {},
+          addPattern: function(_: any): void {},
+          setSearchParams: function(_: any): void {}
         }
       }>
         {children}
@@ -31,10 +33,12 @@ test("Test the usePath hook without valid paths.", function() {
       <ReactRouterContext value={
         {
           paths: [],
+          searchParams: new URLSearchParams(),
           patterns: new Set<string>(["/", "/home"]),
           pushPath: function(_: any): void {},
           popPath: function(): void {},
-          addPattern: function(_: string): void {},
+          addPattern: function(_: any): void {},
+          setSearchParams: function(_: any): void {}
         }
       }>
         {children}
