@@ -1,0 +1,11 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.file_options_container {
+  @include dis-flex(null, null, $var-gap-xs, column);
+  padding: $var-padding-m;
+
+  .file_options_section {
+    @include dis-flex(null, null, $var-gap-xs);
+  }
+}
