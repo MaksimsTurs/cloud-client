@@ -13,6 +13,7 @@
       border-bottom: 1px solid $var-border-color-blue;
       box-shadow: 1px 3px 3px $var-box-shadow-color-black;
       transition: background-color $var-transition-time-100ms ease;
+      font-size: $var-font-l;
       width: 100%;
 
       &:focus {
@@ -53,7 +54,7 @@
 
   .input_text_error_message {
     color: $var-color-red;
-    font-size: $var-font-m;
+    font-size: $var-font-l;
     word-break: break-all;
   }
 }
