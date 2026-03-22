@@ -5,10 +5,10 @@ import type { UserLogUp } from "./Page.type";
 import type { SerializedError } from "@root/global.type";
 
 import Metadata from "@component/Metadata/Metadata.component";
-import InputText from "@ui/Form/Input-Text/Input-Text.component";
+import InputText from "@ui/Input-Text/Input-Text.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 import { Link } from "@hook/use-react-router/use-react-router.hook";
-import { FormContainer, FormBody, FormHeader, FormFooter } from "@ui/Form/Form/Form.component";
+import { FormContainer, FormBody, FormHeader, FormFooter } from "@ui/Form/Form.component";
 
 import { useForm } from "react-hook-form";
 
@@ -21,21 +21,18 @@ import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
 export default function Page(): ReactNode {
-  const { 
-    handleSubmit, 
-    register, 
-    getValues, 
-    formState: { errors }
-  } = useForm<UserLogUp>();
-  const { error, isLoading, authenticate } = useAuth<SerializedError>({ serializeError });
+  const methods = useForm<UserLogUp>();
+  const { error, authenticate } = useAuth<SerializedError>({ serializeError });
   const navigate = useNavigate();
 
+  const { getValues, formState: { errors, isSubmitting }} = methods; 
+
   const logUp: SubmitHandler<UserLogUp> = async (userData): Promise<void> => {
-    const isSucceed: boolean = await authenticate(async () => {
+    const isOk: boolean = await authenticate(async () => {
       return await http.post<UseAuthEndpointResponse>("/user/log-up", { body: userData, credentials: "include" })
     });
 
-    if(isSucceed) {
+    if(isOk) {
       navigate("/");
     }
   };
@@ -57,9 +54,8 @@ export default function Page(): ReactNode {
       <Metadata name="description" content="Create new user."/>
       <FormContainer>
         <FormHeader title="Log up"/>
-        <FormBody onSubmit={handleSubmit(logUp)} error={error?.message}>
-          <InputText 
-            register={register}
+        <FormBody {...methods } onSubmit={logUp} error={error?.message}>
+          <InputText
             type="text"
             error={errors.email?.message}
             name="email" 
@@ -69,8 +65,7 @@ export default function Page(): ReactNode {
               required: "E - mail is required!",
               pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
             }}/>
-          <InputText 
-            register={register}
+          <InputText
             type="password"
             error={errors.password?.message}
             name="password"
@@ -81,8 +76,7 @@ export default function Page(): ReactNode {
               minLength: { value: 12, message: "Password is to short!" },
               validate: checkPasswordsEquality
             }}/>
-          <InputText 
-            register={register}
+          <InputText
             type="password"
             error={errors.confirmPassword?.message}
             name="confirmPassword"
@@ -94,7 +88,7 @@ export default function Page(): ReactNode {
               validate: checkPasswordsEquality
             }}/>
           <FormFooter>
-            <TextButton text="Registrate" disabled={isLoading}/>
+            <TextButton text="Registrate" disabled={isSubmitting}/>
             <Link href="/log-in">Have account?</Link>
           </FormFooter>
         </FormBody>
