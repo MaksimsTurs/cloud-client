@@ -7,11 +7,13 @@ export type NotificationToasterState = {
 export type NotificationToast = {
   id: string
   markTimerId: number
-  type: number
+  type: NotificationToastTypes
   message: string
   createdAt: number
   shouldRemoved: boolean
 };
+
+export type NotificationToastTypes = "error" | "warn" | "info";
 
 export type AddToastPayloadAction = PayloadAction<NotificationToast>;
 

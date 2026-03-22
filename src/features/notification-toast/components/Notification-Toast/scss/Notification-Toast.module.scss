@@ -17,7 +17,7 @@
 
   .notification_toast_message {
     @include dis-flex(center, center, $var-gap-xs);
-    font-size: $var-font-m;
+    font-size: $var-font-l;
     word-break: break-all;
   }
 

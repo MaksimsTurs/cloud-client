@@ -1,14 +1,14 @@
-import NOTIFICATION_TOAST_TYPES from "@feature/notification-toast/const/NOTIFICATION-TOAST-TYPES.const";
+import type { NotificationToastTypes } from "@feature/notification-toast/reducers/notification-toast.type";
 
 import { AlertCircleIcon, AlertOctagonIcon, TriangleAlertIcon } from "lucide-react";
 
-export default function getIconByNotificationType(type: number) {
+export default function getIconByNotificationType(type: NotificationToastTypes) {
   switch(type) {
-    case NOTIFICATION_TOAST_TYPES.ERROR:
+    case "error":
       return AlertOctagonIcon;
-    case NOTIFICATION_TOAST_TYPES.INFO:
+    case "info":
       return AlertCircleIcon;
-    case NOTIFICATION_TOAST_TYPES.WARN:
+    case "warn":
       return TriangleAlertIcon;
     default:
       return null; 

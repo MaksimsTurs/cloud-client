@@ -16,14 +16,15 @@ export default function useNotificationToastActions(): UseNotificationToastActio
     removeAll: function() {
       dispatch(removeAllToasts())
     },
-    add: function(params) {
+    add: function(type, message) {
       const id: string = window.crypto.randomUUID();
       const timerId: number = setTimeout(() => {
         dispatch(markToRemove(id));
       }, DELAYS.TOAST_DISAPPEAR_TIME) as unknown as number;
       
       dispatch(addToast({
-        ...params, 
+        type,
+        message,
         markTimerId: timerId, 
         id, 
         createdAt: Date.now(), 
