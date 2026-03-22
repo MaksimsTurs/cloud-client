@@ -1,4 +1,4 @@
-import type { SerializedError } from "@root/global.type";
+import type { SerializedError, User } from "@root/global.type";
 import type { UseAuthEndpointResponse } from "@service/auth/hooks/use-auth.type";
 import type { ReactNode } from "react";
 
@@ -6,15 +6,14 @@ import scss from "../scss/Navigation.module.scss";
 
 import { usePath, useNavigate } from "@hook/use-react-router/use-react-router.hook";
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
-import { useAuth, useAuthIsAuthorized, useWithAuth } from "@service/auth/auth.service";
+import { useAuth, useAuthIsAuthorized, useUser, useWithAuth } from "@service/auth/auth.service";
 import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 
 import IconButton from "@ui/Icon-Button/Icon-Button.component";
 
-import { Link } from "@hook/use-react-router/use-react-router.hook";
-
 import { 
   ArrowLeftIcon, 
+  MailWarningIcon, 
   UserCheck2Icon, 
   UserPlus2Icon, 
   UserRoundXIcon
@@ -24,7 +23,7 @@ import { Fragment } from "react/jsx-runtime";
 
 import serializeError from "@util/serialize-error.util";
 import http from "@util/http/http.util";
-import generateRefreshToken from "@util/refresh-user-refresh-token.util";
+import generateRefreshToken from "@util/generate-refresh-token.util";
 
 export default function Navigation(): ReactNode {
   const navigate = useNavigate();
@@ -32,8 +31,13 @@ export default function Navigation(): ReactNode {
   const toast = useNotificationToastActions();
   const feHistory = useFileExplorerHistory();
   const isAuthorized = useAuthIsAuthorized();
+  const user = useUser<User>();
   const withAuth = useWithAuth<SerializedError>({ serializeError });
   const { logout } = useAuth<SerializedError>({ serializeError });
+
+  const goTo = (path: string): void => {
+    navigate(path);
+  };
 
   const goBack = async (): Promise<void> => {
     if(path !== "/") {
@@ -62,24 +66,40 @@ export default function Navigation(): ReactNode {
 
   return(
     <nav className={scss.header_nav_container}>
-      <IconButton onClick={goBack} disabled={!feHistory.parent && path === "/"}>
+      <IconButton 
+        onClick={goBack} 
+        disabled={feHistory.isRoot && path === "/"}>
         <ArrowLeftIcon/>
       </IconButton>
       {isAuthorized ?
-      <IconButton onClick={logoutUser}>
-        <UserRoundXIcon/> 
-      </IconButton> :
       <Fragment>
-        <Link href="/log-up">
-          <IconButton>
+        {!user.is_verified ?
+        <IconButton 
+          role="button" 
+          aria-label="Email is not verified"
+          onClick={() => goTo("/request-confirm-email")}>
+          <MailWarningIcon/>
+        </IconButton> : null}
+        <IconButton 
+          onClick={logoutUser} 
+          role="button" 
+          aria-label="Log out">
+          <UserRoundXIcon/> 
+        </IconButton>
+      </Fragment> :
+      <Fragment>
+        <IconButton 
+          role="button" 
+          aria-label="Log up"
+          onClick={() => goTo("/log-up")}>
           <UserPlus2Icon/>
-          </IconButton>
-        </Link>
-        <Link href="/log-in">
-          <IconButton>
-            <UserCheck2Icon/>
-          </IconButton>
-        </Link>
+        </IconButton>
+        <IconButton 
+          role="button" 
+          aria-label="Log in"
+          onClick={() => goTo("/log-in")}>
+          <UserCheck2Icon/>
+        </IconButton>
       </Fragment>}
     </nav>
   );
