@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 
 import { isUndefined, isNull } from "@util/is.util";
 import serializeError from "@util/serialize-error.util";
-import refreshUserRefreshToken from "@util/refresh-user-refresh-token.util";
 import fetcher from "@util/fetcher/fetcher.util";
+import generateRefreshToken from "@util/generate-refresh-token.util";
 
 import { useWithAuth } from "@service/auth/auth.service";
 
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
-
-import NOTIFICATION_TOAST_TYPES from "@feature/notification-toast/const/NOTIFICATION-TOAST-TYPES.const";
 
 export default function useFileExplorerGetFile(id?: string) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,9 +24,7 @@ export default function useFileExplorerGetFile(id?: string) {
       setIsLoading(true);
   
       const [response, error] = await withAuth<FEItem & { buffer: string }>({
-        refreshRefreshToken: async () => {
-          return await refreshUserRefreshToken()
-        },
+        generateRefreshToken,
         apiRequest: async () => {
           const { data, error } = await fetcher.get<FEItem & { buffer: string }>(`/storage/get/${id}`, { credentials: "include" });
 

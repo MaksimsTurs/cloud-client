@@ -45,7 +45,7 @@ export type FECloseItemPayloadAction = PayloadAction<FECloseItem>;
 
 //####################################################################################
 
-export type FECopyItemsReturn = Record<string, FEItem>;
+export type FECopyItemsReturn = FEItem[];
 
 export type FECopyItemsParams = {
   parentId?: string
@@ -76,8 +76,9 @@ export type FERemoveItemsPayloadAction = PayloadAction<FERemoveItemsReturn>;
 //####################################################################################
 
 export type FEUploadItemsParams = {
-  files: FileList;
+  files: FileList
   parentId?: string
+  [settingIndex: string]: any
 };
 
 export type FEUploadItemsReturn = FEItem[];

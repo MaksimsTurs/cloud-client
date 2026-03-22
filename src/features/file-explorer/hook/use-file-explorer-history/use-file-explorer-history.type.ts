@@ -3,6 +3,7 @@ import type { FEItem } from "../../reducers/file-explorer/file-explorer.type";
 export type UseFEHistoryReturn = {
   isLoading: boolean
   isFetchDirectory: boolean
+  isRoot: boolean
   hasRoot: boolean
   items: FEItem[]
   parent?: FEItem

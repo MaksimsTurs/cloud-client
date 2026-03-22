@@ -77,9 +77,7 @@ const slice = createSlice({
       state.isFetchDirectory = false;
     })
     .addCase(copyItems.fulfilled, function(state: WritableDraft<FEState>, action: FECopyItemsPayloadAction): void {
-      const items: FEItemRecord = action.payload;
-
-      state.history.items.at(-1)?.push(...Object.values(items));
+      state.history.items.at(-1)?.push(...action.payload);
     })
     .addCase(removeItems.fulfilled, function(state: WritableDraft<FEState>, action: FERemoveItemsPayloadAction): void {
       const items: FEItemRecord = action.payload;

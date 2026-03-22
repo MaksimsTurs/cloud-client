@@ -93,7 +93,7 @@ export default function useFileExplorerAction(): UseFEActionReturn {
       document.removeEventListener("keydown", _onKeyDown);
       document.removeEventListener("keyup", _onKeyUp);
     };
-  }, [feItems, feHistory.path]);
+  }, [feItems, feHistory.path, feHistory.items]);
 
   return {
     selected: feItems

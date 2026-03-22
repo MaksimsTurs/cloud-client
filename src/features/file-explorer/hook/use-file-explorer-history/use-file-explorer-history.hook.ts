@@ -20,11 +20,12 @@ export default function useFileExplorerHistory(): UseFEHistoryReturn {
   return {
     isLoading,
     isFetchDirectory,
+    isRoot: history.items.length <= 1,
+    hasRoot: history.paths.at(0) === "root",
     items: history.items.at(-1) || [],
     paths: history.paths,
     parent: history.parents.at(-1),
     path: history.path,
-    hasRoot: history.paths.at(0) === "root",
     getItem: function(id) {
       if(!id) {
         return undefined;

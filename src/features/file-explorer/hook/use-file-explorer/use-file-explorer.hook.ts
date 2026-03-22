@@ -54,9 +54,9 @@ export default function useFileExplorer(): UseFEReturn {
       setIsLoading(false);
       return result;
     },
-    upload: async function(files: FileList, parentId?: string) {
+    upload: async function(files, parentId?: string) {
       setIsLoading(true);
-      const result = await asyncDispatcher<FEUploadItemsReturn, FEUploadItemsParams>(uploadItemsAction, { files, parentId }); 
+      const result = await asyncDispatcher<FEUploadItemsReturn, FEUploadItemsParams>(uploadItemsAction, {...files, parentId }); 
       setIsLoading(false);
       return result;
     }

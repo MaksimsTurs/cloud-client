@@ -6,6 +6,7 @@ import File from "./component/File.component";
 import FileExplorerLoader from "../File-Explorer-Loader/File-Explorer-Loader.component";
 import Folder from "./component/Folder.component";
 import BreadCrumbs from "./component/Bread-Crumbs.component";
+import ContextMenu from "../Context-Menu/Context-Menu.component";
 import Empty from "@ui/Empty/Empty.component";
 
 import { useFileExplorerHistory, useFileExplorerItemsEvents } from "@feature/file-explorer/file-explorer.feature";
@@ -29,24 +30,30 @@ export default function FileExplorer(): ReactNode {
 
   if(!feHistory.items.length) {
     return(
-      <div className={scss.explorer_container}>
-        <BreadCrumbs/>
-        <Empty>Directory is empty!</Empty>
-      </div>
+      <ContextMenu>
+        <div className={scss.explorer_container}>
+          <BreadCrumbs/>
+          <Empty
+            header="Folder is Empty!"
+            main={`Looks like ${feHistory.paths.at(-1)} folder does not have any item!`}/>
+        </div>
+      </ContextMenu>
    );
   }
   
   return(
-    <div className={scss.explorer_container}>
-      <BreadCrumbs/>
-      <div className={scss.explorer_body}>
-        {feHistory
-          .items
-          .map(item => 
-            item.type === FE_ITEM_TYPES.FILE ? 
-              <File key={item.id} file={item} isSelected={hasKey(item.id, selected)}/> : 
-              <Folder key={item.id} folder={item} isSelected={hasKey(item.id, selected)}/>)}
+    <ContextMenu>
+      <div className={scss.explorer_container}>
+        <BreadCrumbs/>
+        <div className={scss.explorer_body}>
+          {feHistory
+            .items
+            .map(item => 
+              item.type === FE_ITEM_TYPES.FILE ? 
+                <File key={item.id} file={item} isSelected={hasKey(item.id, selected)}/> : 
+                <Folder key={item.id} folder={item} isSelected={hasKey(item.id, selected)}/>)}
+        </div>
       </div>
-    </div>
+    </ContextMenu>
   );
 };

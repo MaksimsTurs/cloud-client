@@ -20,4 +20,9 @@ type FERemove = (items: FEItemRecord) => Promise<boolean>;
 
 type FECreate = (type: number, name: string, parentId?: string) => Promise<boolean>;
 
-type FEUpload = (files: FileList, parentId?: string) => Promise<boolean>;
+type FEUpload = (files: FEUploadFiles, parentId?: string) => Promise<boolean>;
+
+type FEUploadFiles = {
+  files: FileList
+  [fileSettingIndex: string]: any
+};
