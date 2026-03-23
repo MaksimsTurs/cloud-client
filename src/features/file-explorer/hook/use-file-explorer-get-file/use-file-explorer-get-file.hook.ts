@@ -1,21 +1,22 @@
 import type { SerializedError } from "@root/global.type";
-import type { FEItem } from "../../reducers/file-explorer/file-explorer.type";
+import type { FEItemPreivew } from "@page/File-Viewer/Page.type";
+import type { UseFileExplorerGetFile } from "./use-file-explorer-get-file.type";
 
 import { useEffect, useState } from "react";
 
 import { isUndefined, isNull } from "@util/is.util";
 import serializeError from "@util/serialize-error.util";
-import fetcher from "@util/fetcher/fetcher.util";
 import generateRefreshToken from "@util/generate-refresh-token.util";
+import http from "@util/http/http.util";
 
 import { useWithAuth } from "@service/auth/auth.service";
 
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
 
-export default function useFileExplorerGetFile(id?: string) {
+export default function useFileExplorerGetFile(id?: string): UseFileExplorerGetFile {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isExist, setIsExist] = useState(!isUndefined(id) && !isNull(id));
-  const [data, setData] = useState<FEItem & { buffer: string } | undefined>(undefined);
+  const [isExist, setIsExist] = useState(!isUndefined(id) || !isNull(id));
+  const [data, setData] = useState<FEItemPreivew | undefined>(undefined);
   const withAuth = useWithAuth<SerializedError>({ serializeError });
   const notificationToast = useNotificationToastActions();
 
@@ -23,30 +24,24 @@ export default function useFileExplorerGetFile(id?: string) {
     const getFile = async (): Promise<void> => {
       setIsLoading(true);
   
-      const [response, error] = await withAuth<FEItem & { buffer: string }>({
+      const result = await withAuth<FEItemPreivew>({
         generateRefreshToken,
         apiRequest: async () => {
-          const { data, error } = await fetcher.get<FEItem & { buffer: string }>(`/storage/get/${id}`, { credentials: "include" });
-
-          if(error) {
-            throw error;
-          }
-
-          return data;
+          return await http.get<FEItemPreivew>(`/storage/get/${id}`, { credentials: "include" });
         }
       });
 
-      if(error) {
-        notificationToast.add({ type: NOTIFICATION_TOAST_TYPES.ERROR, message: error.message });
+      if(result.getError()) {
+        notificationToast.add("error", (await serializeError(result.getError())).message);
         setIsExist(false);
       } else {
-        setData(response);
+        setData(result.getData());
       }
 
       setIsLoading(false);
     };
 
-    if(!isNull(id) && !isUndefined(id)) {
+    if(!isNull(id) || !isUndefined(id)) {
       getFile();
     }
   }, []);
