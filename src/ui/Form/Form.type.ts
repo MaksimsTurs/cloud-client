@@ -1,13 +1,13 @@
 import type { PropsWithChildren } from "react";
-import type { SubmitHandler, UseFormReturn } from "react-hook-form";
+import type { FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
 
 export type FormContainerProps = PropsWithChildren;
 
-export type FormBodyProps = PropsWithChildren<{
+export type FormBodyProps<T extends FieldValues> = PropsWithChildren<{
   error?: string
   className?: string
-  onSubmit: SubmitHandler<any>;
-} & UseFormReturn<any>>;
+  onSubmit: SubmitHandler<T>;
+} & UseFormReturn<T>>;
 
 export type FormHeaderProps = {
   title: string

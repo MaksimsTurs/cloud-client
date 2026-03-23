@@ -11,7 +11,8 @@ import {
   isFunction,
   isBigNumber,
   isSymbol,
-  isInstanceOf
+  isInstanceOf,
+  isPrimitive
 } from "../is.util";
 
 test("Test \"isString\".", function() {
@@ -93,12 +94,10 @@ test("Test \"isArray\".", function() {
 
 test("Test \"isObject\".", function() {
   expect(isObject({})).toBe(true);
-  expect(isObject(new Map())).toBe(true);
+  expect(isObject(new Map())).toBe(false);
   expect(isObject(Symbol("symbol"))).toBe(false);
   expect(isObject([])).toBe(false);
   expect(isObject(function() {})).toBe(false);
-  expect(isObject(null)).toBe(false);
-  expect(isObject(undefined)).toBe(false);
   expect(isObject(false)).toBe(false);
   expect(isObject(0)).toBe(false);
   expect(isObject("Some string")).toBe(false);
@@ -143,6 +142,20 @@ test("Test \"isSymbol\".", function() {
   expect(isSymbol(0)).toBe(false);
   expect(isSymbol(new Map())).toBe(false);
   expect(isSymbol("Some string")).toBe(false);
+});
+
+test("Test \"isPrimitive\".", function() {
+  expect(isPrimitive(Symbol("symbol"))).toBe(true);
+  expect(isPrimitive(9007199254740991n)).toBe(true);
+  expect(isPrimitive(function() {})).toBe(false);
+  expect(isPrimitive({})).toBe(false);
+  expect(isPrimitive([])).toBe(false);
+  expect(isPrimitive(null)).toBe(true);
+  expect(isPrimitive(undefined)).toBe(true);
+  expect(isPrimitive(false)).toBe(true);
+  expect(isPrimitive(0)).toBe(true);
+  expect(isPrimitive(new Map())).toBe(false);
+  expect(isPrimitive("Some string")).toBe(true);
 });
 
 test("Test \"isInstanceOf\".", function() {

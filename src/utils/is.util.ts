@@ -20,6 +20,13 @@ export const isPrimitive  = (something: any): boolean => (
   isBigNumber(something) ||
   isSymbol(something)    
 );
+export const isObjectEmpty = (something: any): boolean => {
+  for(let _ in something) {
+    return false;
+  }
+
+  return true;
+}
 
 const MIME_TYPES = {
   TEXT:   "text/*",

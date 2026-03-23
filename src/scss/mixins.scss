@@ -30,7 +30,7 @@
   #{$second-pos-prop}: $second-pos-val;
   width:              $width;
   height:             $height;
-  z-index:            $z-index;
+  z-index:            0;
   position: fixed;
 }
 
