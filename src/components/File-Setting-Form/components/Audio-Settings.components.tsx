@@ -14,7 +14,6 @@ export default function AudioSettings({
   defaultValues 
 }: FileSettingFormProps<FileAudioSettingOptions>): ReactNode {
   const methods = useForm<FileAudioSettingOptions>({ mode: "onSubmit", defaultValues });
-  const { formState: { errors }} = methods;
 
   return(
     <FormBody 
@@ -26,7 +25,6 @@ export default function AudioSettings({
         type="text"
         name="name"
         autoComplete="off"
-        error={errors.name?.message}
         options={{
             maxLength: { value: 64, message: "File name is to long!" }
         }}/>

@@ -55,13 +55,15 @@ export default function Page(): ReactNode {
     <Fragment>
       <Metadata title="Reset password"/>
       <FormContainer>
-        <FormBody {...methods } error={errors.root?.message} onSubmit={resetPassword}>
+        <FormBody<ResetPassword>
+          {...methods }
+          error={errors.root?.message} 
+          onSubmit={resetPassword}>
           <InputText
             name="password"
             type="password"
             placeholder="New password"
             autoComplete="new-password"
-            error={errors?.password?.message}
             options={{
               required: "New password is required!",
               minLength: { value: 12, message: "Password is to short!" },

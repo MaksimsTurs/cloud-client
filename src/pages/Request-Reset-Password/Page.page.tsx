@@ -36,13 +36,15 @@ export default function Page(): ReactNode {
     <Fragment>
       <Metadata title="Request reset password"/>
       <FormContainer>
-        <FormBody {...methods } error={errors.root?.message} onSubmit={requestResetPassword}>
+        <FormBody<RequestResetPassword>
+          {...methods } 
+          error={errors.root?.message} 
+          onSubmit={requestResetPassword}>
           <InputText
             name="email"
             type="email"
             placeholder="Confirm you E - mail"
             autoComplete="email"
-            error={errors?.email?.message}
             options={{
               required: "E - mail is required!",
               pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }

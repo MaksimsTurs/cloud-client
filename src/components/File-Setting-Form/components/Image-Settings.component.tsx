@@ -15,7 +15,6 @@ export default function ImageSettings({
   defaultValues 
 }: FileSettingFormProps<FileImageSettingOptions>): ReactNode {
   const methods = useForm<FileImageSettingOptions>({ mode: "onSubmit", defaultValues });
-  const { formState: { errors }} = methods;
 
   return(
     <FormBody 
@@ -27,7 +26,6 @@ export default function ImageSettings({
         type="text"
         name="name"
         autoComplete="off"
-        error={errors.name?.message}
         options={{
             maxLength: { value: 64, message: "File name is to long!" }
         }}/>
@@ -47,7 +45,6 @@ export default function ImageSettings({
         min={0}
         max={100}
         step={1}
-        error={errors.quality?.message}
         options={{
           max: { value: 100, message: "Quality must be number between 0 and 100!" },
           min: { value: 0, message: "Quality must be number between 0 and 100!" }
@@ -59,7 +56,6 @@ export default function ImageSettings({
           name="width"
           min={0}
           step={1}
-          error={errors.width?.message}
           options={{
             min: { value: 0, message: "Width can not be less than 0!" }
           }}/>
@@ -69,7 +65,6 @@ export default function ImageSettings({
           name="height"
           min={0}
           step={1}
-          error={errors.height?.message}
           options={{
             min: { value: 0, message: "Height can not be less than 0!" }
           }}/>

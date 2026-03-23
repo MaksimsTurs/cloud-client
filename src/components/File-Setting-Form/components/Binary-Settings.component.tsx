@@ -14,7 +14,6 @@ export default function BinarySettings({
   defaultValues 
 }: FileSettingFormProps<FileBinarySettingOptions>): ReactNode {
   const methods = useForm<FileBinarySettingOptions>({ mode: "onSubmit", defaultValues });
-  const { formState: { errors }} = methods;
 
   return(
     <FormBody
@@ -26,7 +25,6 @@ export default function BinarySettings({
         type="text"
         name="name"
         autoComplete="off"
-        error={errors.name?.message}
         options={{
             maxLength: { value: 64, message: "File name is to long!" }
         }}/>

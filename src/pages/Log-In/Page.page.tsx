@@ -25,7 +25,7 @@ export default function Page(): ReactNode {
   const { error, authenticate } = useAuth<SerializedError>({ serializeError });
   const navigate = useNavigate();
 
-  const { formState: { errors, isSubmitting }} = methods; 
+  const { formState: { isSubmitting }} = methods; 
 
   const logIn: SubmitHandler<UserLogIn> = async (userData): Promise<void> => {
     const isSucceed: boolean = await authenticate(async () => {
@@ -46,10 +46,12 @@ export default function Page(): ReactNode {
       <Metadata name="description" content="Log in you'r account."/>
       <FormContainer>
         <FormHeader title="Log in"/>
-        <FormBody {...methods } onSubmit={logIn} error={error?.message}>
+        <FormBody<UserLogIn> 
+          {...methods } 
+          onSubmit={logIn} 
+          error={error?.message}>
           <InputText
             type="text"
-            error={errors.email?.message}
             name="email" 
             placeholder="E - mail"
             options={{
@@ -58,7 +60,6 @@ export default function Page(): ReactNode {
             }}/>
           <InputText
             type="password"
-            error={errors.password?.message}
             name="password"
             placeholder="Password"
             options={{

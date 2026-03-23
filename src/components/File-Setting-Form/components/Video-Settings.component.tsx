@@ -15,7 +15,6 @@ export default function VideoSettings({
   defaultValues 
 }: FileSettingFormProps<FileVideoSettingOptions>): ReactNode {
   const methods = useForm<FileVideoSettingOptions>({ mode: "onSubmit", defaultValues });
-  const { formState: { errors }} = methods;
 
   return(
     <FormBody
@@ -27,7 +26,6 @@ export default function VideoSettings({
         type="text"
         name="name"
         autoComplete="off"
-        error={errors.name?.message}
         options={{
             maxLength: { value: 64, message: "File name is to long!" }
         }}/>
@@ -36,7 +34,6 @@ export default function VideoSettings({
         type="number"
         name="crf"
         autoComplete="off"
-        error={errors.name?.message}
         max={51}
         options={{
             max: { value: 51, message: "CRF is to big!" }

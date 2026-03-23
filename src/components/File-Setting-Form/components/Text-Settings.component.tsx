@@ -13,7 +13,6 @@ export default function TextSettings({
   defaultValues 
 }: FileSettingFormProps<FileTextSettingOptions>): ReactNode {
   const methods = useForm<FileTextSettingOptions>({ mode: "onSubmit", defaultValues });
-  const { formState: { errors }} = methods;
 
   return(
     <FormBody
@@ -25,7 +24,6 @@ export default function TextSettings({
         type="text"
         name="name"
         autoComplete="off"
-        error={errors.name?.message}
         options={{
             maxLength: { value: 64, message: "File name is to long!" }
         }}/>

@@ -7,7 +7,7 @@ import {
   isMimeTypeBinary,
   isMimeTypeImage,
   isMimeTypeVideo 
-} from "@util/check-file-type.util";
+} from "@util/is.util";
 
 import ImageSettings from "./components/Image-Settings.component";
 import AudioSettings from "./components/Audio-Settings.components";
