@@ -9,9 +9,8 @@ export default createAsyncThunk<FEMoveItemsReturn, FEMoveItemsParams>(
   async function(params, thunkApi) {
     try {
       await http.post<void>("/storage/move", { body: params, credentials: "include" });
-      return params.items;
+      return params
     } catch(error) {
-      console.log(error)
       return thunkApi.rejectWithValue(error);
     }
   }
