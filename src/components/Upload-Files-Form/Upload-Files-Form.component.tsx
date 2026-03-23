@@ -36,7 +36,7 @@ export default function UploadFilesForm(): ReactNode {
         <InputFile 
           name="files" 
           error={errors.files?.message}
-          accept={["image/*", "video/*", "audio/*"]}
+          accept={["image/*", "video/*", "audio/*", "text/*", "application/json"]}
           options={{
             validate: validateFiles,
           }}/>
