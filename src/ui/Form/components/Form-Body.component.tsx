@@ -1,11 +1,18 @@
 import type { ReactNode } from "react";
 import type { FormBodyProps } from "../Form.type";
+import type { FieldValues } from "react-hook-form";
 
 import scss from "../scss/Form-Body.module.scss";
 
 import { FormProvider } from "react-hook-form";
 
-export default function FormBody({ children, error, className, onSubmit, ...providerProps }: FormBodyProps): ReactNode {
+export default function FormBody<T extends FieldValues>({ 
+  children, 
+  error, 
+  className, 
+  onSubmit, 
+  ...providerProps 
+}: FormBodyProps<T>): ReactNode {
   return(
     <FormProvider {...providerProps }>
       <form
