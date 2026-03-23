@@ -2,7 +2,7 @@
 @use '@scss/mixins' as *;
 
 .side_menu_container {
-  @include dis-flex(unset, unset, $var-gap-xs, column);
+  @include dis-flex(null, null, $var-gap-xs, column, null, 1, 0);
   border-right: 1px solid $var-border-color-black;
   box-shadow: 0px 3px 5px $var-box-shadow-color-black;
   padding: $var-padding-m;

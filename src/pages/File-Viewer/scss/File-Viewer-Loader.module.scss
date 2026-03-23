@@ -8,8 +8,8 @@
     @include dis-flex(null, null, $var-gap-xs, column);
     padding: $var-padding-m;
     border-right: 1px solid $var-border-color-black;
-    box-shadow: 0px 1px 1px $var-box-shadow-color-black;
-    z-index: 2;
+    box-shadow: 0px 3px 5px $var-box-shadow-color-black;
+    z-index: 1;
     position: relative;
     
     .file_viewer_skeleton_information_section {

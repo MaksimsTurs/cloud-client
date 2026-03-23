@@ -7,6 +7,13 @@
 
   .file_media_viewer {
     @include dis-flex(center, center, null, null, null, 1);
+    padding: $var-padding-xxxxl;
+   
+    video,
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .file_text_viewer {

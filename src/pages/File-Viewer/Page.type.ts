@@ -1,3 +1,4 @@
+import type { FEItem } from "@feature/file-explorer/reducers/file-explorer/file-explorer.type";
 import type { PropsWithChildren } from "react";
 
 export type SideMenuContainerProps = PropsWithChildren;
@@ -8,17 +9,24 @@ export type SideMenuSectionProps = {
 };
 
 export type ImageRendererProps = {
-  data: string
+  data: FEItemPreivew
 };
 
 export type VideoRendererProps = {
-  data: string
+  data: FEItemPreivew
 };
 
 export type AudioRendererProps = {
-  data: string
+  data: FEItemPreivew
 };
 
 export type TextRendererProps = {
-  data: string
+  data: FEItemPreivew
 };
+
+export type FEItemPreivew = {
+  buffer: {
+    type: "Buffer"
+    data: number[]
+  }
+} & FEItem;
