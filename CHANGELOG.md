@@ -1,45 +1,40 @@
 ## Chore
+chore: update packages
 
-chore: update packages version
+## Fix
+fix: items not moved or removed
+fix: title prop not worked
 
 ## Refactor
+refactor: replace Dictionary with Partial<Record>
+refactor: move inputs to separate module
+refactor: rename Button to IconButton
+refactor: remove unused types
+refactor(page/Home): add header, main and footer to Empty component
+refactor: remove redundant react hook form usage
+refactor: correct the notification add toast calls to new signatures
+refactor: replace number constants with strings to describe toast type
+refactor: small changes
+refactor: remove unused FILE-TYPES constants
+refactor: migrate to new notification toast version
+refactor: remove redundant error props
+refactor: replace direct request of specific file with array buffer
+refactor: remove redundant react hook form usage
+refactor: replace fetcher with http implementation
 
-refactor: add serializion for errors that come from http
-refactor: add imports for new hooks and components
-refactor: replace caller with scall
-refactor: replace Error with TypeError
-refactor: rename Submit-Button to Text-Button
-refactor: rename Button to Icon-Button
-refactor: remove unused utilities
-refactor: rename refresh-user-refresh-token to generate-refresh-token
-refactor: replace fetcher utility with http implemintation
-refactor(page/Log-Up): replace fetcher with http utility function
-refactor(component/Header): migrate to newer utility functions, change folder structure
-refactor(auth/use-with-auth): migrate from caller to scall utility function
-refactor(service/auth): remove unused context properties
-refactor(service/auth): update jsdoc, rename types for returning functions
-refactor(service/auth): migrate from caller to scall utility
-refactor: rename Button to Icon-Button
-refactor: rename Submit-Button to Text-Button
-
-## Feature
-
-feat: add component to auth service so we can define auth layer to specific routes
-feat: add hook use-auth-is-authorizing
-feat: add new utility functions to convert one type to another
-feat: add new utility for safe error handling
-feat: add new http client
-feat: add hook to work with url search params
-feat: add hook use-auth-is-authorized
-feat: add alert component
-feat(page/Reset-Password): add page for creating a new password
-feat(page/Request-Reset-Password): add page for requesting a password reseting
-feat(page/Request-Confirm-Email): add page for requesting a new email for email confirmation
-feat(page/Log-In): migrate to new utility functions and add aria attributes
-feat(page/Log-Up): migrate to new utility functions and add aria attributes
-feat(ui/Empty): add 'header', 'main' and optional 'footer' options
-
-## Test
-test: add test for to convert utility
-test: add test for scall utility
-test: add test for http utility
+## Features
+feat: add check functions for mime types
+feat: make Empty footer optional
+feat: add context menu with add folder and add file options
+feat: add check that file list is not empty
+feat: add formatter for memory units
+feat: add types for use-file-explorer-get-file hook
+feat: add favicon
+feat: add custom select input
+feat(ui/Form): add type safety
+feat(component/Upload-Files-Form): add support for text files
+feat(component/Upload-Files-Form): add configuration form for uploaded file
+feat(component/Header): add button for sending user verification email
+feat: add error serializer for synchroune functions
+feat: add common error message component for inputs
+feat(Input-File): replace register and error props with values from react hook form context
