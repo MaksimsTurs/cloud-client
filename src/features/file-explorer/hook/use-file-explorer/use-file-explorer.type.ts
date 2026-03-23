@@ -14,9 +14,9 @@ export type FEAction<R = any, P = any> = (arg: P, config?: AsyncThunkDispatchCon
 
 type FECopy = (items: FEItemRecord, parentId?: string) => Promise<boolean>;
 
-type FEMove = (items: FEItemRecord, parentId?: string) => Promise<boolean>;
+type FEMove = (items: FEItemRecord, itemPaths: Record<string, string>, parentId?: string) => Promise<boolean>;
 
-type FERemove = (items: FEItemRecord) => Promise<boolean>;
+type FERemove = (items: FEItemRecord, itemPaths: Record<string, string>) => Promise<boolean>;
 
 type FECreate = (type: number, name: string, parentId?: string) => Promise<boolean>;
 

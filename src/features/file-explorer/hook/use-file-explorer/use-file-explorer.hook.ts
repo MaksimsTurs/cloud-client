@@ -36,15 +36,15 @@ export default function useFileExplorer(): UseFEReturn {
       setIsLoading(false);
       return result;
     },
-    move: async function(items, parentId) {
+    move: async function(items, itemPaths, parentId) {
       setIsLoading(true);
-      const result = await asyncDispatcher<FEMoveItemsReturn, FEMoveItemsParams>(moveItemsAction, { items, parentId }); 
+      const result = await asyncDispatcher<FEMoveItemsReturn, FEMoveItemsParams>(moveItemsAction, { items,  itemPaths, parentId }); 
       setIsLoading(false);
       return result;
     },
-    remove: async function(items) {
+    remove: async function(items, itemPaths) {
       setIsLoading(true);
-      const result = await asyncDispatcher<FERemoveItemsReturn, FERemoveItemsParams>(removeItemsAction, items); 
+      const result = await asyncDispatcher<FERemoveItemsReturn, FERemoveItemsParams>(removeItemsAction, { items, itemPaths }); 
       setIsLoading(false);
       return result;
     },

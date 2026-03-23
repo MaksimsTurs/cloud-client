@@ -16,6 +16,7 @@ export type FEItem = {
   id: string
   user_id: string
   parent_id: string
+  mime_type: string
   name: string
   type: number
 };
@@ -58,18 +59,28 @@ export type FECopyItemsPayloadAction = PayloadAction<FECopyItemsReturn>;
 
 export type FEMoveItemsParams = {
   parentId?: string
+  itemPaths: Record<string, string>
   items: Record<string, FEItem> 
 };
 
-export type FEMoveItemsReturn = Record<string, FEItem>;
+export type FEMoveItemsReturn = {
+  itemPaths: Record<string, string>
+  items: Record<string, FEItem>
+};
 
 export type FEMoveItemsPayloadAction = PayloadAction<FEMoveItemsReturn>;
 
 //####################################################################################
 
-export type FERemoveItemsParams = Record<string, FEItem>;
+export type FERemoveItemsParams = {
+  itemPaths: Record<string, string>
+  items: Record<string, FEItem> 
+};
 
-export type FERemoveItemsReturn = Record<string, FEItem>;
+export type FERemoveItemsReturn = {
+  itemPaths: Record<string, string>
+  items: Record<string, FEItem> 
+};
 
 export type FERemoveItemsPayloadAction = PayloadAction<FERemoveItemsReturn>;
 

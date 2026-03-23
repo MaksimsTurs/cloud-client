@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import http from "@util/http/http.util";
 
-import type { FECopyItemsReturn, FEMoveItemsParams } from "../file-explorer.type";
+import type { FECopyItemsParams, FECopyItemsReturn } from "../file-explorer.type";
 
-export default createAsyncThunk<FECopyItemsReturn, FEMoveItemsParams>(
+export default createAsyncThunk<FECopyItemsReturn, FECopyItemsParams>(
   "fe:copy::items",
   async function(params, thunkApi) {
     try {

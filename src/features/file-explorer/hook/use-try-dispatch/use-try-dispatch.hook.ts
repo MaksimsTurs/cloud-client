@@ -4,6 +4,7 @@ import type { AppDispatch } from "@reducer/store";
 
 import caller from "@util/caller/caller.util";
 import serializeErrorSync from "@util/serialize-error-sync.util";
+import serializeError from "@root/utils/serialize-error.util";
 import generateRefreshToken from "@util/generate-refresh-token.util";
 
 import { useDispatch } from "react-redux";
@@ -13,7 +14,7 @@ import { useNotificationToastActions } from "@feature/notification-toast/notific
 
 export default function useTryDispatch(): UseTryDispatchReturn {
   const dispatch = useDispatch<AppDispatch>();
-  const withAuth = useWithAuth<SerializedError>({ serializeError: serializeErrorSync });
+  const withAuth = useWithAuth<SerializedError>({ serializeError });
   const notificationToast = useNotificationToastActions();
 
   return {

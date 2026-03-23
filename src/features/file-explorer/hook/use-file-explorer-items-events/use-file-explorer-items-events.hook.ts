@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useFileExplorer, useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 
+import { isObjectEmpty } from "@util/is.util";
 import hasKey from "@feature/file-explorer/utils/has-key.util";
 
 export default function useFileExplorerAction(): UseFEActionReturn {
@@ -15,6 +16,7 @@ export default function useFileExplorerAction(): UseFEActionReturn {
   const feHistory = useFileExplorerHistory();
 
   const pressedKeys: RefObject<Set<string>> = useRef<Set<string>>(new Set<string>());
+  const feItemPaths: RefObject<Record<string, string>> = useRef({});
 
   const addKey = (key: string): void => {
     pressedKeys.current.add(key);
@@ -39,11 +41,17 @@ export default function useFileExplorerAction(): UseFEActionReturn {
 
       if(item && itemId) {
         if(event.ctrlKey && !hasKey(itemId, feItems)) {
-          setFeItems(items => ({...items, [itemId]: item }));
+          setFeItems(items => {
+            feItemPaths.current[itemId] = feHistory.path;
+            return {...items, [itemId]: item };
+          });
         } else {
           setFeItems(items => {
             const newItems = {...items };
+
             delete newItems[itemId];
+            delete feItemPaths.current[itemId]; 
+
             return newItems;
           });
         }
@@ -60,22 +68,25 @@ export default function useFileExplorerAction(): UseFEActionReturn {
     deleteKey(event.key);
   };
 
-  const handlePressedKeys = (event: KeyboardEvent<HTMLDivElement>): void => {
-    if(isPressed("Escape")) {
+  const handlePressedKeys = async (event: KeyboardEvent<HTMLDivElement>): Promise<void> => { 
+    if(!isObjectEmpty(feItems)) {
       event.preventDefault();
-      setFeItems({});
-    } else if(event.ctrlKey && isPressed("c")) {
-      event.preventDefault();
-      fe.copy(feItems, feHistory.parent?.id);
-      setFeItems({});
-    } else if(event.ctrlKey && isPressed("d")) {
-      event.preventDefault();
-      fe.remove(feItems);
-      setFeItems({});
-    } else if(event.ctrlKey && isPressed("m")) {
-      event.preventDefault();
-      fe.move(feItems, feHistory.parent?.id);
-      setFeItems({});
+      
+      if(isPressed("Escape")) {
+        setFeItems({});
+        feItemPaths.current = {};
+      } else if(event.ctrlKey && isPressed("c")) {
+        await fe.copy(feItems, feHistory.parent?.id);
+        setFeItems({});
+      } else if(event.ctrlKey && isPressed("d")) {
+        await fe.remove(feItems, feItemPaths.current);
+        feItemPaths.current = {};
+        setFeItems({});
+      } else if(event.ctrlKey && isPressed("m")) {
+        await fe.move(feItems, feItemPaths.current, feHistory.parent?.id);
+        feItemPaths.current = {};
+        setFeItems({});
+      }
     }
   };
 
