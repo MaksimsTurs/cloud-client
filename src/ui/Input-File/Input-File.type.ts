@@ -8,5 +8,4 @@ export type InputFileProps<P extends FieldValues> = {
   name: Path<P>
   options?: RegisterOptions<P, Path<P>>
   accept?: string[]
-  error?: string
 };

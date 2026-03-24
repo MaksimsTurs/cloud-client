@@ -20,7 +20,7 @@ export default function UploadFilesForm(): ReactNode {
   const feHistory = useFileExplorerHistory();
   const methods = useForm<UploadFiles>();
 
-  const { formState: { errors, isSubmitting }} = methods;
+  const { formState: { isSubmitting }} = methods;
 
   const uploadFiles: SubmitHandler<UploadFiles> = async (upload): Promise<void> => {
     const isOk: boolean = await fe.upload(upload, feHistory.parent?.id);
@@ -35,7 +35,6 @@ export default function UploadFilesForm(): ReactNode {
       <FormBody {...methods } onSubmit={uploadFiles}>
         <InputFile 
           name="files" 
-          error={errors.files?.message}
           accept={["image/*", "video/*", "audio/*", "text/*", "application/json"]}
           options={{
             validate: validateFiles,

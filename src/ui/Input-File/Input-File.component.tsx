@@ -15,8 +15,8 @@ import { useModalsManager } from "@feature/modals-manager/modals-manager.feature
 import InputErrorMessage from "../Input-Error-Message/Input-Error-Message.component";
 import FileSettingForm from "@component/File-Setting-Form/File-Setting-Form.component";
 
-export default function InputFile<T extends FieldValues>({ name, accept, error, options }: InputFileProps<T>): ReactNode {
-  const { register, setValue, getValues } = useFormContext<T>();
+export default function InputFile<T extends FieldValues>({ name, accept, options }: InputFileProps<T>): ReactNode {
+  const { register, setValue, getValues, formState: { errors }} = useFormContext<T>();
   const modalsManager = useModalsManager();
   const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
   const dataTransferRef: RefObject<DataTransfer> = useRef<DataTransfer>(new DataTransfer());
@@ -24,6 +24,8 @@ export default function InputFile<T extends FieldValues>({ name, accept, error, 
 
   const fileListMode = filesToUpload.length ? "visible" : "hidden";
   const fileInputMode = !filesToUpload.length ? "visible" : "hidden";
+
+  const error: string | undefined = errors[name]?.message?.toString();
 
   const upload = (event: SyntheticEvent<HTMLInputElement>): void => {
     const { files } = event.currentTarget;
