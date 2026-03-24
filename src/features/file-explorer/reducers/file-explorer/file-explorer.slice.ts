@@ -80,17 +80,12 @@ const slice = createSlice({
       state.history.items.at(-1)?.push(...action.payload);
     })
     .addCase(removeItems.fulfilled, function(state: WritableDraft<FEState>, action: FERemoveItemsPayloadAction): void {
-      const { itemPaths, items } = action.payload;
+      const itemPaths: Record<string, string> = action.payload;
       const currPath: string[] = current(state.history.paths);
 
       for(let itemId in itemPaths) {
         const itemFolder: string = itemPaths[itemId];
         const itemFolderSplit: string[] = itemFolder.split("/");
-        const item: FEItem = items[itemId];
-
-        if(isUserTryRemoveFromUnsecureLocation(`${itemFolder}/${item.name}`, currPath)) {
-          throw new Error("You can't delete the folders you're in!");
-        }
 
         if(currPath.length >= itemFolderSplit.length) {
           state.history.items[itemFolderSplit.length - 1] = state.history.items[itemFolderSplit.length - 1].filter(item => item.id != itemId);

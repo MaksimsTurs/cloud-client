@@ -78,6 +78,7 @@ export default function useFileExplorerAction(): UseFEActionReturn {
       } else if(event.ctrlKey && isPressed("c")) {
         await fe.copy(feItems, feHistory.parent?.id);
         setFeItems({});
+        feItemPaths.current = {};
       } else if(event.ctrlKey && isPressed("d")) {
         await fe.remove(feItems, feItemPaths.current);
         feItemPaths.current = {};

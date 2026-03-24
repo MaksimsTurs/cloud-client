@@ -9,7 +9,7 @@ export default createAsyncThunk<FERemoveItemsReturn, FERemoveItemsParams>(
   async function(params, thunkApi) {
     try {
       await http.post<void>("/storage/remove", { body: params.items, credentials: "include" });
-      return params;
+      return params.itemPaths;
     } catch(error) {
       return thunkApi.rejectWithValue(error);
     }

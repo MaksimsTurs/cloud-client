@@ -77,10 +77,7 @@ export type FERemoveItemsParams = {
   items: Record<string, FEItem> 
 };
 
-export type FERemoveItemsReturn = {
-  itemPaths: Record<string, string>
-  items: Record<string, FEItem> 
-};
+export type FERemoveItemsReturn = Record<string, string>;
 
 export type FERemoveItemsPayloadAction = PayloadAction<FERemoveItemsReturn>;
 

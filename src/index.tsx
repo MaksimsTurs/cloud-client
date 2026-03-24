@@ -33,6 +33,9 @@ const RequestConfirmEmail = lazy(() => import("@page/Request-Confirm-Email/Page.
 
 http.config({ base: "http://localhost:4000" });
 
+// TODO Make side menu in file preview page smaller.
+// TODO Move user location validation into use file explorer hook.
+
 async function authorize(): Promise<UseAuthEndpointResponse> {
   return await http.get("/user/init", { credentials: "include" });
 };
