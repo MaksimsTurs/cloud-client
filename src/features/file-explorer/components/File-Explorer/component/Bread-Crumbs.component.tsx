@@ -26,7 +26,7 @@ export default function BreadCrumbs(): ReactNode {
       {feHistory.paths.map((crumb: string, index: number) =>
         <li key={crumb} className={scss.breadcrumbs_list_item}>
           <p>/</p>
-          <p onClick={() => closeFolder(index)}>{crumb}</p>
+          <p onClick={feHistory.isLoading ? undefined : () => closeFolder(index)}>{crumb}</p>
         </li>
       )}
     </ul>
