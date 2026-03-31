@@ -7,13 +7,15 @@ import { useFormContext } from "react-hook-form";
 
 import scss from "./Input-Text.module.scss";
 
-import { EyeClosedIcon, EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+
+import InputErrorMessage from "../Input-Error-Message/Input-Error-Message.component";
 
 export default function InputText<T extends FieldValues>({ options, type, ...attributes }: InputTextProps<T>): ReactNode {
   const [isPreviewMode, setPreviewMode] = useState<boolean>(false);
   const { register, formState: { errors }} = useFormContext<T>();
 
-  const error = errors[attributes.name]?.message;
+  const error: string | undefined = errors[attributes.name]?.message?.toString();
 
   const togglePreview = (): void => {
     setPreviewMode(prev => !prev);
@@ -53,7 +55,7 @@ export default function InputText<T extends FieldValues>({ options, type, ...att
           id={attributes.name}
           className={error ? scss.input_text_error : scss.input_text}/>
       </div>
-      {error ? <p className={scss.input_text_error_message}>{error.toString()}</p> : null}
+      {error ? <InputErrorMessage message={error}/> : null}
     </label>
   );
 };
