@@ -13,6 +13,7 @@ import IconButton from "@ui/Icon-Button/Icon-Button.component";
 
 import { 
   ArrowLeftIcon, 
+  LogOutIcon, 
   MailWarningIcon, 
   UserPlus2Icon, 
   UserRoundKeyIcon, 
@@ -80,7 +81,7 @@ export default function Navigation(): ReactNode {
           onClick={logoutUser} 
           role="button" 
           aria-label="Log out">
-          <UserRoundXIcon/> 
+          <LogOutIcon/>
         </IconButton>
       </Fragment> :
       <Fragment>
