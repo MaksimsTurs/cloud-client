@@ -2,7 +2,7 @@
 @use "@scss/mixins" as *;
 
 .form_header {
-  font-size: calc($var-font-xxxxl);
+  font-size: $var-font-xxxxl;
   font-weight: bolder;
   color: #000000;
   border-bottom: 1px solid $var-border-color-black;
