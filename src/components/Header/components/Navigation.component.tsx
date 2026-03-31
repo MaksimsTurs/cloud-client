@@ -14,8 +14,8 @@ import IconButton from "@ui/Icon-Button/Icon-Button.component";
 import { 
   ArrowLeftIcon, 
   MailWarningIcon, 
-  UserCheck2Icon, 
   UserPlus2Icon, 
+  UserRoundKeyIcon, 
   UserRoundXIcon
 } from "lucide-react";
 
@@ -94,7 +94,7 @@ export default function Navigation(): ReactNode {
           role="button" 
           aria-label="Log in"
           onClick={() => goTo("/log-in")}>
-          <UserCheck2Icon/>
+          <UserRoundKeyIcon/>
         </IconButton>
       </Fragment>}
     </nav>
