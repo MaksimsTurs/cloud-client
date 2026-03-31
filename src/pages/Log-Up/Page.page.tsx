@@ -53,11 +53,11 @@ export default function Page(): ReactNode {
       <Metadata title="Log up"/>
       <Metadata name="description" content="Create new user."/>
       <FormContainer>
-        <FormHeader title="Log up"/>
         <FormBody<UserLogUp>
           {...methods } 
           onSubmit={logUp} 
           error={error?.message}>
+          <FormHeader title="Log up"/>
           <InputText
             type="email"
             name="email" 
@@ -67,7 +67,7 @@ export default function Page(): ReactNode {
               required: "E - mail is required!",
               pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
             }}/>
-            <InputText
+          <InputText
             type="password"
             name="password"
             autoComplete="new-password"
@@ -77,7 +77,7 @@ export default function Page(): ReactNode {
               minLength: { value: 12, message: "Password is to short!" },
               validate: checkPasswordsEquality
             }}/>
-            <InputText
+          <InputText
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
