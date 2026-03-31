@@ -21,7 +21,7 @@ import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
 export default function Page(): ReactNode {
-  const methods = useForm<UserLogUp>();
+  const methods = useForm<UserLogUp>({ mode: "onSubmit", reValidateMode: "onSubmit" });
   const { error, authenticate } = useAuth<SerializedError>({ serializeError });
   const navigate = useNavigate();
 
