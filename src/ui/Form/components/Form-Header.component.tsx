@@ -4,5 +4,5 @@ import type { FormHeaderProps } from "../Form.type";
 import scss from "../scss/Form-Header.module.scss";
 
 export default function FormHeader({ title }: FormHeaderProps): ReactNode {
-  return <h4 className={scss.form_header}>{title}</h4>;
+  return <p className={scss.form_header}>{title}</p>;
 };
