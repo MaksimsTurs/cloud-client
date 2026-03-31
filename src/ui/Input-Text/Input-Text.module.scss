@@ -14,15 +14,16 @@
       box-shadow: 1px 3px 3px $var-box-shadow-color-black;
       transition: background-color $var-transition-time-100ms ease;
       font-size: $var-font-l;
+      background-color: #b6b6c833;
       width: 100%;
 
       &:focus {
-        background-color: $var-background-color-black;
+        background-color: #b6b6c84d;
         transition: background-color $var-transition-time-100ms ease;
       }
 
       &:hover {
-        background-color: $var-background-color-black;
+        background-color: #b6b6c84d;
         transition: background-color $var-transition-time-100ms ease;
       }
     }
