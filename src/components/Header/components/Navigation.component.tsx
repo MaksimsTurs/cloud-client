@@ -64,7 +64,8 @@ export default function Navigation(): ReactNode {
     <nav className={scss.nav_container}>
       <IconButton 
         onClick={goBack} 
-        disabled={feHistory.isRoot || path != "/"}>
+        disabled={feHistory.isRoot || path != "/"}
+        aria-label="Go to parent folder">
         <ArrowLeftIcon/>
       </IconButton>
       {isAuthorized ?
