@@ -59,15 +59,15 @@ export default function Page(): ReactNode {
           onSubmit={logUp} 
           error={error?.message}>
           <InputText
-            type="text"
+            type="email"
             name="email" 
             placeholder="E - mail"
-            autoComplete="email"
+            autoComplete="username"
             options={{
               required: "E - mail is required!",
               pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
             }}/>
-          <InputText
+            <InputText
             type="password"
             name="password"
             autoComplete="new-password"
@@ -77,10 +77,9 @@ export default function Page(): ReactNode {
               minLength: { value: 12, message: "Password is to short!" },
               validate: checkPasswordsEquality
             }}/>
-          <InputText
+            <InputText
             type="password"
             name="confirmPassword"
-            autoComplete="new-password"
             placeholder="Confirm Password"
             options={{
               required: "Confirm password is required!",
@@ -88,7 +87,7 @@ export default function Page(): ReactNode {
               validate: checkPasswordsEquality
             }}/>
           <FormFooter>
-            <TextButton text="Registrate" disabled={isSubmitting}/>
+            <TextButton type="submit" text="Registrate" disabled={isSubmitting}/>
             <Link href="/log-in">Have account?</Link>
           </FormFooter>
         </FormBody>
