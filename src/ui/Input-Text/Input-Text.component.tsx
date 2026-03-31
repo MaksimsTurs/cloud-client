@@ -7,7 +7,7 @@ import { useFormContext } from "react-hook-form";
 
 import scss from "./Input-Text.module.scss";
 
-import { EyeClosedIcon, EyeIcon } from "lucide-react";
+import { EyeClosedIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function InputText<T extends FieldValues>({ options, type, ...attributes }: InputTextProps<T>): ReactNode {
   const [isPreviewMode, setPreviewMode] = useState<boolean>(false);
@@ -41,7 +41,7 @@ export default function InputText<T extends FieldValues>({ options, type, ...att
           className={scss.input_text_preview_button} 
           onClick={togglePreview} 
           type="button">
-          {isPreviewMode ? <EyeIcon strokeWidth={1} size={24}/> : <EyeClosedIcon strokeWidth={1} size={24}/>}
+          {isPreviewMode ? <EyeIcon strokeWidth={1} size={24}/> : <EyeOffIcon strokeWidth={1} size={24}/>}
         </button> : null}
         <input 
           {...attributes } 
