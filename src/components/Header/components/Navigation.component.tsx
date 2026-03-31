@@ -61,7 +61,7 @@ export default function Navigation(): ReactNode {
   };
 
   return(
-    <nav className={scss.header_nav_container}>
+    <nav className={scss.nav_container}>
       <IconButton 
         onClick={goBack} 
         disabled={feHistory.isRoot || path != "/"}>
