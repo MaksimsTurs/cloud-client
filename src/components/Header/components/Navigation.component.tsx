@@ -40,11 +40,7 @@ export default function Navigation(): ReactNode {
   };
 
   const goBack = async (): Promise<void> => {
-    if(path !== "/") {
-      navigate(-1);
-    } else {
-      feHistory.close(-1);
-    }
+    feHistory.close(-1);
   };
 
   const logoutUser = async (): Promise<void> => {
@@ -68,7 +64,7 @@ export default function Navigation(): ReactNode {
     <nav className={scss.header_nav_container}>
       <IconButton 
         onClick={goBack} 
-        disabled={feHistory.isRoot && path === "/"}>
+        disabled={feHistory.isRoot || path != "/"}>
         <ArrowLeftIcon/>
       </IconButton>
       {isAuthorized ?
