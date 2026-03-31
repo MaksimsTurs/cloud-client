@@ -2,7 +2,7 @@
 @use "@scss/mixins" as *;
 
 .input_text_label {
-  @include dis-flex(normal, normal, 0.2rem, column);
+  @include dis-flex(normal, normal, $var-gap-xs, column);
   width: 100%;
 
   .input_text_container {
