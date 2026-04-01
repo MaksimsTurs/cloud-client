@@ -35,7 +35,7 @@ export default function ContextMenu({ children }: ContextMenuProps): ReactNode {
 
   const uploadFiles = (event: MouseEvent<HTMLButtonElement>): void => {
     event.stopPropagation();
-    modalsManager.push("Upload Files", <UploadFilesForm/>);
+    modalsManager.push("Add Files", <UploadFilesForm/>);
     setIsVisible(false);
   };
 
@@ -59,7 +59,7 @@ export default function ContextMenu({ children }: ContextMenuProps): ReactNode {
         <li>
           <button className={scss.context_menu_button} onClick={uploadFiles}>
             <FilePlusIcon strokeWidth={1}/>
-            <p>Add File</p>
+            <p>Add Files</p>
           </button>
         </li>
       </ul>
