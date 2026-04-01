@@ -38,6 +38,18 @@ function App(): ReactNode {
     <Fragment>
       <ModalsRenderer/>
       <NotificationToastRenderer/>
+      <Route path="/log-up">
+        <Header/>
+        <Suspense>
+          <LogUp/>
+        </Suspense>
+      </Route>
+      <Route path="/log-in">
+        <Header/>
+        <Suspense>
+          <LogIn/>
+        </Suspense>
+      </Route>
       <Route path="/item/:id">
         <AuthRoute authorize={authorize}>
           <Header/>
@@ -55,33 +67,18 @@ function App(): ReactNode {
         </AuthRoute>
       </Route>
       <Route path="/request-reset-password">
-        <Header/>
         <Suspense>
           <RequestResetPassword/>
         </Suspense>
       </Route>
       <Route path="/request-confirm-email">
-        <Header/>
         <Suspense>
           <RequestConfirmEmail/>
         </Suspense>
       </Route>
       <Route path="/reset-password">
-        <Header/>
         <Suspense>
           <ResetPassword/>
-        </Suspense>
-      </Route>
-      <Route path="/log-up">
-        <Header/>
-        <Suspense>
-          <LogUp/>
-        </Suspense>
-      </Route>
-      <Route path="/log-in">
-        <Header/>
-        <Suspense>
-          <LogIn/>
         </Suspense>
       </Route>
     </Fragment>
