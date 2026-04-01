@@ -5,7 +5,7 @@ import type { FileSettingOptions } from "@component/File-Setting-Form/File-Setti
 
 import scss from "./Input-File.module.scss";
 
-import { CircleXIcon, DownloadIcon, SettingsIcon } from "lucide-react";
+import { CircleXIcon, DownloadIcon, FileImageIcon, SettingsIcon } from "lucide-react";
 import { Fragment, Activity, useState, useRef } from "react";
 
 import { useFormContext } from "react-hook-form";

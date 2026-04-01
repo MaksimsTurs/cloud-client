@@ -9,11 +9,13 @@
   box-shadow: 1px 3px 3px $var-box-shadow-color-black;
   transition: background-color $var-transition-time-100ms ease;
   font-size: $var-font-l;
-  width: 100%;
+  width: calc($var-size-xxxxl * 10);
   cursor: pointer;
+  background-color: #b6b6c833;
   
   &:hover {
-    background-color: $var-background-color-black;
+    background-color: #b6b6c84d;
+    transition: background-color $var-transition-time-100ms ease;
   }
 }
 
@@ -25,21 +27,19 @@
 
 .input_file_list {
   @include dis-flex(null, null, 0, column);
-  color: $var-color-blue;
   border-bottom: 1px solid $var-border-color-blue;
   box-shadow: 1px 3px 3px $var-box-shadow-color-black;
   transition: background-color $var-transition-time-100ms ease;
   font-size: $var-font-l;
-  width: 100%;
+  width: calc($var-size-xxxxl * 10);
   overflow-y: auto;
   max-height: calc(10 * 61px);
-  color: $var-color-blue;
 
   .input_file_item {
     @include text-overflow();
-    @include dis-flex(cen
-    ter, space-between, $var-gap-xxxxl, row, nowrap, 1, 0);
+    @include dis-flex(center, space-between, $var-gap-xxxxl, row, nowrap, 1, 0);
     padding: $var-padding-m;
+    background-color: #b6b6c833;
     border-bottom: 1px solid $var-border-color-black;
 
     &:last-child {
