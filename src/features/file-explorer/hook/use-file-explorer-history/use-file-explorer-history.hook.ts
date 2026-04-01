@@ -5,7 +5,7 @@ import type { UseFEHistoryReturn } from "./use-file-explorer-history.type";
 import getItems from "@feature/file-explorer/reducers/file-explorer/actions/get-items.action";
 import { closeDir } from "@feature/file-explorer/reducers/file-explorer/file-explorer.slice";
 
-import caller from "@util/caller/caller.util";
+import scall from "@util/scall/scall.util";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -31,15 +31,15 @@ export default function useFileExplorerHistory(): UseFEHistoryReturn {
         return undefined;
       }
      
-      const [data, error] = caller(() => {
+      const result = scall(() => {
         return history.items.at(-1)?.find(item => item.id === id);
       });
 
-      if(error) {
-        return undefined
+      if(result.getError()) {
+        return undefined;
       }
 
-      return data;
+      return result.getData();
     },
     close: function(from) {
       return syncDispatcher(closeDir, from);

@@ -2,7 +2,7 @@ import type { UseTryDispatchReturn } from "./use-try-dispatch.type";
 import type { SerializedError } from "@root/global.type";
 import type { AppDispatch } from "@reducer/store";
 
-import caller from "@util/caller/caller.util";
+import scall from "@util/scall/scall.util";
 import serializeErrorSync from "@util/serialize-error-sync.util";
 import serializeError from "@root/utils/serialize-error.util";
 import generateRefreshToken from "@util/generate-refresh-token.util";
@@ -19,12 +19,12 @@ export default function useTryDispatch(): UseTryDispatchReturn {
 
   return {
     syncDispatcher: (action, args) => {
-      const [_, error] = caller(() => {
+      const result = scall(() => {
         dispatch(action(args));
       });
 
-      if(error) {
-        notificationToast.add("error", serializeErrorSync(error).message);
+      if(result.getError()) {
+        notificationToast.add("error", serializeErrorSync(result.getError()).message);
         return false;
       }
 
