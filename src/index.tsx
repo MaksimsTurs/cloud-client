@@ -1,7 +1,6 @@
 import "@scss/root.scss";
 
 import type { ReactNode } from "react";
-import type { UseAuthEndpointResponse } from "./services/auth/hooks/use-auth.type";
 
 import { Fragment, lazy, Suspense } from "react";
 import { Provider } from "react-redux";
@@ -20,6 +19,7 @@ import { ModalsRenderer } from "@feature/modals-manager/modals-manager.feature";
 import { Routes, initRouteComponents } from "@hook/use-react-router/use-react-router.hook";
 
 import http from "./utils/http/http.util";
+import authorize from "./utils/authorize.util";
 
 export const { Route, Link } = initRouteComponents<string>();
 
@@ -32,13 +32,6 @@ const ResetPassword = lazy(() => import("@page/Reset-Password/Page.page"));
 const RequestConfirmEmail = lazy(() => import("@page/Request-Confirm-Email/Page.page"));
 
 http.config({ base: "http://localhost:4000" });
-
-// TODO Make side menu in file preview page smaller.
-// TODO Move user location validation into use file explorer hook.
-
-async function authorize(): Promise<UseAuthEndpointResponse> {
-  return await http.get("/user/init", { credentials: "include" });
-};
 
 function App(): ReactNode {
   return(
