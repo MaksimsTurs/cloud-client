@@ -44,7 +44,9 @@ export default function Page(): ReactNode {
   if(isLoading) {
     return(
       <Fragment>
-        <Metadata title="Request confirm E - mail"/>
+        <Metadata title="Request confirm e - mail"/>
+        <Empty 
+          main="Requesting e - mail confirmation."/>
       </Fragment>
     );
   }
@@ -62,10 +64,9 @@ export default function Page(): ReactNode {
 
   return(
     <Fragment>
-      <Metadata title="Request confirm E - mail"/>
+      <Metadata title="Request confirm e - mail"/>
       <Empty
-        header="Confirm email"
-        main="Confirm email has been sended, check you email post."/>
+        main="Confirm e - mail has been sended, check you e - mail post."/>
     </Fragment>
   );
 };
