@@ -35,9 +35,7 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
       const result = await scall<UseAuthEndpointResponse, E | undefined>(async() => {
         const response = await callback();
 
-        if(!response || 
-           !isString(response.tokens.access) || 
-           !isString(response.tokens.refresh)) {
+        if(!isString(response?.tokens?.access) || !isString(response?.tokens?.refresh)) {
           throw new AuthenticationError("Refresh and Access tokens must be returned from you authentication endpoint!");
         }
 

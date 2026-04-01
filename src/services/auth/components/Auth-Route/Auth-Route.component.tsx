@@ -26,18 +26,20 @@ export default function AuthRoute({ authorize, children }: AuthRoute): ReactNode
       const result = await scall<UseAuthEndpointResponse>(async () => {
         const response: UseAuthEndpointResponse | undefined = await authorize!();
       
-        if(!response || 
-           !isString(response.tokens.access) || 
-           !isString(response.tokens.refresh)) {
+        if(!isString(response?.tokens?.access) || !isString(response?.tokens?.refresh)) {
           throw new AuthenticationError("Refresh and Access tokens must be returned from you authentication endpoint!");
         }
         
         return response;
       });
 
-      context.setTokens(result.getData()?.tokens || {});
-      context.setUser(result.getData()?.user);
-      context.setIsAuthorizing(false);
+      if(result.getData()) {
+        const { tokens, user } = result.getData()!;
+            
+        context.setTokens(tokens || {});
+        context.setUser(user);
+        context.setIsAuthorizing(false);
+      }
     };
 
     if(!isUndefined(authorize)) {
