@@ -72,7 +72,8 @@ export default function Page(): ReactNode {
     <Fragment>
       <Metadata title="Request confirm e - mail"/>
       <Empty
-        main="Confirm e - mail has been sended."
+        header="Account confirmation"
+        main="Confirm e - mail has been sended, check you post, don't forget that e - mail will expire in 5 minutes!"
         footer={<TextButton text="Go Home" onClick={goHome}/>}/>
     </Fragment>
   );
