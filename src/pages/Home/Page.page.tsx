@@ -8,18 +8,17 @@ import Empty from "@ui/Empty/Empty.component";
 import Metadata from "@component/Metadata/Metadata.component";
 
 import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
-import { useAuthIsAuthorized, useAuthIsAuthorizing } from "@service/auth/auth.service";
+import { useAuthIsAuthorized } from "@service/auth/auth.service";
 
 export default function Page(): ReactNode {
   const feHistory = useFileExplorerHistory();
   const isAuthorized = useAuthIsAuthorized();
-  const isAuthorizing = useAuthIsAuthorizing();
 
   useEffect(() => {
-    if(!isAuthorizing && isAuthorized && !feHistory.hasRoot) {
+    if(isAuthorized && !feHistory.hasRoot) {
       feHistory.open("root");
     }
-  }, [isAuthorizing, isAuthorized]);
+  }, [isAuthorized, feHistory.hasRoot]);
 
   return(
     <Fragment>
