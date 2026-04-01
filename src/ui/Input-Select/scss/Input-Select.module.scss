@@ -12,9 +12,11 @@
     border-bottom: 1px solid $var-color-blue;
     cursor: pointer;
     position: relative;
+    background-color: #b6b6c833;
 
     &:hover {
-      background-color: $var-background-color-black;
+      background-color: #b6b6c84d;
+      transition: background-color $var-transition-time-100ms ease;
     }
 
     .input_select_placeholder {
