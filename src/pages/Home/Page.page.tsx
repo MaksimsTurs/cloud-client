@@ -20,21 +20,28 @@ export default function Page(): ReactNode {
     }
   }, [isAuthorized, feHistory.hasRoot]);
 
+  if(!feHistory.isFetchDirectory && !isAuthorized) {
+    return(
+      <Fragment>
+        <Metadata title="File Explorer"/>
+        <Empty
+          header="Not Authenticated!"
+          main="It looks like you either haven't logged into your account, or do not have an account."
+          footer={
+            <Fragment>
+              <Link href="/log-in">Log in</Link>
+              or
+              <Link href="/log-up">Log up</Link>
+            </Fragment>
+          }/>
+      </Fragment>
+    );
+  }
+
   return(
     <Fragment>
       <Metadata title="File Explorer"/>
-      {!feHistory.isFetchDirectory && !isAuthorized ? 
-      <Empty
-        header="Not Authenticated!"
-        main="It looks like you either haven't logged into your account, or do not have an account."
-        footer={
-          <Fragment>
-            <Link href="/log-in">Log in</Link>
-            or
-            <Link href="/log-up">Log up</Link>
-          </Fragment>
-        }/> :
-      <FileExplorer/>}
+      <FileExplorer/>
     </Fragment>
   );
 };
