@@ -71,7 +71,7 @@ export default function InputFile<T extends FieldValues>({ name, accept, options
 
     currentFile.current = index;
     modalsManager.push(
-      `File Settings(${file.name})`, 
+      "Settings", 
       <FileSettingForm mimeType={file.type} onSubmit={saveFileOptions} defaultValues={getValues(name)}/>
     );
   };
