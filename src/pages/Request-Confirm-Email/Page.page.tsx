@@ -11,6 +11,8 @@ import scall from "@util/scall/scall.util";
 import serializeError from "@util/serialize-error.util";
 
 import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
+import TextButton from "@root/ui/Text-Button/Text-Button.component";
+import CommonSkeleton from "@root/ui/Common-Skeleton/Common-Skeleton.component";
 
 export default function Page(): ReactNode {
   const [error, setError] = useState<SerializedError | undefined>();
@@ -41,12 +43,15 @@ export default function Page(): ReactNode {
     requestConfirmEmail();
   }, []);
 
+  const goHome = (): void => {
+    navigate("/");
+  };
+
   if(isLoading) {
     return(
       <Fragment>
         <Metadata title="Request confirm e - mail"/>
-        <Empty 
-          main="Requesting e - mail confirmation."/>
+        <CommonSkeleton/>
       </Fragment>
     );
   }
@@ -57,7 +62,8 @@ export default function Page(): ReactNode {
         <Metadata title="Request confirm E - mail"/>
         <Empty
           header={error.code}
-          main={error.message}/>
+          main={error.message}
+          footer={<TextButton text="Go Home" onClick={goHome}/>}/>
       </Fragment>
     );
   }
@@ -66,7 +72,8 @@ export default function Page(): ReactNode {
     <Fragment>
       <Metadata title="Request confirm e - mail"/>
       <Empty
-        main="Confirm e - mail has been sended, check you e - mail post."/>
+        main="Confirm e - mail has been sended."
+        footer={<TextButton text="Go Home" onClick={goHome}/>}/>
     </Fragment>
   );
 };
