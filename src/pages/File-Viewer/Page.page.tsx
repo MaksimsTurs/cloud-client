@@ -29,7 +29,7 @@ export default function FileViewer() {
 
   return(
     <Fragment>
-      <Metadata  title={data?.name || "Preview"}/>
+      <Metadata title={data?.name || "Preview"}/>
       {isLoading ? <FileViewerSkeleton/> : data && isExist ?
       <div className={scss.file_viewer_container}>
         <SideMenuContainer>
