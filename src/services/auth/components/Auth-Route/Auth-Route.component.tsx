@@ -38,8 +38,9 @@ export default function AuthRoute({ authorize, children }: AuthRoute): ReactNode
             
         context.setTokens(tokens || {});
         context.setUser(user);
-        context.setIsAuthorizing(false);
       }
+      
+      context.setIsAuthorizing(false);
     };
 
     if(!isUndefined(authorize)) {
