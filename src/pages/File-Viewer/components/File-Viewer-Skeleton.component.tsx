@@ -8,19 +8,19 @@ export default function FileViewerSkeleton(): ReactNode {
       <div className={scss.file_viewer_skeleton_information}>
         <div className={scss.file_viewer_skeleton_information_section}>
           <p></p>
-          <p style={{ width: "9rem" }}></p>
+          <p style={{ width: "15rem" }}></p>
         </div>
         <div className={scss.file_viewer_skeleton_information_section}>
           <p></p>
-          <p style={{ width: "8rem" }}></p>
+          <p style={{ width: "13rem" }}></p>
         </div>
         <div className={scss.file_viewer_skeleton_information_section}>
           <p></p>
-          <p style={{ width: "10rem" }}></p>
+          <p style={{ width: "11rem" }}></p>
         </div>
         <div className={scss.file_viewer_skeleton_information_section}>
           <p></p>
-          <p style={{ width: "7.5rem" }}></p>
+          <p style={{ width: "13rem" }}></p>
         </div>
       </div>
       <div className={scss.file_viewer_skeleton_viewer}>
