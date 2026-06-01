@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import scss from "../scss/File-Viewer-Loader.module.scss";
+import scss from "../scss/File-Viewer-Skeleton.module.scss";
 
 export default function FileViewerSkeleton(): ReactNode {
   return(
