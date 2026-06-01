@@ -31,3 +31,6 @@ export function formatSecondsToTime(seconds: number): FormattedTime {
   return time;
 };
 
+export function formatLeadingZeroCount(num: number, count: number): string {
+  return num.toString().padStart(count, "0");
+};
