@@ -2,7 +2,7 @@
 @use '@scss/mixins' as *;
 
 .side_menu_section {
-  @include dis-flex(unset, space-between, $var-gap-xxxxl);
+  @include dis-flex(unset, space-between, $var-gap-xl);
   padding-bottom: $var-padding-m;
   border-bottom: 1px solid $var-border-color-black;
 
