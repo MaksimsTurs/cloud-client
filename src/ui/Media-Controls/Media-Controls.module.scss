@@ -1,0 +1,18 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.media_controls_container {
+  @include dis-flex(center, none, $var-gap-xs);
+  border: 1px solid $var-border-color-black;
+  padding: $var-padding-s $var-padding-m;
+  box-shadow: 0px 2px 4px $var-box-shadow-color-silver;
+
+  .media_data_container {
+    @include dis-flex(center, none, $var-gap-xs);
+  }
+
+  .media_time {
+    font-size: $var-font-xl;
+    width: 80px;
+  }
+}
