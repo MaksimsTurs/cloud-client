@@ -1,3 +1,5 @@
+import type { FormattedTime } from "./formatters.type";
+
 export function formatToMemoryUnit(bytes: number): string {
   const units: string[] = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte"];
   const i: number = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length);
@@ -12,3 +14,20 @@ export function formatToMemoryUnit(bytes: number): string {
 
   return formatter.format(value);
 };
+
+export function formatSecondsToTime(seconds: number): FormattedTime {
+  const time: FormattedTime = {
+    h: 0,
+    m: 0,
+    s: 0
+  };
+  
+  if(seconds != 0) {
+    time.h = ~~((seconds / 60) / 60)
+    time.m = ~~(((seconds / 60) % 60))
+    time.s = ~~(seconds % 60)
+  }
+
+  return time;
+};
+
