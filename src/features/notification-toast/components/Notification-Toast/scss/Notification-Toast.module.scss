@@ -1,5 +1,5 @@
-@use '@scss/variables' as *;
-@use '@scss/mixins' as *;
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
 
 .notification_toast_item {
   @include dis-flex(flex-end, center, $var-gap-xl);

@@ -2,10 +2,9 @@
 @use "@scss/mixins" as *;
 
 .container {
-  @include dis-flex(center, center);
+  @include dis-flex(center, center, null, null, null, 1);
   width: 100%;
   height: 100%;
-  flex-grow: 1;
 
   img {
     animation: common-skeleton 1s infinite ease-in;

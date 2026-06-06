@@ -1,30 +1,30 @@
 @use "@scss/variables" as *;
 @use "@scss/mixins" as *;
 
-.container {
+.empty_container {
   @include dis-flex(center, center, 0, unset, 1, 1);
   padding: $var-padding-s;
   color: #808080;
   width: 100%;
   height: 100%;
 
-  .body {
+  .empty_body {
     @include dis-flex(center, unset, $var-gap-xs, column);
     width: calc($var-size-xxxxl * 10);
     text-align: center;
 
-    .header {
+    .empty_header {
       font-size: $var-size-xl;
       padding-bottom: $var-padding-xs;
       color: #000000;
     }
 
-    .main {
+    .empty_main {
       font-size: $var-size-s;
       flex-grow: 1;
     }
 
-    .footer {
+    .empty_footer {
       @include dis-flex(center, center, $var-gap-xs);
       font-size: $var-size-s;
       padding-top: $var-padding-s;
