@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { ErrorBoundaryState } from "./Error-Boundary.component.type";
+import type { ErrorBoundaryProps, ErrorBoundaryState } from "./Error-Boundary.component.type";
 
 import scss from "./Error-Boundary.module.scss";
 
@@ -9,12 +9,12 @@ import { BugIcon } from "lucide-react";
 import Metadata from "@component/Metadata/Metadata.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 
-class ErrorBoundary extends Component<unknown, ErrorBoundaryState> {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   public static getDerivedStateFromError(_: Error): ErrorBoundaryState {
     return { hasError: true };
   };
 
-  public constructor(props: unknown) {
+  public constructor(props: ErrorBoundaryProps) {
     super(props);
 
     this.state = {

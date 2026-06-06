@@ -1,5 +1,5 @@
 import type { SerializedError } from "@root/global.type";
-import type { UseRequestConfirmEmailReturn } from "./use-send-confirm-email.type";
+import type { UseRequestConfirmEmailReturn } from "./use-request-confirm-email.type";
 
 import { useState, useEffect } from "react";
 

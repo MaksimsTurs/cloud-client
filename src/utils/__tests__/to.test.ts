@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 
-import { toFormDataFromObject } from "../to.util";
+import { fromObjectToFormData } from "../to.util";
 
 test("Create form data from js object.", function() {
   const obj = {
@@ -9,7 +9,7 @@ test("Create form data from js object.", function() {
     hobbies: ["Js", "Ts"],
   }
 
-  const formData: FormData = toFormDataFromObject(obj);
+  const formData: FormData = fromObjectToFormData(obj);
 
   expect(formData.get("name"))
     .toBe("Max");

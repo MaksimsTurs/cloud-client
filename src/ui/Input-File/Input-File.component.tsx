@@ -18,7 +18,6 @@ import FileSettingForm from "@component/File-Setting-Form/File-Setting-Form.comp
 import getPreviewTag from "./utils/get-preview-tag.util";
 
 import { MAX_FILES_TO_UPLOAD_COUNT } from "@root/const/NUMBER.const";
-import clamp from "@root/utils/clamp.util";
 
 export default function InputFile<T extends FieldValues>({ name, accept, options }: InputFileProps<T>): ReactNode {
   const { register, setValue, getValues, formState: { errors }} = useFormContext<T>();
