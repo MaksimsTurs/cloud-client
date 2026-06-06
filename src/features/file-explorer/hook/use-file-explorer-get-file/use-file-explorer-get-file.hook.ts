@@ -14,7 +14,7 @@ import { useWithAuth } from "@service/auth/auth.service";
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
 
 export default function useFileExplorerGetFile(id?: string): UseFileExplorerGetFile {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isExist, setIsExist] = useState(!isUndefined(id) || !isNull(id));
   const [data, setData] = useState<FEItemPreivew | undefined>(undefined);
   const withAuth = useWithAuth<SerializedError>({ serializeError });
