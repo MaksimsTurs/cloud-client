@@ -22,12 +22,13 @@ export default function ImageSettings({
       className={scss.file_options_container} 
       onSubmit={onSubmit}>
       <InputText<FileImageSettingOptions>
-        placeholder="Name (with extention)"
+        placeholder="Name"
         type="text"
         name="name"
         autoComplete="off"
         options={{
-            maxLength: { value: 64, message: "File name is to long!" }
+            maxLength: { value: 64, message: "File name is to long!" },
+            minLength: { value: 1, message: "File name is to short!" }
         }}/>
       <InputSelect<FileImageSettingOptions>
         name="convertTo" 
@@ -57,7 +58,7 @@ export default function ImageSettings({
           min={0}
           step={1}
           options={{
-            min: { value: 0, message: "Width can not be less than 0!" }
+            min: { value: 0, message: "Width can not be smaller than 0!" }
           }}/>
         <InputText<FileImageSettingOptions>
           placeholder="Height"
@@ -66,10 +67,10 @@ export default function ImageSettings({
           min={0}
           step={1}
           options={{
-            min: { value: 0, message: "Height can not be less than 0!" }
+            min: { value: 0, message: "Height can not be smaller than 0!" }
           }}/>
       </section>
-      <TextButton text="Save config"/>
+      <TextButton text="Save"/>
     </FormBody>
   );
 };

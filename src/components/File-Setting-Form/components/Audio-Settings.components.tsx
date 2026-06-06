@@ -21,14 +21,15 @@ export default function AudioSettings({
       className={scss.file_options_container} 
       onSubmit={onSubmit}>
       <InputText<FileAudioSettingOptions>
-        placeholder="Name (with extention)"
+        placeholder="Name"
         type="text"
         name="name"
         autoComplete="off"
         options={{
-            maxLength: { value: 64, message: "File name is to long!" }
+            maxLength: { value: 64, message: "File name is to long!" },
+            minLength: { value: 1, message: "File name is to short!" }
         }}/>
-      <TextButton text="Save config"/>
+      <TextButton text="Save"/>
     </FormBody>
   );
 };

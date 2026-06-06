@@ -22,12 +22,13 @@ export default function VideoSettings({
       className={scss.file_options_container} 
       onSubmit={onSubmit}>
       <InputText<FileVideoSettingOptions>
-        placeholder="Name (with extention)"
+        placeholder="Name"
         type="text"
         name="name"
         autoComplete="off"
         options={{
-            maxLength: { value: 64, message: "File name is to long!" }
+            maxLength: { value: 64, message: "File name is to long!" },
+            minLength: { value: 1, message: "File name is to short!" }
         }}/>
       <InputText<FileVideoSettingOptions>
         placeholder="CRF(Constant Rate Factor)"
@@ -36,7 +37,8 @@ export default function VideoSettings({
         autoComplete="off"
         max={51}
         options={{
-            max: { value: 51, message: "CRF is to big!" }
+            max: { value: 51, message: "CRF is to big!" },
+            min: {  value: 0, message: "CRF is to small!" }
         }}/>
         <InputSelect name="preset" placeholder="Preset" defaultValue={defaultValues?.preset}>
           <InputSelectOption value="ultrafast">Ultrafast</InputSelectOption>
@@ -53,7 +55,7 @@ export default function VideoSettings({
           <InputSelectOption value="libx264">H.264</InputSelectOption>
           <InputSelectOption value="libx265">H.265</InputSelectOption>
         </InputSelect>
-      <TextButton text="Save config"/>
+      <TextButton text="Save"/>
     </FormBody>
   );
 };

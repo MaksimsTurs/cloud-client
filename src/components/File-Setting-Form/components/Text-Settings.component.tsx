@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { FileSettingFormProps, FileTextSettingOptions } from "../File-Setting-Form.type";
 
 import { useForm } from "react-hook-form";
+
 import { FormBody } from "@ui/Form/Form.component";
 import InputText from "@ui/Input-Text/Input-Text.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
@@ -20,14 +21,15 @@ export default function TextSettings({
       className={scss.file_options_container} 
       onSubmit={onSubmit}>
       <InputText<FileTextSettingOptions>
-        placeholder="Name (with extention)"
+        placeholder="Name"
         type="text"
         name="name"
         autoComplete="off"
         options={{
-            maxLength: { value: 64, message: "File name is to long!" }
+            maxLength: { value: 64, message: "File name is to long!" },
+            minLength: { value: 1, message: "File name is to short!" }
         }}/>
-      <TextButton text="Save config"/>
+      <TextButton text="Save"/>
     </FormBody>
   );
 };
