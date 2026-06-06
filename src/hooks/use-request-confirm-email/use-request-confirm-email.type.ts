@@ -1,6 +1,6 @@
 import type { SerializedError } from "@root/global.type";
 
-export type UseSendConfirmEmailReturn = {
+export type UseRequestConfirmEmailReturn = {
   error?: SerializedError
   isLoading: boolean
 };
