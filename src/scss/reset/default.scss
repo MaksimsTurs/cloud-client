@@ -37,8 +37,11 @@ header, main, footer {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-	padding: 5rem 0rem 1rem 0rem;
+  flex-grow: 1;
+  background-color: $var-background-color-black;
 }
 
 a {
