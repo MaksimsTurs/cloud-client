@@ -1,0 +1,7 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.video_renderer > video {
+  border: 1px solid $var-border-color-black;
+  box-shadow: 0px 0px 4px $var-box-shadow-color-black-bright;
+}

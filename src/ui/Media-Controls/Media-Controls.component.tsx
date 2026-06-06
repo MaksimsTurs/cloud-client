@@ -1,5 +1,5 @@
 import type { MouseEvent, ReactNode, RefObject } from "react";
-import type { FormattedTime } from "@util/formatters.type";
+import type { FormattedTime } from "@util/formatters/formatters.type";
 import type { MediaControlsProps } from "./Media-Controls.type";
 
 import { useEffect, useRef, useState } from "react";
@@ -9,7 +9,7 @@ import scss from "./Media-Controls.module.scss";
 
 import RangeBar from "./components/Range-Bar.component";
 
-import { formatSecondsToTime, formatLeadingZeroCount } from "@util/formatters.util";
+import { formatSecondsToTime, formatLeadingZeroCount } from "@util/formatters/formatters.util";
 
 function calcProgress(mouseX: number, rect: DOMRect): number {
   const progress: number = (~~(mouseX - rect.left) / rect.width);
@@ -103,11 +103,11 @@ export default function MediaControls({ elementRef }: MediaControlsProps): React
     <div className={scss.media_controls_container}>
       <section className={scss.media_data_container}>
         {isPlaying ?
-        <button onClick={changeIsPlaying}>
-          <PauseIcon size={28} strokeWidth={1}/>
+        <button aria-label="Play Media" onClick={changeIsPlaying}>
+          <PauseIcon size={28} strokeWidth={1.25}/>
         </button> :
-        <button onClick={changeIsPlaying}>
-          <PlayIcon size={28} strokeWidth={1}/>
+        <button aria-label="Pause Media" onClick={changeIsPlaying}>
+          <PlayIcon size={28} strokeWidth={1.25}/>
         </button>}
         <p className={scss.media_time}>
           {formatLeadingZeroCount(formattedCurrentTimeRef.current.h, 2)}:
@@ -128,11 +128,11 @@ export default function MediaControls({ elementRef }: MediaControlsProps): React
       </section>
       <section className={scss.media_data_container}>
         {isMuted ?
-        <button onClick={changeIsMuted}>
-          <VolumeXIcon size={28} strokeWidth={1}/>
+        <button aria-label="Mute Media" onClick={changeIsMuted}>
+          <VolumeXIcon size={28} strokeWidth={1.25}/>
         </button> :
-        <button onClick={changeIsMuted}>
-          <Volume2Icon size={28} strokeWidth={1}/>
+        <button aria-label="Unmute Media" onClick={changeIsMuted}>
+          <Volume2Icon size={28} strokeWidth={1.25}/>
         </button>}
       <RangeBar 
         onClick={changeCurrentVolume} 

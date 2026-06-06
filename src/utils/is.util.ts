@@ -36,25 +36,15 @@ const MIME_TYPES = {
   BINARY: "application/octet-stream"
 };
 
-export const isMimeTypeText = (mimeType: string): boolean => {
-  return(
-    new RegExp(MIME_TYPES.TEXT).test(mimeType) ||
-    mimeType === "application/json"
-  );
-};
+export const isMimeTypeText = (mimeType: string): boolean => (
+  new RegExp(MIME_TYPES.TEXT).test(mimeType) ||
+  mimeType === "application/json"
+);
 
-export const isMimeTypeVideo = (mimeType: string): boolean => {
-  return new RegExp(MIME_TYPES.VIDEO).test(mimeType);
-};
+export const isMimeTypeVideo = (mimeType: string): boolean => new RegExp(MIME_TYPES.VIDEO).test(mimeType);
 
-export const isMimeTypeAudio = (mimeType: string): boolean => {
-  return new RegExp(MIME_TYPES.AUDIO).test(mimeType);
-};
+export const isMimeTypeAudio = (mimeType: string): boolean => new RegExp(MIME_TYPES.AUDIO).test(mimeType);
 
-export const isMimeTypeImage = (mimeType: string): boolean => {
-  return new RegExp(MIME_TYPES.IMAGE).test(mimeType);
-};
+export const isMimeTypeImage = (mimeType: string): boolean => new RegExp(MIME_TYPES.IMAGE).test(mimeType);
 
-export const isMimeTypeBinary = (mimeType: string): boolean => {
-  return MIME_TYPES.BINARY === mimeType;
-};
+export const isMimeTypeBinary = (mimeType: string): boolean => MIME_TYPES.BINARY === mimeType;

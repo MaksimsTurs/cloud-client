@@ -70,20 +70,22 @@ export default function useFileExplorerAction(): UseFEActionReturn {
 
   const handlePressedKeys = async (event: KeyboardEvent<HTMLDivElement>): Promise<void> => { 
     if(!isObjectEmpty(feItems)) {
-      event.preventDefault();
-      
       if(isPressed("Escape")) {
+        event.preventDefault();
         setFeItems({});
         feItemPaths.current = {};
       } else if(event.ctrlKey && isPressed("c")) {
+        event.preventDefault();
         await fe.copy(feItems, feHistory.parent?.id);
         setFeItems({});
         feItemPaths.current = {};
       } else if(event.ctrlKey && isPressed("d")) {
+        event.preventDefault();
         await fe.remove(feItems, feItemPaths.current);
         feItemPaths.current = {};
         setFeItems({});
       } else if(event.ctrlKey && isPressed("m")) {
+        event.preventDefault();
         await fe.move(feItems, feItemPaths.current, feHistory.parent?.id);
         feItemPaths.current = {};
         setFeItems({});
@@ -108,6 +110,6 @@ export default function useFileExplorerAction(): UseFEActionReturn {
   }, [feItems, feHistory.path, feHistory.items]);
 
   return {
-    selected: feItems
+    selected: feItems,
   };
 };

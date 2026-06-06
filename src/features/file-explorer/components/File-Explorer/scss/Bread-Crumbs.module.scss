@@ -3,7 +3,6 @@
 
 .breadcrumbs_list {
   @include dis-flex(unset, unset, $var-gap-xs);
-  margin: $var-margin-xs 0;
 
   .breadcrumbs_list_item {
     @include dis-flex(center, unset, $var-gap-xs);

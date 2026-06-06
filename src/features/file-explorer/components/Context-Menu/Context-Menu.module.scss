@@ -1,5 +1,5 @@
-@use '@scss/variables' as *;
-@use '@scss/mixins' as *;
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
 
 .context_menu_container {
   @include dis-flex(null, null, null, column);
@@ -7,9 +7,8 @@
 }
 
 .context_menu_list {
-  @include pos-fixed(top, left, 0, 0, 1, fit-content, fit-content);
+  @include pos-fixed(top, left, 0%, 0%, 1, fit-content, fit-content);
   border: 1px solid $var-border-color-black;
-  box-shadow: 1px 3px 3px $var-box-shadow-color-black;
   background-color: #ffffff;
 
   .context_menu_button {
@@ -20,7 +19,7 @@
 
     &:hover {
       color: $var-color-blue;
-      background-color: $var-background-color-black;
+      background-color: $var-color-blue-hover;
     }
   }
 

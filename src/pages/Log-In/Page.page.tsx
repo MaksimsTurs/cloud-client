@@ -41,19 +41,20 @@ export default function Page(): ReactNode {
   };
 
   return(
-    <main className={scss.page_container}>
+    <div className={scss.page_container}>
       <Metadata title="Log in"/>
-      <Metadata name="description" content="Log in you'r account."/>
+      <Metadata name="description" content="Log in page, here you can log in into your Account."/>
       <FormContainer>
-        <FormHeader title="Log in"/>
         <FormBody<UserLogIn> 
           {...methods } 
           onSubmit={logIn} 
           error={error?.message}>
+          <FormHeader title="Log in"/>
           <InputText
             type="text"
             name="email" 
             placeholder="E - mail"
+            autoComplete="email"
             options={{
               required: "E - mail is required!",
               pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
@@ -62,6 +63,7 @@ export default function Page(): ReactNode {
             type="password"
             name="password"
             placeholder="Password"
+            autoComplete="current-password"
             options={{
               required: "Password is required!",
               minLength: { value: 12, message: "Password is to short!" },
@@ -72,6 +74,6 @@ export default function Page(): ReactNode {
           </FormFooter>
         </FormBody>
       </FormContainer>
-    </main>
+    </div>
  );
 };

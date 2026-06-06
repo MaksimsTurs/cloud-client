@@ -13,4 +13,4 @@ export type RangeBarProps = {
 
 type OnTrackMove = (event: MouseEvent<HTMLDivElement>, rect: DOMRect) => void;
 
-type OnClick = (event: MouseEvent<HTMLDivElement>, rect: DOMRect) => void:
+type OnClick = (event: MouseEvent<HTMLDivElement>, rect: DOMRect) => void;

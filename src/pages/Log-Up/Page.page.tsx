@@ -27,9 +27,12 @@ export default function Page(): ReactNode {
 
   const { getValues, formState: { isSubmitting }} = methods; 
 
-  const logUp: SubmitHandler<UserLogUp> = async (userData): Promise<void> => {
-    const isOk: boolean = await authenticate(async () => {
-      return await http.post<UseAuthEndpointResponse>("/user/log-up", { body: userData, credentials: "include" })
+  const logUp: SubmitHandler<UserLogUp> = async (userData: UserLogUp): Promise<void> => {
+    const isOk: boolean = await authenticate(async (): Promise<UseAuthEndpointResponse> => {
+      return await http.post<UseAuthEndpointResponse>("/user/log-up", { 
+        body: userData, 
+        credentials: "include" 
+      });
     });
 
     if(isOk) {
@@ -49,9 +52,9 @@ export default function Page(): ReactNode {
   };
 
   return(
-    <main className={scss.page_container}>
+    <div className={scss.page_container}>
       <Metadata title="Log up"/>
-      <Metadata name="description" content="Create new user."/>
+      <Metadata name="description" content="Log up page, here you can create a new Account to get access to application functionality."/>
       <FormContainer>
         <FormBody<UserLogUp>
           {...methods } 
@@ -60,7 +63,7 @@ export default function Page(): ReactNode {
           <FormHeader title="Log up"/>
           <InputText
             type="email"
-            name="email" 
+            name="email"
             placeholder="E - mail"
             autoComplete="username"
             options={{
@@ -87,11 +90,11 @@ export default function Page(): ReactNode {
               validate: checkPasswordsEquality
             }}/>
           <FormFooter>
-            <TextButton type="submit" text="Registrate" disabled={isSubmitting}/>
+            <TextButton type="submit" text="Submit" disabled={isSubmitting}/>
             <Link href="/log-in">Have account?</Link>
           </FormFooter>
         </FormBody>
       </FormContainer>
-    </main>
+    </div>
   );
 };

@@ -4,8 +4,9 @@
 .media_controls_container {
   @include dis-flex(center, none, $var-gap-xs);
   border: 1px solid $var-border-color-black;
+  box-shadow: 0px 0px 4px $var-box-shadow-color-black-bright;
   padding: $var-padding-s $var-padding-m;
-  box-shadow: 0px 2px 4px $var-box-shadow-color-silver;
+  background-color: #ffffff;
 
   .media_data_container {
     @include dis-flex(center, none, $var-gap-xs);
@@ -13,6 +14,11 @@
 
   .media_time {
     font-size: $var-font-xl;
+    color: $var-color-blue;
     width: 80px;
+  }
+
+  > p, svg {
+    color: $var-color-blue;
   }
 }

@@ -9,7 +9,7 @@ export default function IconButton({ children, className, ...attributes }: Butto
       {...attributes } 
       className={`${scss.button} ${className}`} 
       type="button">
-        {children}
+      {children}
     </button>
   );
 };

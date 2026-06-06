@@ -10,7 +10,7 @@ import Metadata from "@component/Metadata/Metadata.component";
 import Empty from "@ui/Empty/Empty.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 import InputText from "@ui/Input-Text/Input-Text.component";
-import { FormContainer, FormBody, FormFooter } from "@ui/Form/Form.component";
+import { FormContainer, FormBody, FormFooter, FormHeader } from "@ui/Form/Form.component";
 
 import { useNavigate, useSearchParams } from "@hook/use-react-router/use-react-router.hook";
 
@@ -42,12 +42,12 @@ export default function Page(): ReactNode {
 
   if(!searchParams.has("token") || !searchParams.get("token")) {
     return(
-      <Fragment>
+      <main>
         <Metadata title="Reset password"/>
         <Empty
-          header="Token is invalid"
-          main="Looks like you have no requested the password reseting, request password reseting first!"/>
-      </Fragment>
+          header="Token is invalid!"
+          main="Looks like you have not requested the password resetting. Request password resetting first!"/>
+      </main>
     );
   }
 
@@ -59,6 +59,7 @@ export default function Page(): ReactNode {
           {...methods }
           error={errors.root?.message} 
           onSubmit={resetPassword}>
+          <FormHeader title="Reset Password"/>
           <InputText
             name="password"
             type="password"
