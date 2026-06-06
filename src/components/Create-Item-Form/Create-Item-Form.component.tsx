@@ -13,8 +13,6 @@ import { useModalsManager } from "@feature/modals-manager/modals-manager.feature
 
 import scss from "./Create-Item-Form.module.scss";
 
-import FE_ITEM_TYPES from "@feature/file-explorer/const/FE-ITEM-TYPES.const";
-
 export default function CreateItemForm(): ReactNode {
   const methods = useForm<FEItem>();
   const fe = useFileExplorer();
@@ -24,7 +22,7 @@ export default function CreateItemForm(): ReactNode {
   const { formState: { isSubmitting }} = methods;
 
   const createItem: SubmitHandler<FEItem> = async (dirData): Promise<void> => {
-    const isOk: boolean = await fe.create(FE_ITEM_TYPES.DIRECTORY, dirData.name, feHistory.parent?.id);
+    const isOk: boolean = await fe.create(dirData.name, feHistory.parent?.id);
 
     if(isOk) {
       modalsManager.pop();
@@ -32,20 +30,18 @@ export default function CreateItemForm(): ReactNode {
   };
 
   return(
-    <div className={scss.create_item_form_container}>
-      <FormBody {...methods } onSubmit={createItem}>
-        <InputText 
-          name="name" 
-          type="text"
-          placeholder="Item name"
-          autoFocus
-          options={{
-            required: "Name can not be empty!",
-            maxLength: { value: 64, message: "Name can be maximum 64 characters long!" },
-            pattern: { value: /[a-zA-Z0-9\-\.]/, message: "Name have suspicous characters!" }
-          }}/>
-        <TextButton text="Create" disabled={isSubmitting}/>
-      </FormBody>
-    </div>
+    <FormBody className={scss.create_folder_form_container} {...methods } onSubmit={createItem}>
+      <InputText 
+        name="name" 
+        type="text"
+        placeholder="Folder name"
+        autoFocus
+        options={{
+          required: "Name can not be empty!",
+          maxLength: { value: 64, message: "Name can be maximum 64 characters long!" },
+          pattern: { value: /[a-zA-Z0-9\-\.]/, message: "Name have suspicous characters!" }
+        }}/>
+      <TextButton text="Submit" disabled={isSubmitting}/>
+    </FormBody>
  );
 };
