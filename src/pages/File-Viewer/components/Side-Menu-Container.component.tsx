@@ -5,8 +5,9 @@ import scss from "../scss/Side-Menu-Container.module.scss";
 
 export default function SideMenuContainer({ children }: SideMenuContainerProps): ReactNode {
   return(
-    <div className={scss.side_menu_container}>
+    <aside className={scss.side_menu_container}>
+      <h3>Summary</h3>
       {children}
-    </div>
+    </aside>
   );
 };
