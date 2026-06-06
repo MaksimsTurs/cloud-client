@@ -30,7 +30,7 @@
   #{$second-pos-prop}: $second-pos-val;
   width:              $width;
   height:             $height;
-  z-index:            0;
+  z-index:            $z-index;
   position: fixed;
 }
 
@@ -43,15 +43,16 @@
   $width:          100%, 
   $height:         100%
 ) {
-  #{$first-pos-prop}:  $first-pos-val;
-  #{$second-pos-prop}: $second-pos-val;
-  width:              $width;
-  height:             $height;
-  z-index:            $z-index;
-  position: sticky;
+  #{$first-pos-prop}:   $first-pos-val;
+  #{$second-pos-prop}:  $second-pos-val;
+  width:                $width;
+  height:               $height;
+  z-index:              $z-index;
+  position:             sticky;
 }
 
 @mixin dis-flex(
+
   $align-items:     unset,
   $justify-content: unset,
   $gap:             unset,
