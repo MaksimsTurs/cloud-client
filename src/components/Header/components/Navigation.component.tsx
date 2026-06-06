@@ -19,7 +19,7 @@ import {
   UserRoundKeyIcon, 
 } from "lucide-react";
 
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 
 import serializeError from "@util/serialize-error.util";
 import http from "@util/http/http.util";
@@ -62,7 +62,7 @@ export default function Navigation(): ReactNode {
 
   return(
     <nav className={scss.nav_container}>
-      <IconButton 
+      <IconButton
         onClick={goBack} 
         disabled={feHistory.isRoot || path != "/"}
         aria-label="Go to parent folder">
@@ -86,7 +86,7 @@ export default function Navigation(): ReactNode {
       </Fragment> :
       <Fragment>
         <IconButton 
-          role="button" 
+          role="button"
           aria-label="Log up"
           onClick={() => goTo("/log-up")}>
           <UserPlus2Icon/>

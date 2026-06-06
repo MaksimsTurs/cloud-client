@@ -1,16 +1,16 @@
-import useParams from "@root/hooks/use-react-router/use-params.hook";
+import useParams from "@hook/use-react-router/use-params.hook";
 
 import SideMenuContainer from "./components/Side-Menu-Container.component";
 import SideMenuSection from "./components/Side-Menu-Section.component";
 import Metadata from "@component/Metadata/Metadata.component";
 import Empty from "@ui/Empty/Empty.component";
-import FileViewerSkeleton from "./components/File-Viewer-Skeleton.component";
 import ImageRenderer from "./components/Image-Renderer.component";
 import VideoRenderer from "./components/Video-Renderer.component";
 import AudioRenderer from "./components/Audio-Renderer.component";
 import TextRenderer from "./components/Text-Renderer.component";
+import CommonSkeleton from "@ui/Common-Skeleton/Common-Skeleton.component";
 
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 
 import { 
   isMimeTypeText, 
@@ -21,21 +21,25 @@ import {
 
 import scss from "./Page.module.scss";
 
+import { formatToMemoryUnit } from "@util/formatters/formatters.util";
+
 import { useFileExplorerGetFile } from "@feature/file-explorer/file-explorer.feature";
 
 export default function FileViewer() {
   const { id } = useParams();
   const { data, isExist, isLoading } = useFileExplorerGetFile(id);
-
+  
   return(
     <Fragment>
       <Metadata title={data?.name || "Preview"}/>
-      {isLoading ? <FileViewerSkeleton/> : data && isExist ?
+      <Metadata name="description" content="Preview page, here you can edit, remove and preview uploaded files."/>
+      {isLoading ? <CommonSkeleton/> : data && isExist ?
       <div className={scss.file_viewer_container}>
         <SideMenuContainer>
           <SideMenuSection  name="Id" value={data!.id}/>
           <SideMenuSection  name="Name" value={data!.name}/>
-          <SideMenuSection  name="Mime Type" value={data!.mime_type}/>
+          <SideMenuSection  name="Format" value={data!.mime_type}/>
+          <SideMenuSection  name="Size" value={formatToMemoryUnit(data!.buffer.data.length)}/>
         </SideMenuContainer>
         <div className={scss.file_media_viewer}>
           {isMimeTypeImage(data.mime_type) ? <ImageRenderer data={data}/> :
