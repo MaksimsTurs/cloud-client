@@ -1,4 +1,5 @@
-const MAX_FILES_COUNT: number = 10;
+import { MAX_FILES_TO_UPLOAD_COUNT } from "@root/const/NUMBER.const";
+
 const MAX_FILE_SIZE: number = 1e+8;
 const UNSUPPORTED_FILE_TYPES: Set<string> = new Set<string>([
  "application/x-msdownload",
@@ -13,7 +14,7 @@ export default function validateFiles(files: FileList): string | undefined {
     return "You need select at least one file!"
   }
 
-  if(files.length > MAX_FILES_COUNT) {
+  if(files.length > MAX_FILES_TO_UPLOAD_COUNT) {
     return "You can upload only 10 files at once!";
   }
 
