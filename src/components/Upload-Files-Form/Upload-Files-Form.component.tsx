@@ -5,6 +5,7 @@ import type { UploadFiles } from "./Upload-Files-Form.type";
 import { FormBody } from "@ui/Form/Form.component";
 import InputFile from "@ui/Input-File/Input-File.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
+import { AlertContainer } from "@ui/Alert/Alert.component";
 
 import { useModalsManager } from "@feature/modals-manager/modals-manager.feature";
 import { useFileExplorer, useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
@@ -22,8 +23,8 @@ export default function UploadFilesForm(): ReactNode {
 
   const { formState: { isSubmitting }} = methods;
 
-  const uploadFiles: SubmitHandler<UploadFiles> = async (upload): Promise<void> => {
-    const isOk: boolean = await fe.upload(upload, feHistory.parent?.id);
+  const uploadFiles: SubmitHandler<UploadFiles> = async (files): Promise<void> => {
+    const isOk: boolean = await fe.upload(files, feHistory.parent?.id);
 
     if(isOk) {
       modalsManager.pop();
@@ -35,10 +36,11 @@ export default function UploadFilesForm(): ReactNode {
       <FormBody {...methods } onSubmit={uploadFiles}>
         <InputFile 
           name="files" 
-          accept={["image/*", "video/*", "audio/*", "text/*", "application/json"]}
+          accept={["image/*", "video/*", "audio/*"]}
           options={{
             validate: validateFiles,
           }}/>
+        <AlertContainer type="info">You can upload max. 19 files at the same time!</AlertContainer>
         <TextButton text="Upload" disabled={isSubmitting}/>
       </FormBody>
     </div>
