@@ -8,18 +8,15 @@ import { closeDir } from "@feature/file-explorer/reducers/file-explorer/file-exp
 import scall from "@util/scall/scall.util";
 
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 import useTryDispatch from "../use-try-dispatch/use-try-dispatch.hook";
 
 export default function useFileExplorerHistory(): UseFEHistoryReturn {
-  const { history, isFetchDirectory } = useSelector<RootState, FEState>(state => state.fileExplorer);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { history, isLoading } = useSelector<RootState, FEState>(state => state.fileExplorer);
   const { asyncDispatcher, syncDispatcher } = useTryDispatch();
 
   return {
     isLoading,
-    isFetchDirectory,
     isRoot: history.items.length <= 1,
     hasRoot: history.paths.at(0) === "root",
     items: history.items.at(-1) || [],
@@ -45,10 +42,7 @@ export default function useFileExplorerHistory(): UseFEHistoryReturn {
       return syncDispatcher(closeDir, from);
     },
     open: async function(name, id) {
-      setIsLoading(true);
-      const result = await asyncDispatcher<FEGetItemsReturn, FEGetItemsParams>(getItems, { name, id });
-      setIsLoading(false);
-      return result;
+      return await asyncDispatcher<FEGetItemsReturn, FEGetItemsParams>(getItems, { name, id });
     },
   }
 };

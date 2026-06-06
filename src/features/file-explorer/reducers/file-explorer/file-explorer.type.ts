@@ -1,7 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type FEState = {
-  isFetchDirectory: boolean
+  isLoading: boolean
   history: FEHistory
 };
 
