@@ -13,6 +13,7 @@ import ErrorBoundary from "@component/Error-Boundary/Error-Boundary.component";
 import Header from "@component/Header/Header.component";
 import AuthProvider from "@service/auth/components/Auth-Provider/Auth-Provider.component";
 import AuthRoute from "./services/auth/components/Auth-Route/Auth-Route.component";
+import CommonSkeleton from "./ui/Common-Skeleton/Common-Skeleton.component";
 import { NotificationToastRenderer } from "./features/notification-toast/notification-toast.feature";
 import { ModalsRenderer } from "@feature/modals-manager/modals-manager.feature";
 
@@ -39,47 +40,58 @@ function App(): ReactNode {
       <ModalsRenderer/>
       <NotificationToastRenderer/>
       <Route path="/log-up">
-        <Header/>
-        <Suspense>
-          <LogUp/>
-        </Suspense>
+        <main>
+          <Suspense fallback={<CommonSkeleton/>}>
+            <LogUp/>
+          </Suspense>
+        </main>
       </Route>
       <Route path="/log-in">
-        <Header/>
-        <Suspense>
-          <LogIn/>
-        </Suspense>
+        <main>
+          <Suspense fallback={<CommonSkeleton/>}>
+            <LogIn/>
+          </Suspense>
+        </main>
       </Route>
       <Route path="/item/:id">
-        <AuthRoute authorize={authorize}>
-          <Header/>
-          <Suspense>
-            <FileViewer/>
-          </Suspense>
+        <AuthRoute onEnter={authorize}>
+          <main>
+            <Suspense fallback={<CommonSkeleton/>}>
+              <FileViewer/>
+            </Suspense>
+          </main>
         </AuthRoute>
       </Route>
       <Route path="/">
-        <AuthRoute authorize={authorize}>
+        <AuthRoute onEnter={authorize}>
           <Header/>
-          <Suspense>
-            <Home/>
-          </Suspense>
+          <main>
+            <Suspense fallback={<CommonSkeleton/>}>
+              <Home/>
+            </Suspense>
+          </main>
         </AuthRoute>
       </Route>
       <Route path="/request-reset-password">
-        <Suspense>
-          <RequestResetPassword/>
-        </Suspense>
+        <main>
+          <Suspense fallback={<CommonSkeleton/>}>
+            <RequestResetPassword/>
+          </Suspense>
+        </main>
       </Route>
       <Route path="/request-confirm-email">
-        <Suspense>
-          <RequestConfirmEmail/>
-        </Suspense>
+        <main>
+          <Suspense fallback={<CommonSkeleton/>}>
+            <RequestConfirmEmail/>
+          </Suspense>
+        </main>
       </Route>
       <Route path="/reset-password">
-        <Suspense>
-          <ResetPassword/>
-        </Suspense>
+        <main>
+          <Suspense fallback={<CommonSkeleton/>}>
+            <ResetPassword/>
+          </Suspense>
+        </main>
       </Route>
     </Fragment>
   );
