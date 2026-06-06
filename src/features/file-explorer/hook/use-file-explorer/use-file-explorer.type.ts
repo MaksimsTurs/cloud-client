@@ -18,7 +18,7 @@ type FEMove = (items: FEItemRecord, itemPaths: Record<string, string>, parentId?
 
 type FERemove = (items: FEItemRecord, itemPaths: Record<string, string>) => Promise<boolean>;
 
-type FECreate = (type: number, name: string, parentId?: string) => Promise<boolean>;
+type FECreate = (name: string, parentId?: string) => Promise<boolean>;
 
 type FEUpload = (files: FEUploadFiles, parentId?: string) => Promise<boolean>;
 

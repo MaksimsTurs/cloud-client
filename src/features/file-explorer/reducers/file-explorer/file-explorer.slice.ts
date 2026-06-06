@@ -22,10 +22,8 @@ import moveItems from "./actions/move-items.action";
 import removeItems from "./actions/remove-items.action";
 import uploadItems from "./actions/upload-items.action";
 
-import isUserTryRemoveFromUnsecureLocation from "../../utils/is-user-try-remove-item-from-unsecure-location.util";
-
 const initState: FEState = {
-  isFetchDirectory: false,
+  isLoading: true,
   history: {
     items: [],
     paths: [],
@@ -60,10 +58,10 @@ const slice = createSlice({
   extraReducers: function(builder: ActionReducerMapBuilder<FEState>) {
     builder
     .addCase(getItems.pending, function(state: WritableDraft<FEState>): void {
-      state.isFetchDirectory = true;
+      state.isLoading = true
     })
     .addCase(getItems.rejected, function(state: WritableDraft<FEState>): void {
-      state.isFetchDirectory = false;
+      state.isLoading = false;
     })
     .addCase(getItems.fulfilled, function(state: WritableDraft<FEState>, action: FEReadItemsPayloadAction): void {
       const { name, items, parent } = action.payload;
@@ -74,10 +72,23 @@ const slice = createSlice({
 
       state.history.path = state.history.paths.join("/");
 
-      state.isFetchDirectory = false;
+      state.isLoading = false;
+    })
+    .addCase(copyItems.pending, function(state: WritableDraft<FEState>): void {
+      state.isLoading = true;
+    })
+    .addCase(copyItems.rejected, function(state: WritableDraft<FEState>): void {
+      state.isLoading = false;
     })
     .addCase(copyItems.fulfilled, function(state: WritableDraft<FEState>, action: FECopyItemsPayloadAction): void {
       state.history.items.at(-1)?.push(...action.payload);
+      state.isLoading = false;
+    })
+    .addCase(removeItems.pending, function(state: WritableDraft<FEState>): void {
+      state.isLoading = true;
+    })
+    .addCase(removeItems.rejected, function(state: WritableDraft<FEState>): void {
+      state.isLoading = false;
     })
     .addCase(removeItems.fulfilled, function(state: WritableDraft<FEState>, action: FERemoveItemsPayloadAction): void {
       const itemPaths: Record<string, string> = action.payload;
@@ -91,6 +102,14 @@ const slice = createSlice({
           state.history.items[itemFolderSplit.length - 1] = state.history.items[itemFolderSplit.length - 1].filter(item => item.id != itemId);
         }
       }
+
+      state.isLoading = false;
+    })
+    .addCase(moveItems.pending, function(state: WritableDraft<FEState>): void {
+      state.isLoading = true
+    })
+    .addCase(moveItems.rejected, function(state: WritableDraft<FEState>): void {
+      state.isLoading = false;
     })
     .addCase(moveItems.fulfilled, function(state: WritableDraft<FEState>, action: FEMoveItemsPayloadAction): void {
       const { itemPaths, items } = action.payload;
@@ -101,16 +120,14 @@ const slice = createSlice({
         const itemFolderSplit: string[] = itemFolder.split("/");
         const item: FEItem = items[itemId];
 
-        if(isUserTryRemoveFromUnsecureLocation(`${itemFolder}/${item.name}`, currPath)) {
-          throw new Error("You can't delete the folders you're in!");
-        }
-
         if(currPath.length >= itemFolderSplit.length) {
           state.history.items[itemFolderSplit.length - 1] = state.history.items[itemFolderSplit.length - 1].filter(item => item.id != itemId);
         }
 
         state.history.items[currPath.length - 1].push(item);
       }
+
+      state.isLoading = false;
     })
    .addCase(createItem.fulfilled, function(state: WritableDraft<FEState>, action: FECreateDirPayloadAction): void {
       state.history.items.at(-1)?.push(action.payload);
