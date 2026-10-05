@@ -3,6 +3,7 @@
 
 .breadcrumbs_list {
   @include dis-flex(unset, unset, $var-gap-xs);
+  padding: $var-padding-xs 0 0 $var-padding-xs;
 
   .breadcrumbs_list_item {
     @include dis-flex(center, unset, $var-gap-xs);
@@ -10,13 +11,15 @@
     transition: background-color $var-transition-time-100ms ease;
     width: fit-content;
 
-    > p:nth-child(1) {
+    > p {
       padding: $var-padding-m 0;
     }
 
-    > p:nth-child(2) {
+    > button {
       @include text-overflow();
-      padding: $var-padding-m;
+      color: $var-color-blue;
+      border-radius: $var-border-radius-xs;
+      padding: $var-padding-s $var-padding-m;
       cursor: pointer;
 
       &:hover {
