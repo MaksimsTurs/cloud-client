@@ -1,0 +1,7 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.image_renderer > img {
+  width: 100%;
+  max-height: 80vh;
+}
