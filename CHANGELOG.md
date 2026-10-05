@@ -1,47 +1,26 @@
-## Fix
-fix: error fixes
-fix: bug when trying to serialize error
-fix: bug with wrong z-index in pos-abs
-fix(service/Auth-Route): isAuthorizing state has not been setted back to false when authorization fails
+## Chore
+chore: update package version
+chore: some other changes
+chore: update dependencies
 
 ## Refactor
-refactor: small refactor changes
-refactor: rename isFetchDirectory with isLoading
-refactor: add white background to File and Folder component
-refactor: remove recursive remove checks (server do this yet)
-refactor(features/modals-manager/components/Modal): remove state from parameter list
-refactor: rename authorize event into onEnter
-refactor: add background color to all pages
-refactor: replace use-send-confirm-email with use-request-confirm-email
-refactor: move formatter files into separate folder
-refactor: move formatter files into separate folder
-refactor: change style of side menu in file viewer page
-refactor: add useEffect with cleanup function
-refactor(ui/Alert): remove redundant format-title utility
-refactor: replace custom component skeletons with one single common skeleton
-refactor: replace react/jsx-runtime with react
-refactor: remove box shadow
-refactor: update the styles of log in and log up buttons in main menu
-refactor: update the width of side menu and side menu skeleton
-refactor: change the size of side menu in item preview page
+refactor: add focus/hover color for inputs
+refactor: small changes in input error message styles
+refactor: some changes in side menu container styles
+refactor: some changes in video renderer styles
+refactor: some changes in image renderer styles
+refactor: replaced with Request-Some-Email component, obsolete
+refactor: small changes in bread crumbs styles
+refactor: small changes in context menu styles
+refactor: move Header-Loader into components folder
 
-## Style
-style: replace single quotes with double quotes
-style: rename file viewer skeleton scss file
-
-## Features
-feat(ui/Input-File): rewrite entierly
-feat: add clamp utility
-feat: add background image for file viewer page
-feat: add file for constants
-feat: remove text files from allowed list
-feat: add more validation
-feat: add content to error boundary component
-feat: create function does not need a type of new item parameter anymore
-feat: add type definitions for formatSecondsToTime and formatLeadingZeroCount utilities
-feat: add formatter that add n count of leading zeros
-feat: add formatter that format seconds to time (h, m, s)
-feat: add custom video/audio controls
-
-## Build
-build: update libraries
+## Feat
+feat: add custom checkbox input
+feat: replace two request pages with one common page
+feat: add pseudonym input
+feat: pass id of the root folder to open function
+feat: add root_id from server response
+feat: replace back button from header with back button directly in file explorer
+feat: add "remove me" and "download my data" buttons
+feat: add Not-Authenticated component
+feat: add some envs
