@@ -1,44 +1,25 @@
 import type { ReactNode } from "react";
+import type { User } from "@root/global.type";
 
 import { Fragment, useEffect } from "react";
 
 import { FileExplorer } from "@feature/file-explorer/file-explorer.feature";
-import { Link } from "@hook/use-react-router/use-react-router.hook";
-import Empty from "@ui/Empty/Empty.component";
 import Metadata from "@component/Metadata/Metadata.component";
 
 import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 
-import { useAuthIsAuthorized } from "@service/auth/auth.service";
+import { useUser } from "@service/auth/auth.service";
 
 export default function Page(): ReactNode {
   const feHistory = useFileExplorerHistory();
-  const isAuthorized = useAuthIsAuthorized();
+  const user = useUser<User>();
 
   useEffect(() => {
     if(!feHistory.hasRoot) {
-      feHistory.open("root");
+      feHistory.open("root", user.root_id);
     }
   }, [feHistory.hasRoot]);
-
-  if(!isAuthorized) {
-    return(
-      <Fragment>
-        <Metadata title="File Explorer"/>
-        <Empty
-          header="Not Authenticated!"
-          main="It looks like you either haven't logged into your account, or do not have an account."
-          footer={
-            <Fragment>
-              <Link href="/log-in">Log in</Link>
-              or
-              <Link href="/log-up">Log up</Link>
-            </Fragment>
-          }/>
-      </Fragment>
-    );
-  }
-
+  
   return(
     <Fragment>
       <Metadata title="File Explorer"/>
