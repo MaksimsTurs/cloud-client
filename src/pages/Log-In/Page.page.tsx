@@ -52,12 +52,12 @@ export default function Page(): ReactNode {
           <FormHeader title="Log in"/>
           <InputText
             type="text"
-            name="email" 
-            placeholder="E - mail"
-            autoComplete="email"
+            name="pseudonym" 
+            placeholder="Unique Pseudonym"
             options={{
-              required: "E - mail is required!",
-              pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
+              required: "Pseudonym is requierd!",
+              minLength: { value: 1, message: "Pseudonym is to short!" },
+              maxLength: { value: 32, message: "Pseudonym is to long!" },
             }}/>
           <InputText
             type="password"

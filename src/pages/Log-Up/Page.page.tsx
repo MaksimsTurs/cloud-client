@@ -6,11 +6,13 @@ import type { SerializedError } from "@root/global.type";
 
 import Metadata from "@component/Metadata/Metadata.component";
 import InputText from "@ui/Input-Text/Input-Text.component";
+import InputCheckbox from "@root/ui/Input-Checkbox/Input-Checkbox.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 import { Link } from "@hook/use-react-router/use-react-router.hook";
 import { FormContainer, FormBody, FormHeader, FormFooter } from "@ui/Form/Form.component";
 
 import { useForm } from "react-hook-form";
+import { Fragment } from "react";
 
 import { useAuth } from "@service/auth/auth.service";
 import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
@@ -71,6 +73,16 @@ export default function Page(): ReactNode {
               pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
             }}/>
           <InputText
+            type="text"
+            name="pseudonym"
+            placeholder="Unique Pseudonym"
+            autoComplete="username"
+            options={{
+              required: "Pseudonym is requierd!",
+              minLength: { value: 1, message: "Pseudonym is to short!" },
+              maxLength: { value: 32, message: "Pseudonym is to long!" },
+            }}/>
+          <InputText
             type="password"
             name="password"
             autoComplete="new-password"
@@ -89,6 +101,14 @@ export default function Page(): ReactNode {
               minLength: { value: 12, message: "Confirm password is to short!" },
               validate: checkPasswordsEquality
             }}/>
+          <InputCheckbox 
+            name="privacyPolicy" 
+            label={
+              <Fragment>
+                I accept our <Link href="/about-us#privacy-policy">Privacy Policy.</Link>
+              </Fragment>
+            }
+            options={{ required: "You must accept Privacy Policy" }}/>
           <FormFooter>
             <TextButton type="submit" text="Submit" disabled={isSubmitting}/>
             <Link href="/log-in">Have account?</Link>
