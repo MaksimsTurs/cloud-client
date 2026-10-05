@@ -27,6 +27,7 @@ export default viteConfig(function({ mode }) {
   return {
     root:          resolve("src"),
     publicDir:     resolve("public"),
+    envDir:        resolve("./"),
     assetsInclude: ASSETS_INCLUDE_EXTENSIONS,
     resolve: vite.options.resolve({
       "@root":      resolve("src/"),

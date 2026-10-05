@@ -1,6 +1,6 @@
 import type { HTTPRequestOptions } from "../http.type";
 
-import { isResponseJson, isResponseText, isContentTypeMatchProcessAs } from "./is.util";
+import { isResponseJson, isResponseText } from "./is.util";
 import { isUndefined } from "@util/is.util";
 
 import PROCESS_ASS_POSSIBLE_VALUES from "../const/PROCESS-AS-POSSIBLE-VALUES.const";
@@ -10,11 +10,6 @@ export default async function getResponseBodyData<T = unknown>(response: Respons
 
   if(!contentType) {
     throw new Error("Server response does not provide a information about body content type!");
-  }
-
-  if(!isContentTypeMatchProcessAs(contentType, options?.processAs)) {
-    console.log(contentType, options?.processAs)
-    throw new Error(`mime-type(${contentType}) and processAs(${options?.processAs}) option does not match!`);
   }
 
   if(!isUndefined(options?.processAs)) {

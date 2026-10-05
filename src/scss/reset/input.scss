@@ -26,8 +26,10 @@ input[type=file] {
 }
 
 input[type=checkbox] {
-	display: none;
-	appearance: none;
+	position: absolute;
+  width: 0;
+  height: 0;
+  appearance: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	border: none;

@@ -9,6 +9,7 @@ import { createRoot } from "react-dom/client";
 
 import store from "./reducers/store";
 
+import NotAuthenticated from "@component/Not-Authenticated/Not-Authenticated.component";
 import ErrorBoundary from "@component/Error-Boundary/Error-Boundary.component";
 import Header from "@component/Header/Header.component";
 import AuthProvider from "@service/auth/components/Auth-Provider/Auth-Provider.component";
@@ -17,82 +18,87 @@ import CommonSkeleton from "./ui/Common-Skeleton/Common-Skeleton.component";
 import { NotificationToastRenderer } from "./features/notification-toast/notification-toast.feature";
 import { ModalsRenderer } from "@feature/modals-manager/modals-manager.feature";
 
-import { Routes, initRouteComponents } from "@hook/use-react-router/use-react-router.hook";
+import { Routes, Route } from "@hook/use-react-router/use-react-router.hook";
 
 import http from "./utils/http/http.util";
 import authorize from "./utils/authorize.util";
-
-export const { Route, Link } = initRouteComponents<string>();
+import generateRefreshToken from "./utils/generate-refresh-token.util";
+import Metadata from "./components/Metadata/Metadata.component";
 
 const Home = lazy(() => import("@page/Home/Page.page"));
 const LogUp = lazy(() => import("@page/Log-Up/Page.page"));
 const LogIn = lazy(() => import("@page/Log-In/Page.page"));
 const FileViewer = lazy(() => import("@page/File-Viewer/Page.page"));
-const RequestResetPassword = lazy(() => import("@page/Request-Reset-Password/Page.page"));
+const RequestSomeEmail = lazy(() => import("@page/Request-Some-Email/Page.page"));
 const ResetPassword = lazy(() => import("@page/Reset-Password/Page.page"));
-const RequestConfirmEmail = lazy(() => import("@page/Request-Confirm-Email/Page.page"));
 
-http.config({ base: "http://localhost:4000" });
+http.config({ base: import.meta.env.VITE_BACKEND_URL });
 
 function App(): ReactNode {
   return(
     <Fragment>
       <ModalsRenderer/>
       <NotificationToastRenderer/>
-      <Route path="/log-up">
-        <main>
+      <Header/>
+      <main>
+        <Route path="/log-up">
           <Suspense fallback={<CommonSkeleton/>}>
             <LogUp/>
           </Suspense>
-        </main>
-      </Route>
-      <Route path="/log-in">
-        <main>
+        </Route>
+        <Route path="/log-in">
           <Suspense fallback={<CommonSkeleton/>}>
             <LogIn/>
           </Suspense>
-        </main>
-      </Route>
-      <Route path="/item/:id">
-        <AuthRoute onEnter={authorize}>
-          <main>
+        </Route>
+        <Route path="/item/:id">
+          <AuthRoute 
+            fallback={<NotAuthenticated/>}  
+            loader={<CommonSkeleton/>} 
+            auth={authorize}
+            generateRefreshToken={generateRefreshToken}>
             <Suspense fallback={<CommonSkeleton/>}>
               <FileViewer/>
             </Suspense>
-          </main>
-        </AuthRoute>
-      </Route>
-      <Route path="/">
-        <AuthRoute onEnter={authorize}>
-          <Header/>
-          <main>
+          </AuthRoute>
+        </Route>
+        <Route path="/">
+          <AuthRoute 
+            fallback={<NotAuthenticated/>}
+            loader={<CommonSkeleton/>} 
+            auth={authorize}
+            generateRefreshToken={generateRefreshToken}>
             <Suspense fallback={<CommonSkeleton/>}>
               <Home/>
             </Suspense>
-          </main>
-        </AuthRoute>
-      </Route>
-      <Route path="/request-reset-password">
-        <main>
+          </AuthRoute>
+        </Route>
+        <Route path="/request-reset-password">
           <Suspense fallback={<CommonSkeleton/>}>
-            <RequestResetPassword/>
+            <RequestSomeEmail 
+              url="/user/request-reset-password" 
+              formHeader="Request Reset Password"
+              metadata={
+                <Metadata title="Request Reset Password"/>
+              }/>
           </Suspense>
-        </main>
-      </Route>
-      <Route path="/request-confirm-email">
-        <main>
+        </Route>
+        <Route path="/request-confirm-email">
           <Suspense fallback={<CommonSkeleton/>}>
-            <RequestConfirmEmail/>
+            <RequestSomeEmail 
+              url="/user/request-confirm-email"
+              formHeader="Request Confirm Email"
+              metadata= {
+                <Metadata title="Request Confirm Email"/>
+              }/>
           </Suspense>
-        </main>
-      </Route>
-      <Route path="/reset-password">
-        <main>
+        </Route>
+        <Route path="/reset-password">
           <Suspense fallback={<CommonSkeleton/>}>
             <ResetPassword/>
           </Suspense>
-        </main>
-      </Route>
+        </Route>
+      </main>
     </Fragment>
   );
 };

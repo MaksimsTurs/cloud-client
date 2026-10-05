@@ -10,6 +10,7 @@
   color: #ffffff;
   width: 100%;
 
+  &:focus,
   &:hover {
     color: $var-color-blue;
     transition: background-color $var-transition-time-100ms ease;

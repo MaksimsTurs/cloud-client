@@ -21,9 +21,7 @@ export default function Modal({ children, title }: ModalProps): ReactNode {
       <div className={scss.modal_body}>
         <section className={scss.modal_header}>
           <p>{title}</p>
-          <IconButton onClick={closeModal}>
-            <XIcon/>
-          </IconButton>
+          <IconButton icon={<XIcon/>} onClick={closeModal}/>
         </section>
         {children}
       </div>

@@ -19,6 +19,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "erasableSyntaxOnly": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowUnusedLabels": false,
+    "noImplicitAny": true,
+    // "noUncheckedIndexedAccess": true,
     "paths": { 
       "@public/*":    ["./public/*"],
       "@root/*":      ["./src/*"],

@@ -2,6 +2,6 @@ import type { UseWithAuthEndpointResponse } from "@service/auth/hooks/use-with-a
 
 import http from "./http/http.util";
 
-export default async function generateRefreshToken(): Promise<UseWithAuthEndpointResponse | undefined> {
-  return http.get<UseWithAuthEndpointResponse>("/user/refresh-token", { credentials: "include" });
+export default async function generateRefreshToken(): Promise<UseWithAuthEndpointResponse> {
+  return http.get<UseWithAuthEndpointResponse>("/user/refresh-token", { credentials: "include" })!;
 };

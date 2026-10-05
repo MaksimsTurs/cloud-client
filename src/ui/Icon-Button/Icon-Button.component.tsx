@@ -1,15 +1,23 @@
-import scss from "./Icon-Button.module.scss";
+import scss from "./Hybride-Button.module.scss";
 
 import type { ReactNode } from "react";
-import type { ButtonProps } from "./Icon-Button.type";
+import type { HybrideButtonProps } from "./Hybride-Button.type";
 
-export default function IconButton({ children, className, ...attributes }: ButtonProps): ReactNode {
+export default function HybrideButton({
+  className,
+  icon,
+  text,
+  ...attributes 
+}: HybrideButtonProps): ReactNode {
+  const fullClassName: string = `${className} ${scss.hybride_button} ${(icon && text) ? scss.hybride_button__full : ""}`;
+  
   return(
     <button 
       {...attributes } 
-      className={`${scss.button} ${className}`} 
+      className={fullClassName} 
       type="button">
-      {children}
+      {icon}
+      {text}
     </button>
   );
 };

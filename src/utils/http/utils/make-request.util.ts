@@ -12,7 +12,6 @@ export default async function makeRequest<T>(method: string, path: string, optio
     const headers: Headers = formatHeaders(options?.headers, options?.body);
     const url: string = formatUrl(path);
     const body: HTTPRequestBody = formatBody(options?.body);
-
     const response: Response = await fetch(url, { 
       method, 
       ...options,

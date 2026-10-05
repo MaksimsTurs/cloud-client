@@ -16,6 +16,7 @@ export default function InputText<T extends FieldValues>({ options, type, ...att
   const { register, formState: { errors }} = useFormContext<T>();
 
   const error: string | undefined = errors[attributes.name]?.message?.toString();
+  const containerClassName: string = `${scss.input_text_container} ${error ? scss.input_text_container__error : ""}`;
 
   const togglePreview = (): void => {
     setPreviewMode(prev => !prev);
@@ -36,26 +37,18 @@ export default function InputText<T extends FieldValues>({ options, type, ...att
   };
 
   return(
-    <label className={scss.input_text_label} htmlFor={attributes.name}>
-      <div className={scss.input_text_container}>
-      {type === "password" ?
-        <button
-          className={scss.input_text_preview_button} 
-          onClick={togglePreview} 
-          type="button">
-          {isPreviewMode ? <EyeIcon strokeWidth={1} size={24}/> : <EyeOffIcon strokeWidth={1} size={24}/>}
-        </button> : null}
+    <section className={scss.input_text_label}>
+      <div className={containerClassName}>
         <input 
           {...attributes } 
-          {...register(attributes.name, {
-            ...options,
-            setValueAs
-          }) }
-          type={isPreviewMode ? "text" : type}
-          id={attributes.name}
-          className={error ? scss.input_text_error : scss.input_text}/>
+          {...register(attributes.name, {...options, setValueAs }) }
+          type={isPreviewMode ? "text" : type}/>
+        {type === "password" ?
+        <button onClick={togglePreview} type="button">
+          {isPreviewMode ? <EyeIcon strokeWidth={1} size={24}/> : <EyeOffIcon strokeWidth={1} size={24}/>}
+        </button> : null}
       </div>
       {error ? <InputErrorMessage message={error}/> : null}
-    </label>
+    </section>
   );
 };

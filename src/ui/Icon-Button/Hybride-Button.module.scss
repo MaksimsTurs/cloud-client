@@ -1,16 +1,16 @@
 @use "@scss/mixins" as *;
 @use "@scss/variables" as *;
 
-.button {
-  @include dis-flex(center, center, 0.5rem);
+.hybride_button {
+  @include dis-flex(center, center);
   transition: 
     color $var-transition-time-100ms ease,
     background-color $var-transition-time-100ms ease,
     box-shadow $var-transition-time-100ms ease;
   background-color: $var-background-color-black;
   padding: $var-padding-s;
-  box-shadow: 0px 1px 1px $var-box-shadow-color-black;
-  border-radius: 50%;
+  box-shadow: 0px 2px 1px $var-box-shadow-color-black;
+  border-radius: $var-border-radius-s;
   color: #646464;
 
   &:hover {
@@ -19,31 +19,44 @@
       background-color $var-transition-time-100ms ease,
       box-shadow $var-transition-time-100ms ease;
     background-color: $var-color-blue-hover;
-    box-shadow: 0px 2px 2px $var-color-blue-hover;
+    box-shadow: 0px 2px 1px $var-color-blue;
     color: $var-color-blue;
-
 
     > svg {
       color: $var-color-blue;
-      flex-shrink: 0;
-      flex-grow: 1;
-      stroke-width: 1.2;
     }
   }
 
   &:disabled { 
+    background-color: $var-color-disabled-bright;
+    color: $var-color-disabled-dark;
     cursor: auto;
     pointer-events: none;
+    box-shadow: none;
 
     > svg {
-      color: #C0C0C0;
+      color: $var-color-disabled-dark;
+      border-right: 1px solid transparent;
     }
   }
 
   > svg {
-    flex-shrink: 0;
-    flex-grow: 1;
     stroke-width: 1.2;
     color: #646464;
+    min-width: fit-content;
+  }
+}
+
+.hybride_button__full {
+  padding: $var-padding-s $var-padding-m;  
+
+  > svg {
+    border-right: 1px solid $var-border-color-black;
+    padding-right: $var-padding-s;
+    margin-right: $var-padding-s;
+  }
+  
+  &:hover > svg {
+    border-right: 1px solid $var-color-blue-hover;
   }
 }

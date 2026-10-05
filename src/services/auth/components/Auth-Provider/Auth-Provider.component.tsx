@@ -7,8 +7,8 @@ export const AuthContext: Context<AuthContextValue | undefined> = createContext<
 
 export default function AuthProvider({ children }: AuthProviderProps): ReactNode {
   const [tokens, setTokens] = useState<AuthTokens>({ access: undefined, refresh: undefined });
-  const [isAuthorizing, setIsAuthorizing] = useState<boolean>(false);
   const [user, setUser] = useState<unknown | undefined>(undefined);
+  const [isAuthorizing, setIsAuthorizing] = useState<boolean>(false);
 
   const value: AuthContextValue = {
     isAuthorizing,

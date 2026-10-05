@@ -1,5 +1,4 @@
-import { isInstanceOf, isUndefined } from "@util/is.util";
-import { HTTPProcessResponseAs } from "../http.type";
+import { isInstanceOf } from "@util/is.util";
 
 export const isResponseJson = (contentType: string): boolean => /application\/json/.test(contentType);
 
@@ -13,22 +12,6 @@ export const isResponseBuffer = (contentType: string): boolean => {
     (!isResponseJson(contentType) && /application\/.+/.test(contentType)) ||
     /font\/.+/.test(contentType) ||
     /model\/.+/.test(contentType)
-  );
-};
-
-export const isContentTypeMatchProcessAs = (contentType: string, processAs?: HTTPProcessResponseAs): boolean => {
-  if(isUndefined(processAs) && isResponseBuffer(contentType)) {
-    return false;
-  }
-
-  if(isUndefined(processAs) && (isResponseJson(contentType) || isResponseText(contentType))) {
-    return true;
-  }
-
-  return(
-    (isResponseBuffer(contentType) && processAs !== "json") ||
-    isResponseText(contentType) ||
-    (isResponseJson(contentType) && (processAs === "text" || processAs === "json"))
   );
 };
 
