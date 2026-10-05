@@ -11,4 +11,5 @@ export type SerializedError = {
 
 export type User = {
   is_verified: boolean
+  root_id: string
 };
