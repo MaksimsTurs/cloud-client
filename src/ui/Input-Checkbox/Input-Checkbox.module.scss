@@ -1,0 +1,47 @@
+@use "@scss/variables" as *;
+@use "@scss/mixins" as *;
+
+.input_checkbox_label {
+  @include dis-flex(null, null, 0, column);
+
+  .input_checkbox_container {
+    @include dis-flex(center, null, $var-gap-xs);
+    color: $var-color-grey-font;
+
+    > input {
+      &:hover ~ .input_checkbox,
+      &:focus ~ .input_checkbox {
+        background-color: $var-color-grey-dark;
+        transition: background-color $var-transition-time-100ms ease;
+      }
+
+      &:checked ~ .input_checkbox {
+        padding: $var-padding-xs;
+        background-color: $var-color-blue !important;
+      }
+    }
+
+    .input_checkbox {
+      border-bottom: 1px solid $var-border-color-blue;
+      box-shadow: 1px 3px 3px $var-box-shadow-color-black;
+      transition: background-color $var-transition-time-100ms ease;  
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+  }
+
+  .input_checkbox_container__error {
+     > input {
+      &:hover,
+      &:focus ~ .input_checkbox {
+        background-color: $var-background-color-red;
+        transition: background-color $var-transition-time-100ms ease;
+      }
+    }
+
+    .input_checkbox {
+      border-bottom: 1px solid $var-border-color-red;
+    }   
+  }
+}
