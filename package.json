@@ -1,6 +1,6 @@
 {
-  "name": "cloud-client",
-  "version": "3.2.1",
+  "name": "Die.Wolke",
+  "version": "3.3.1",
   "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.app.json && vite build",
