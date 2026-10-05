@@ -4,19 +4,23 @@ import type { ReactNode } from "react";
 
 import scss from "../scss/Navigation.module.scss";
 
-import { usePath, useNavigate } from "@hook/use-react-router/use-react-router.hook";
+import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
 import { useAuth, useAuthIsAuthorized, useUser, useWithAuth } from "@service/auth/auth.service";
-import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 
-import IconButton from "@ui/Icon-Button/Icon-Button.component";
+import { Link } from "@hook/use-react-router/use-react-router.hook";
+import HybrideButton from "@ui/Icon-Button/Icon-Button.component";
 
 import { 
-  ArrowLeftIcon, 
+  DatabaseArrowDownIcon,
+  HouseIcon,
+  InfoIcon,
   LogOutIcon, 
+  MailPenIcon, 
   MailWarningIcon, 
-  UserPlus2Icon, 
-  UserRoundKeyIcon, 
+  TrashIcon, 
+  UserKeyIcon, 
+  UserPlusIcon, 
 } from "lucide-react";
 
 import { Fragment } from "react";
@@ -27,29 +31,53 @@ import generateRefreshToken from "@util/generate-refresh-token.util";
 
 export default function Navigation(): ReactNode {
   const navigate = useNavigate();
-  const path = usePath();
-  const toast = useNotificationToastActions();
-  const feHistory = useFileExplorerHistory();
-  const isAuthorized = useAuthIsAuthorized();
-  const user = useUser<User>();
   const withAuth = useWithAuth<SerializedError>({ serializeError });
   const { logout } = useAuth<SerializedError>({ serializeError });
+  const toast = useNotificationToastActions();
+  const isAuthorized: boolean = useAuthIsAuthorized();
+  const user: User = useUser<User>();
 
-  const goTo = (path: string): void => {
-    navigate(path);
+  const removeMe = async (): Promise<void> => {
+    const result = await withAuth({
+      generateRefreshToken,
+      apiRequest: async () => {
+        await http.get("/user/remove-me", { credentials: "include" });
+      } 
+    });
+
+    if(result.getError()) {
+      toast.add("error", result.getError()!.message);
+    } else {
+      navigate("/");
+    }   
   };
 
-  const goBack = async (): Promise<void> => {
-    feHistory.close(-1);
+  const downloadMyData = async (): Promise<void> => {
+    const result = await withAuth({
+      generateRefreshToken,
+      apiRequest: async () => {
+        const blob: Blob = await http.get<Blob>("/user/download-my-data", { credentials: "include", processAs: "blob" });
+        const url: string = URL.createObjectURL(blob);
+        const link: HTMLAnchorElement = document.createElement("a");
+
+        link.href = url;
+        link.download = "Data.json";
+        link.click();
+
+        URL.revokeObjectURL(url);
+      } 
+    });
+
+    if(result.getError()) {
+      toast.add("error", result.getError()!.message);
+    }
   };
 
   const logoutUser = async (): Promise<void> => {
     const result = await withAuth({
       generateRefreshToken,
       apiRequest: async () => {
-        await logout(async () => {
-          return await http.get<UseAuthEndpointResponse>("/user/log-out", { credentials: "include" });
-        });
+        await logout(async () => await http.get<UseAuthEndpointResponse>("/user/log-out", { credentials: "include" }));
       } 
     });
 
@@ -61,43 +89,34 @@ export default function Navigation(): ReactNode {
   };
 
   return(
-    <nav className={scss.nav_container}>
-      <IconButton
-        onClick={goBack} 
-        disabled={feHistory.isRoot || path != "/"}
-        aria-label="Go to parent folder">
-        <ArrowLeftIcon/>
-      </IconButton>
+    <nav className={scss.nav__container}>
+      <Link href="/">
+        <HybrideButton icon={<HouseIcon/>}/>
+      </Link>
+     <Link href="/write-us">
+      <HybrideButton icon={<MailPenIcon/>}/>
+     </Link>
       {isAuthorized ?
       <Fragment>
         {!user.is_verified ?
-        <IconButton 
-          role="button" 
-          aria-label="Email is not verified"
-          onClick={() => goTo("/request-confirm-email")}>
-          <MailWarningIcon/>
-        </IconButton> : null}
-        <IconButton 
-          onClick={logoutUser} 
-          role="button" 
-          aria-label="Log out">
-          <LogOutIcon/>
-        </IconButton>
+        <Link href="/request-confirm-email">
+          <HybrideButton icon={<MailWarningIcon/>}/>
+        </Link> : null}
+        <HybrideButton onClick={logoutUser} icon={<LogOutIcon/>}/>
+        <HybrideButton onClick={downloadMyData} text="Get my data" icon={<DatabaseArrowDownIcon/>}/>
+        <HybrideButton onClick={removeMe} text="Remove me" icon={<TrashIcon/>}/>
       </Fragment> :
       <Fragment>
-        <IconButton 
-          role="button"
-          aria-label="Log up"
-          onClick={() => goTo("/log-up")}>
-          <UserPlus2Icon/>
-        </IconButton>
-        <IconButton 
-          role="button" 
-          aria-label="Log in"
-          onClick={() => goTo("/log-in")}>
-          <UserRoundKeyIcon/>
-        </IconButton>
-      </Fragment>}
-    </nav>
+        <Link href="/log-up">
+          <HybrideButton icon={<UserPlusIcon/>} text="Log up"/>
+        </Link>
+        <Link href="/log-in">
+          <HybrideButton icon={<UserKeyIcon/>} text="Log in"/>
+        </Link>
+        <Link href="/about-us">
+          <HybrideButton icon={<InfoIcon/>}/>
+        </Link>
+     </Fragment>}
+   </nav>
   );
 };
