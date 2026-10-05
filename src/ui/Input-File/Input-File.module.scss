@@ -54,10 +54,9 @@
   transition: background-color $var-transition-time-100ms ease;
   font-size: $var-font-l;
   cursor: pointer;
-  background-color: #b6b6c833;
   
   &:hover {
-    background-color: #b6b6c84d;
+    background-color: $var-color-grey-dark;
     transition: background-color $var-transition-time-100ms ease;
   }
 }

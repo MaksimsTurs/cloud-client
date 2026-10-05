@@ -2,54 +2,59 @@
 @use "@scss/mixins" as *;
 
 .input_text_label {
-  @include dis-flex(normal, normal, $var-gap-xs, column);
+  @include dis-flex(unset, unset, 0, column);
   width: 100%;
 
   .input_text_container {
-    position: relative;
-
-    & > input {
+    @include dis-flex(center);
+    border-bottom: 1px solid $var-border-color-blue;
+    box-shadow: 1px 3px 3px $var-box-shadow-color-black;
+    
+    > input {
       padding: $var-padding-m calc($var-padding-xxxxl * 1.2) $var-padding-m $var-padding-m;
-      border-bottom: 1px solid $var-border-color-blue;
-      box-shadow: 1px 3px 3px $var-box-shadow-color-black;
       transition: background-color $var-transition-time-100ms ease;
       font-size: $var-font-l;
-      background-color: #b6b6c833;
+      transition: background-color $var-transition-time-100ms ease;
+      background-color: transparent;
       width: 100%;
 
+      &:hover,
       &:focus {
-        background-color: #b6b6c84d;
-        transition: background-color $var-transition-time-100ms ease;
+        background-color: $var-color-grey-dark;
       }
 
-      &:hover {
-        background-color: #b6b6c84d;
-        transition: background-color $var-transition-time-100ms ease;
+      &::placeholder {
+        color: $var-color-grey-font;
       }
     }
 
-    .input_text_error {
-      border-bottom: 1px solid $var-border-color-red;
-      background-color: $var-background-color-red;
+    > button {
+      padding: 0 $var-padding-m;
+      background-color: $var-color-grey-bright;
+      transition: background-color $var-transition-time-100ms;
+      height: 100%;
+
+      &:hover,
+      &:focus {
+        background-color: $var-color-grey-dark;
+      }
+    }
+  }
+
+  .input_text_container__error {
+    border-bottom: 1px solid $var-border-color-red;
+
+    > input {
+      transition: background-color $var-transition-time-100ms ease;
+
+      &:hover,
+      &:focus {
+        background-color: $var-background-color-red;
+      }
 
       &::placeholder {
         color: $var-color-red;
       }
-
-      &:focus {
-        background-color: $var-background-color-red;
-        transition: background-color $var-transition-time-100ms ease;
-      }
-
-      &:hover {
-        background-color: $var-background-color-red;
-        transition: background-color $var-transition-time-100ms ease;
-      }
-    }
-
-    .input_text_preview_button {
-      @include pos-abs(top, right, 50%, 0.5rem, 1, fit-content, fit-content);
-      transform: translateY(-50%);
     }
   }
 }
