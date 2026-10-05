@@ -5,5 +5,7 @@
   @include dis-flex(center, null, $var-gap-xs);
   color: $var-color-red;
   font-size: $var-font-l;
+  padding: $var-padding-s $var-padding-m;
+  background-color: $var-background-color-red;
   word-break: break-all;
 }
