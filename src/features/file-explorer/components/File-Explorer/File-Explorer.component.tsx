@@ -13,7 +13,7 @@ import { useFileExplorerHistory, useFileExplorerItemsEvents } from "@feature/fil
 
 import hasKey from "@feature/file-explorer/utils/has-key.util";
 
-import FE_ITEM_TYPES from "../../const/FE-ITEM-TYPES.const";
+import FE_ITEM_TYPES from "../../const/FE_ITEM_TYPES.const";
 
 export default function FileExplorer(): ReactNode {
   const feHistory = useFileExplorerHistory();
