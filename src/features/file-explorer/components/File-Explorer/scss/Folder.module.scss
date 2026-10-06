@@ -7,8 +7,7 @@
   transition: 
     color $var-transition-time-100ms ease,
     background-color $var-transition-time-100ms ease,
-    border $var-transition-time-100ms ease,
-    box-shadow $var-transition-time-100ms ease;
+    border $var-transition-time-100ms ease;
   padding: $var-padding-l;
   border: 1px solid $var-border-color-black;
   height: calc($var-size-s * 6);
@@ -33,12 +32,11 @@
     color: $var-color-blue;
     background-color: $var-color-blue-hover;
     border: 1px solid $var-color-blue;
-    box-shadow: 1px 3px 3px $var-color-blue-hover;
+    box-shadow: 0px 1px 2px $var-color-blue;
     transition: 
       color $var-transition-time-100ms ease,
       background-color $var-transition-time-100ms ease,
-      border $var-transition-time-100ms ease,
-      box-shadow $var-transition-time-100ms ease;
+      border $var-transition-time-100ms ease;
   }
 }
 
