@@ -22,7 +22,10 @@ export default function Page(): ReactNode {
   
   return(
     <Fragment>
-      <Metadata title="File Explorer"/>
+      <Metadata 
+        title="File Explorer"
+        charset="utf-8"
+        name="description" content="Main page, here you can upload and manipulate with you files and folders."/>
       <FileExplorer/>
     </Fragment>
   );
