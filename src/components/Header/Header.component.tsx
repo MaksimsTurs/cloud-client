@@ -16,7 +16,7 @@ export default function Header(): ReactNode {
     <Fragment>
       {isAuthorizing ?
       <HeaderLoader/> :
-      <header className={scss.header__container}>
+      <header className={scss.header_container}>
         <Navigation/>
       </header>}
     </Fragment>

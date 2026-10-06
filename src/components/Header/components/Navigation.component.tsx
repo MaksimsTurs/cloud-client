@@ -89,7 +89,7 @@ export default function Navigation(): ReactNode {
   };
 
   return(
-    <nav className={scss.nav__container}>
+    <nav className={scss.nav_container}>
       <Link href="/">
         <HybrideButton icon={<HouseIcon/>}/>
       </Link>
