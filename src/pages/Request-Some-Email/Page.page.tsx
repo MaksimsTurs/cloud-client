@@ -3,7 +3,6 @@ import type { RequestSomeEmailFromServer, RequestSomeEmailFromServerProps } from
 import type { SubmitHandler } from "react-hook-form";
 import type { SerializedError } from "@root/global.type";
 
-import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
 import TextButton from "@ui/Text-Button/Text-Button.component";
@@ -19,7 +18,7 @@ import generateRefreshToken from "@util/generate-refresh-token.util";
 import { useWithAuth } from "@service/auth/auth.service";
 import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
 
-export default function Page({ url, metadata, formHeader }: RequestSomeEmailFromServerProps): ReactNode {
+export default function Page({ url }: RequestSomeEmailFromServerProps): ReactNode {
   const methods = useForm<RequestSomeEmailFromServer>();
   const withAuth = useWithAuth<SerializedError>({ serializeError });
   const navigate = useNavigate();
@@ -61,23 +60,31 @@ export default function Page({ url, metadata, formHeader }: RequestSomeEmailFrom
   };
 
   return(
-    <Fragment>
-      {metadata}
-      <FormContainer>
-        <FormBody
-          {...methods } 
-          error={errors.root?.message} 
-          onSubmit={requestSomeEmail}>
-          <FormHeader title={formHeader}/>
-          <SomeInputs url={url}/>
-          <AlertContainer type="info">
-            After submitting, we will send you an e-mail with a link, this link will expire in 5 minutes!
-          </AlertContainer>
-          <FormFooter>
-            <TextButton text="Submit" disabled={isSubmitting}/>
-          </FormFooter>
-        </FormBody>
-      </FormContainer>
-    </Fragment>
+    <FormContainer>
+      <FormBody
+        {...methods } 
+        error={errors.root?.message} 
+        onSubmit={requestSomeEmail}>
+        <FormHeader title={getFormHeader(url)}/>
+        <SomeInputs url={url}/>
+        <AlertContainer type="info">
+          After submitting, we will send you an e-mail with a link, this link will expire in 5 minutes!
+        </AlertContainer>
+        <FormFooter>
+          <TextButton text="Submit" disabled={isSubmitting}/>
+        </FormFooter>
+      </FormBody>
+    </FormContainer>
   );
+};
+
+function getFormHeader(url: string): string {
+  switch(url) {
+    case "/user/request-confirm-email":
+      return "Request Confirm Email";
+    case "/user/request-reset-password":
+      return "Request Reset Password";
+    default:
+      return "Unknown Form Header";
+  }
 };

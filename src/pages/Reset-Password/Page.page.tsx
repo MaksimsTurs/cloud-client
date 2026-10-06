@@ -3,10 +3,8 @@ import type { ResetPassword } from "./Page.type";
 import type { SerializedError } from "@root/global.type";
 import type { SubmitHandler } from "react-hook-form";
 
-import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
-import Metadata from "@component/Metadata/Metadata.component";
 import Empty from "@ui/Empty/Empty.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 import InputText from "@ui/Input-Text/Input-Text.component";
@@ -44,35 +42,29 @@ export default function Page(): ReactNode {
 
   if(!searchParams.has("token") || !searchParams.get("token")) {
     return(
-      <main>
-        <Metadata title="Reset password"/>
         <Empty
           header="Token is invalid!"
           main="Looks like you have not requested the password resetting. Request password resetting first!"/>
-      </main>
     );
   }
 
   return(
-    <Fragment>
-      <Metadata title="Reset password"/>
-      <FormContainer>
-        <FormBody<ResetPassword>
-          {...methods }
-          error={errors.root?.message} 
-          onSubmit={resetPassword}>
-          <FormHeader title="Reset Password"/>
-          <InputText
-            name="password"
-            type="password"
-            placeholder="New password"
-            autoComplete="new-password"
-            options={VALIDATION_RULES.USER.PASSWORD()}/>
-          <FormFooter>
-            <TextButton text="Reset password" disabled={isSubmitting}/>
-          </FormFooter>
-        </FormBody>
-      </FormContainer>
-    </Fragment>
+    <FormContainer>
+      <FormBody<ResetPassword>
+        {...methods }
+        error={errors.root?.message} 
+        onSubmit={resetPassword}>
+        <FormHeader title="Reset Password"/>
+        <InputText
+          name="password"
+          type="password"
+          placeholder="New password"
+          autoComplete="new-password"
+          options={VALIDATION_RULES.USER.PASSWORD()}/>
+        <FormFooter>
+          <TextButton text="Reset password" disabled={isSubmitting}/>
+        </FormFooter>
+      </FormBody>
+    </FormContainer>
   );
 };

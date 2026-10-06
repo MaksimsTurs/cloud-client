@@ -6,7 +6,6 @@ import scss from "./Error-Boundary.module.scss";
 import { Fragment, Component } from "react";
 import { BugIcon } from "lucide-react";
 
-import Metadata from "@component/Metadata/Metadata.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -31,7 +30,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   public render(): ReactNode {
     return(
       <Fragment>
-        <Metadata title="Error is occur"/>
         {!this.state.hasError ? this.props.children : 
         <div className={scss.error_container}>
           <div className={scss.error_body}>

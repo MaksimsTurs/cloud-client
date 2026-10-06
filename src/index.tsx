@@ -15,6 +15,7 @@ import Header from "@component/Header/Header.component";
 import AuthProvider from "@service/auth/components/Auth-Provider/Auth-Provider.component";
 import AuthRoute from "./services/auth/components/Auth-Route/Auth-Route.component";
 import CommonSkeleton from "./ui/Common-Skeleton/Common-Skeleton.component";
+import Metadata from "./components/Metadata/Metadata.component";
 import { NotificationToastRenderer } from "./features/notification-toast/notification-toast.feature";
 import { ModalsRenderer } from "@feature/modals-manager/modals-manager.feature";
 
@@ -23,7 +24,6 @@ import { Routes, Route } from "@hook/use-react-router/use-react-router.hook";
 import http from "./utils/http/http.util";
 import authorize from "./utils/authorize.util";
 import generateRefreshToken from "./utils/generate-refresh-token.util";
-import Metadata from "./components/Metadata/Metadata.component";
 
 const Home = lazy(() => import("@page/Home/Page.page"));
 const LogUp = lazy(() => import("@page/Log-Up/Page.page"));
@@ -42,16 +42,22 @@ function App(): ReactNode {
       <Header/>
       <main>
         <Route path="/log-up">
+          <Metadata title="Log up"/>
+          <Metadata name="description" content="Create new account to get full access of page functionality."/>
           <Suspense fallback={<CommonSkeleton/>}>
             <LogUp/>
           </Suspense>
         </Route>
         <Route path="/log-in">
+          <Metadata title="Log in"/>
+          <Metadata name="description" content="Log in into you'r account to get full access of page functionality."/>
           <Suspense fallback={<CommonSkeleton/>}>
             <LogIn/>
           </Suspense>
         </Route>
         <Route path="/item/:id">
+          <Metadata title="Media Viewer"/>
+          <Metadata name="description" content="Media viewer for images, videos, audios and text files."/>
           <AuthRoute 
             fallback={<NotAuthenticated/>}  
             loader={<CommonSkeleton/>} 
@@ -63,7 +69,9 @@ function App(): ReactNode {
           </AuthRoute>
         </Route>
         <Route path="/">
-          <AuthRoute 
+          <Metadata title="File Explorer"/>
+          <Metadata name="description" content="File Explorer."/>
+          <AuthRoute
             fallback={<NotAuthenticated/>}
             loader={<CommonSkeleton/>} 
             auth={authorize}
@@ -74,26 +82,22 @@ function App(): ReactNode {
           </AuthRoute>
         </Route>
         <Route path="/request-reset-password">
+          <Metadata title="Request Reset Password"/>
+          <Metadata name="description" content="Page for requesting password reset."/>
           <Suspense fallback={<CommonSkeleton/>}>
-            <RequestSomeEmail 
-              url="/user/request-reset-password" 
-              formHeader="Request Reset Password"
-              metadata={
-                <Metadata title="Request Reset Password"/>
-              }/>
+            <RequestSomeEmail url="/user/request-reset-password"/>
           </Suspense>
         </Route>
         <Route path="/request-confirm-email">
+          <Metadata title="Request Confirm Email"/>
+          <Metadata name="description" content="Request new confirmation email if your previous email has expired."/>
           <Suspense fallback={<CommonSkeleton/>}>
-            <RequestSomeEmail 
-              url="/user/request-confirm-email"
-              formHeader="Request Confirm Email"
-              metadata= {
-                <Metadata title="Request Confirm Email"/>
-              }/>
+            <RequestSomeEmail url="/user/request-confirm-email"/>
           </Suspense>
         </Route>
         <Route path="/reset-password">
+          <Metadata title="Reset Password"/>
+          <Metadata name="description" content="Update you'r password."/>
           <Suspense fallback={<CommonSkeleton/>}>
             <ResetPassword/>
           </Suspense>

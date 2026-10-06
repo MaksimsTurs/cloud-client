@@ -1,8 +1,9 @@
 import useParams from "@hook/use-react-router/use-params.hook";
 
+import { useFileExplorerGetFile } from "@feature/file-explorer/file-explorer.feature";
+
 import SideMenuContainer from "./components/Side-Menu-Container.component";
 import SideMenuSection from "./components/Side-Menu-Section.component";
-import Metadata from "@component/Metadata/Metadata.component";
 import Empty from "@ui/Empty/Empty.component";
 import ImageRenderer from "./components/Image-Renderer.component";
 import VideoRenderer from "./components/Video-Renderer.component";
@@ -23,16 +24,12 @@ import scss from "./Page.module.scss";
 
 import { formatToMemoryUnit } from "@util/formatters/formatters.util";
 
-import { useFileExplorerGetFile } from "@feature/file-explorer/file-explorer.feature";
-
 export default function FileViewer() {
   const { id } = useParams();
   const { data, isExist, isLoading } = useFileExplorerGetFile(id);
   
   return(
     <Fragment>
-      <Metadata title={data?.name || "Preview"}/>
-      <Metadata name="description" content="Preview page, here you can edit, remove and preview uploaded files."/>
       {isLoading ? <CommonSkeleton/> : data && isExist ?
       <div className={scss.file_viewer_container}>
         <SideMenuContainer>

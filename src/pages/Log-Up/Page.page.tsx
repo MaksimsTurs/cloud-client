@@ -4,7 +4,6 @@ import type { UseAuthEndpointResponse } from "@service/auth/hooks/use-auth.type"
 import type { UserLogUp } from "./Page.type";
 import type { SerializedError } from "@root/global.type";
 
-import Metadata from "@component/Metadata/Metadata.component";
 import InputText from "@ui/Input-Text/Input-Text.component";
 import InputCheckbox from "@root/ui/Input-Checkbox/Input-Checkbox.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
@@ -57,8 +56,6 @@ export default function Page(): ReactNode {
 
   return(
     <div className={scss.page_container}>
-      <Metadata title="Log up"/>
-      <Metadata name="description" content="Log up page, here you can create a new Account to get access to application functionality."/>
       <FormContainer>
         <FormBody<UserLogUp>
           {...methods } 

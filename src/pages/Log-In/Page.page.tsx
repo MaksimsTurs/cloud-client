@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 
 import InputText from "@ui/Input-Text/Input-Text.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
-import Metadata from "@component/Metadata/Metadata.component";
 import { FormBody, FormContainer, FormHeader, FormFooter } from "@ui/Form/Form.component";
 import { Link } from "@hook/use-react-router/use-react-router.hook";
 
@@ -44,8 +43,6 @@ export default function Page(): ReactNode {
 
   return(
     <div className={scss.page_container}>
-      <Metadata title="Log in"/>
-      <Metadata name="description" content="Log in page, here you can log in into your Account."/>
       <FormContainer>
         <FormBody<UserLogIn> 
           {...methods } 
