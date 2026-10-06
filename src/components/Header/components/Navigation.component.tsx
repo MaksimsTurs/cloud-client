@@ -12,18 +12,16 @@ import { Link } from "@hook/use-react-router/use-react-router.hook";
 import HybrideButton from "@ui/Icon-Button/Icon-Button.component";
 
 import { 
-  DatabaseArrowDownIcon,
   HouseIcon,
   InfoIcon,
   LogOutIcon, 
   MailPenIcon, 
   MailWarningIcon, 
-  TrashIcon, 
   UserKeyIcon, 
-  UserPlusIcon, 
+  UserMinusIcon, 
+  UserPlusIcon,
+  UserSearchIcon,
 } from "lucide-react";
-
-import { Fragment } from "react";
 
 import serializeError from "@util/serialize-error.util";
 import http from "@util/http/http.util";
@@ -90,33 +88,35 @@ export default function Navigation(): ReactNode {
 
   return(
     <nav className={scss.nav_container}>
-      <Link href="/">
-        <HybrideButton icon={<HouseIcon/>}/>
-      </Link>
-     <Link href="/write-us">
-      <HybrideButton icon={<MailPenIcon/>}/>
-     </Link>
+      <section>
+        <Link href="/">
+          <HybrideButton icon={<HouseIcon/>}/>
+        </Link>
+        <Link href="/write-us">
+          <HybrideButton text="Write us" icon={<MailPenIcon/>}/>
+        </Link>
+        <Link href="/about-us">
+          <HybrideButton text="About us" icon={<InfoIcon/>}/>
+        </Link>
+      </section>
       {isAuthorized ?
-      <Fragment>
+      <section>
         {!user.is_verified ?
         <Link href="/request-confirm-email">
-          <HybrideButton icon={<MailWarningIcon/>}/>
+          <HybrideButton text="Send confirm Email" icon={<MailWarningIcon/>}/>
         </Link> : null}
-        <HybrideButton onClick={logoutUser} icon={<LogOutIcon/>}/>
-        <HybrideButton onClick={downloadMyData} text="Get my data" icon={<DatabaseArrowDownIcon/>}/>
-        <HybrideButton onClick={removeMe} text="Remove me" icon={<TrashIcon/>}/>
-      </Fragment> :
-      <Fragment>
+        <HybrideButton onClick={logoutUser} text="Log out" icon={<LogOutIcon/>}/>
+        <HybrideButton onClick={removeMe} text="Remove me" icon={<UserMinusIcon/>}/>
+        <HybrideButton onClick={downloadMyData} text="Get me" icon={<UserSearchIcon/>}/>
+      </section> :
+      <section>
         <Link href="/log-up">
           <HybrideButton icon={<UserPlusIcon/>} text="Log up"/>
         </Link>
         <Link href="/log-in">
           <HybrideButton icon={<UserKeyIcon/>} text="Log in"/>
         </Link>
-        <Link href="/about-us">
-          <HybrideButton icon={<InfoIcon/>}/>
-        </Link>
-     </Fragment>}
+     </section>}
    </nav>
   );
 };
