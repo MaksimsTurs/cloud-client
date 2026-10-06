@@ -3,7 +3,7 @@ import type { ModalProps } from "./Modal.type";
 
 import scss from "./Modal.module.scss";
 
-import IconButton from "@ui/Icon-Button/Icon-Button.component";
+import HybrideButton from "@ui/Hybride-Button/Hybride-Button.component";
 
 import { XIcon } from "lucide-react";
 
@@ -21,7 +21,7 @@ export default function Modal({ children, title }: ModalProps): ReactNode {
       <div className={scss.modal_body}>
         <section className={scss.modal_header}>
           <p>{title}</p>
-          <IconButton icon={<XIcon/>} onClick={closeModal}/>
+          <HybrideButton icon={<XIcon/>} onClick={closeModal}/>
         </section>
         {children}
       </div>

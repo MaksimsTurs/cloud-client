@@ -9,7 +9,7 @@ import { useNotificationToastActions } from "@feature/notification-toast/notific
 import { useAuth, useAuthIsAuthorized, useUser, useWithAuth } from "@service/auth/auth.service";
 
 import { Link } from "@hook/use-react-router/use-react-router.hook";
-import HybrideButton from "@ui/Icon-Button/Icon-Button.component";
+import HybrideButton from "@ui/Hybride-Button/Hybride-Button.component";
 
 import { 
   HouseIcon,
