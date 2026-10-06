@@ -3,6 +3,6 @@
 
 .header_container {
   @include dis-flex(unset, space-between, $var-gap-xs);
-  box-shadow: 0px 1px 2px $var-box-shadow-color-black;
+  box-shadow: 0px 2px 1px $var-box-shadow-color-black;
   padding: $var-padding-m $var-padding-l;
 }
