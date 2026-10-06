@@ -9,3 +9,7 @@ export type FileProps = {
   isSelected: boolean
   file: FEItem
 };
+
+export type BackButtonProps = {
+  isRoot: boolean
+};

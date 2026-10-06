@@ -37,4 +37,8 @@
       background-color $var-transition-time-100ms ease,
       border $var-transition-time-100ms ease;
   }
+
+  &:disabled {
+    pointer-events: none;
+  }
 }

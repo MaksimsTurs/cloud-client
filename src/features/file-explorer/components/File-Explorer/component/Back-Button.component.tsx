@@ -1,12 +1,11 @@
 import scss from "../scss/Back-Button.module.scss";
 
 import type { ReactNode } from "react";
-
-import { FolderClosedIcon } from "lucide-react";
+import type { BackButtonProps } from "../File-Explorer.type";
 
 import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 
-export default function BackButton(): ReactNode {
+export default function BackButton({ isRoot }: BackButtonProps): ReactNode {
   const feHistory = useFileExplorerHistory();
 
   const closeCurrentFolder = async (): Promise<void> => {
@@ -16,8 +15,8 @@ export default function BackButton(): ReactNode {
   return(
     <button 
       onClick={closeCurrentFolder}
+      disabled={isRoot}
       className={scss.back_button_container}>
-      <FolderClosedIcon strokeWidth={1} size={25}/>
       <p>..</p>
     </button>
   );

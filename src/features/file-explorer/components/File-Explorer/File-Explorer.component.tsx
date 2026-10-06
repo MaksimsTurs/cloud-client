@@ -33,7 +33,7 @@ export default function FileExplorer(): ReactNode {
       <div className={scss.explorer_container}>
         <BreadCrumbs/>
         <div className={scss.explorer_body}>
-          <BackButton/>
+          <BackButton isRoot={feHistory.isRoot}/>
           {feHistory
             .items
             .map(item => 
