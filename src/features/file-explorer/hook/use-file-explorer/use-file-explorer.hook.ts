@@ -47,14 +47,14 @@ export default function useFileExplorer(): UseFEReturn {
       const result = await asyncDispatcher<FERemoveItemsReturn, FERemoveItemsParams>(removeItemsAction, { items, itemPaths }); 
       setIsLoading(false);
       return result;
-   },
+    },
     create: async function(name, parentId) {
       setIsLoading(true);
       const result = await asyncDispatcher<FECreateItemReturn, FECreateItemParams>(createItemAction, { name, parentId, path: feHistory.path }); 
       setIsLoading(false);
       return result;
     },
-    upload: async function(files, parentId?: string) {
+    upload: async function(files, parentId) {
       setIsLoading(true);
       const result = await asyncDispatcher<FEUploadItemsReturn, FEUploadItemsParams>(uploadItemsAction, {...files, parentId }); 
       setIsLoading(false);
