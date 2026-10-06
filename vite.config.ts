@@ -16,8 +16,6 @@ const PROD_PLUGINS: (Plugin<any> | PluginOption[])[] = [
   vite.plugins.webFont([]),
   vite.plugins.reactSwc(),
   vite.plugins.imageMin(),
-  vite.plugins.htmlPlugin(),
-  vite.plugins.detectDuplicateDeps(),
   vite.plugins.optimizeCssModule(),
 ];
 

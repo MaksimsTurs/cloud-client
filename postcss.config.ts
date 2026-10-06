@@ -1,7 +1,6 @@
 import cssnano                          from "cssnano";
 import postcssenv                       from "postcss-preset-env";
 import postcssCombineDupicatedSelectors from "postcss-combine-duplicated-selectors";
-import postcssClassNameShorter          from "postcss-class-name-shortener";
 import postcssCalc                      from "postcss-calc";
 
 export default {
@@ -15,7 +14,6 @@ export default {
       removeDuplicatedProperties: true, 
       removeDuplicatedValues: false 
     }),
-    postcssClassNameShorter(),
     cssnano({ preset: "cssnano-preset-advanced" }),
   ]
 };
