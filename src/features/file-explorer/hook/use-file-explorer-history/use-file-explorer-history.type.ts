@@ -8,7 +8,6 @@ export type UseFEHistoryReturn = {
   parent?: FEItem
   paths: string[]
   path: string
-
   getItem: FEGetItem
   close: FEClose
   open: FEOpen
@@ -20,4 +19,4 @@ type FEGetItem = (id?: string) => FEItem | undefined;
 
 type FEClose = (from: number) => boolean;
 
-type FEOpen = (name: string, id?: string) => Promise<boolean>;
+type FEOpen = (name: string, id: string) => Promise<boolean>;
