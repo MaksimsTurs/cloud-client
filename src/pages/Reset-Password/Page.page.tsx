@@ -18,6 +18,8 @@ import scall from "@util/scall/scall.util";
 import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function Page(): ReactNode {
   const methods = useForm<ResetPassword>();
   const [searchParams] = useSearchParams();
@@ -65,10 +67,7 @@ export default function Page(): ReactNode {
             type="password"
             placeholder="New password"
             autoComplete="new-password"
-            options={{
-              required: "New password is required!",
-              minLength: { value: 12, message: "Password is to short!" },
-            }}/>
+            options={VALIDATION_RULES.USER.PASSWORD()}/>
           <FormFooter>
             <TextButton text="Reset password" disabled={isSubmitting}/>
           </FormFooter>

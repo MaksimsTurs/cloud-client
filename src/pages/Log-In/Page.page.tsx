@@ -20,6 +20,8 @@ import http from "@util/http/http.util";
 
 import scss from "./Page.module.scss"
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function Page(): ReactNode {
   const methods = useForm<UserLogIn>();
   const { error, authenticate } = useAuth<SerializedError>({ serializeError });
@@ -54,20 +56,13 @@ export default function Page(): ReactNode {
             type="text"
             name="pseudonym" 
             placeholder="Unique Pseudonym"
-            options={{
-              required: "Pseudonym is requierd!",
-              minLength: { value: 1, message: "Pseudonym is to short!" },
-              maxLength: { value: 32, message: "Pseudonym is to long!" },
-            }}/>
+            options={VALIDATION_RULES.USER.PSEUDONYM()}/>
           <InputText
             type="password"
             name="password"
             placeholder="Password"
             autoComplete="current-password"
-            options={{
-              required: "Password is required!",
-              minLength: { value: 12, message: "Password is to short!" },
-            }}/>
+            options={VALIDATION_RULES.USER.PASSWORD()}/>
           <FormFooter>
             <TextButton text="Log in" type="submit" disabled={isSubmitting}/>
             <Link href="/request-reset-password">Forgot password?</Link>

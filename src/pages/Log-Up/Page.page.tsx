@@ -22,6 +22,8 @@ import scss from "./Page.module.scss";
 import http from "@util/http/http.util";
 import serializeError from "@util/serialize-error.util";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function Page(): ReactNode {
   const methods = useForm<UserLogUp>({ mode: "onSubmit", reValidateMode: "onSubmit" });
   const { error, authenticate } = useAuth<SerializedError>({ serializeError });
@@ -68,37 +70,25 @@ export default function Page(): ReactNode {
             name="email"
             placeholder="E - mail"
             autoComplete="username"
-            options={{
-              required: "E - mail is required!",
-              pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
-            }}/>
+            options={VALIDATION_RULES.USER.EMAIL()}/>
           <InputText
             type="text"
             name="pseudonym"
             placeholder="Unique Pseudonym"
             autoComplete="username"
-            options={{
-              required: "Pseudonym is requierd!",
-              minLength: { value: 1, message: "Pseudonym is to short!" },
-              maxLength: { value: 32, message: "Pseudonym is to long!" },
-            }}/>
+            options={VALIDATION_RULES.USER.PSEUDONYM()}/>
           <InputText
             type="password"
             name="password"
             autoComplete="new-password"
             placeholder="Password"
-            options={{
-              required: "Password is required!",
-              minLength: { value: 12, message: "Password is to short!" },
-              validate: checkPasswordsEquality
-            }}/>
+            options={VALIDATION_RULES.USER.PASSWORD()}/>
           <InputText
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
             options={{
-              required: "Confirm password is required!",
-              minLength: { value: 12, message: "Confirm password is to short!" },
+              ...VALIDATION_RULES.USER.PASSWORD(),
               validate: checkPasswordsEquality
             }}/>
           <InputCheckbox 
@@ -108,7 +98,7 @@ export default function Page(): ReactNode {
                 I accept our <Link href="/about-us#privacy-policy">Privacy Policy.</Link>
               </Fragment>
             }
-            options={{ required: "You must accept Privacy Policy" }}/>
+            options={VALIDATION_RULES.USER.PRIVACY_POLICY()}/>
           <FormFooter>
             <TextButton type="submit" text="Submit" disabled={isSubmitting}/>
             <Link href="/log-in">Have account?</Link>

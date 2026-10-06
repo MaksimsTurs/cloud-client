@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 
 import scss from "../File-Setting-Form.module.scss";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function ImageSettings({ 
   onSubmit, 
   defaultValues 
@@ -26,10 +28,7 @@ export default function ImageSettings({
         type="text"
         name="name"
         autoComplete="off"
-        options={{
-            maxLength: { value: 64, message: "File name is to long!" },
-            minLength: { value: 1, message: "File name is to short!" }
-        }}/>
+        options={VALIDATION_RULES.STORAGE_OBJECT.NAME()}/>
       <InputSelect<FileImageSettingOptions>
         name="convertTo" 
         placeholder="Convert to"
@@ -46,10 +45,7 @@ export default function ImageSettings({
         min={0}
         max={100}
         step={1}
-        options={{
-          max: { value: 100, message: "Quality must be number between 0 and 100!" },
-          min: { value: 0, message: "Quality must be number between 0 and 100!" }
-        }}/>
+        options={VALIDATION_RULES.STORAGE_OBJECT.QUALITY()}/>
       <section className={scss.file_options_section}>
         <InputText<FileImageSettingOptions>
           placeholder="Width"
@@ -57,18 +53,14 @@ export default function ImageSettings({
           name="width"
           min={0}
           step={1}
-          options={{
-            min: { value: 0, message: "Width can not be smaller than 0!" }
-          }}/>
+          options={VALIDATION_RULES.STORAGE_OBJECT.SIZE()}/>
         <InputText<FileImageSettingOptions>
           placeholder="Height"
           type="number"
           name="height"
           min={0}
           step={1}
-          options={{
-            min: { value: 0, message: "Height can not be smaller than 0!" }
-          }}/>
+          options={VALIDATION_RULES.STORAGE_OBJECT.SIZE()}/>
       </section>
       <TextButton text="Save"/>
     </FormBody>

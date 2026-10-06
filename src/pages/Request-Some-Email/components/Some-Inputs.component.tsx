@@ -5,6 +5,8 @@ import { Fragment } from "react";
 
 import InputText from "@ui/Input-Text/Input-Text.component";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function SomeInputs({ url }: SomeInputsProps): ReactNode {
   switch(url) {
     case "/user/request-confirm-email":
@@ -14,33 +16,23 @@ export default function SomeInputs({ url }: SomeInputsProps): ReactNode {
           type="email"
           placeholder="E - mail"
           autoComplete="email"
-          options={{
-            required: "E - mail is required!",
-            pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
-          }}/>
+          options={VALIDATION_RULES.USER.EMAIL()}/>
       );
     case "/user/request-reset-password":
       return(
         <Fragment>
           <InputText
-            name="email"
-            type="email"
-            placeholder="E - mail"
-            autoComplete="email"
-            options={{
-              required: "E - mail is required!",
-              pattern: { value: /^\S+@\S+\.\S+$/, message: "E - mail is not valid!" }
-            }}/>
-          <InputText
             type="text"
             name="pseudonym"
             placeholder="Unique Pseudonym"
             autoComplete="username"
-            options={{
-              required: "Pseudonym is requierd!",
-              minLength: { value: 1, message: "Pseudonym is to short!" },
-              maxLength: { value: 32, message: "Pseudonym is to long!" },
-            }}/>
+            options={VALIDATION_RULES.USER.PSEUDONYM()}/>
+          <InputText
+            name="email"
+            type="email"
+            placeholder="E - mail"
+            autoComplete="email"
+            options={VALIDATION_RULES.USER.EMAIL()}/>
         </Fragment>
       );
   }

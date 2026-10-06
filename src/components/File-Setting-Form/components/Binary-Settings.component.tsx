@@ -9,6 +9,8 @@ import { FormBody } from "@ui/Form/Form.component";
 import InputText from "@ui/Input-Text/Input-Text.component";
 import TextButton from "@ui/Text-Button/Text-Button.component";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function BinarySettings({ 
   onSubmit, 
   defaultValues 
@@ -25,10 +27,7 @@ export default function BinarySettings({
         type="text"
         name="name"
         autoComplete="off"
-        options={{
-            maxLength: { value: 64, message: "File name is to long!" },
-            minLength: { value: 1, message: "File name is to short!" }
-        }}/>
+        options={VALIDATION_RULES.STORAGE_OBJECT.NAME()}/>
       <TextButton text="Save"/>
     </FormBody>
   );

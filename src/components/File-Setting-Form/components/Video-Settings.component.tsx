@@ -10,6 +10,8 @@ import TextButton from "@ui/Text-Button/Text-Button.component";
 
 import scss from "../File-Setting-Form.module.scss";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function VideoSettings({ 
   onSubmit, 
   defaultValues 
@@ -26,20 +28,14 @@ export default function VideoSettings({
         type="text"
         name="name"
         autoComplete="off"
-        options={{
-            maxLength: { value: 64, message: "File name is to long!" },
-            minLength: { value: 1, message: "File name is to short!" }
-        }}/>
+        options={VALIDATION_RULES.STORAGE_OBJECT.NAME()}/>
       <InputText<FileVideoSettingOptions>
         placeholder="CRF(Constant Rate Factor)"
         type="number"
         name="crf"
         autoComplete="off"
         max={51}
-        options={{
-            max: { value: 51, message: "CRF is to big!" },
-            min: {  value: 0, message: "CRF is to small!" }
-        }}/>
+        options={VALIDATION_RULES.STORAGE_OBJECT.CRF()}/>
         <InputSelect name="preset" placeholder="Preset" defaultValue={defaultValues?.preset}>
           <InputSelectOption value="ultrafast">Ultrafast</InputSelectOption>
           <InputSelectOption value="superfast">Superfast</InputSelectOption>

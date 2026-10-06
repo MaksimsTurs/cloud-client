@@ -9,6 +9,8 @@ import TextButton from "@ui/Text-Button/Text-Button.component";
 
 import scss from "../File-Setting-Form.module.scss";
 
+import VALIDATION_RULES from "@root/const/VALIDATION_RULES.const";
+
 export default function AudioSettings({ 
   onSubmit, 
   defaultValues 
@@ -25,10 +27,7 @@ export default function AudioSettings({
         type="text"
         name="name"
         autoComplete="off"
-        options={{
-            maxLength: { value: 64, message: "File name is to long!" },
-            minLength: { value: 1, message: "File name is to short!" }
-        }}/>
+        options={VALIDATION_RULES.STORAGE_OBJECT.NAME()}/>
       <TextButton text="Save"/>
     </FormBody>
   );
