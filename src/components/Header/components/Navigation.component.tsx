@@ -6,6 +6,7 @@ import scss from "../scss/Navigation.module.scss";
 
 import { useNavigate } from "@hook/use-react-router/use-react-router.hook";
 import { useNotificationToastActions } from "@feature/notification-toast/notification-toast.feature";
+import { useFileExplorerHistory } from "@feature/file-explorer/file-explorer.feature";
 import { useAuth, useAuthIsAuthorized, useUser, useWithAuth } from "@service/auth/auth.service";
 
 import { Link } from "@hook/use-react-router/use-react-router.hook";
@@ -31,6 +32,7 @@ export default function Navigation(): ReactNode {
   const navigate = useNavigate();
   const withAuth = useWithAuth<SerializedError>({ serializeError });
   const { logout } = useAuth<SerializedError>({ serializeError });
+  const feHistory = useFileExplorerHistory();
   const toast = useNotificationToastActions();
   const isAuthorized: boolean = useAuthIsAuthorized();
   const user: User = useUser<User>();
@@ -86,12 +88,15 @@ export default function Navigation(): ReactNode {
     }
   };
 
+  const goHome = (): void => {
+    navigate("/");
+    feHistory.close(-1);
+  };
+
   return(
     <nav className={scss.nav_container}>
       <section>
-        <Link href="/">
-          <HybrideButton icon={<HouseIcon/>}/>
-        </Link>
+        <HybrideButton onClick={goHome} icon={<HouseIcon/>}/>
         <Link href="/write-us">
           <HybrideButton text="Write us" icon={<MailPenIcon/>}/>
         </Link>
