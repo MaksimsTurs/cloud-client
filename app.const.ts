@@ -1,6 +1,6 @@
 import type { AppType } from "vite"
 
-export const DIRNAME: string                     = __dirname;
+export const DIRNAME: string                     = import.meta.dirname;
 
 export const APP_TYPE: AppType                   = "spa";
 

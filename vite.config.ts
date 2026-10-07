@@ -1,21 +1,20 @@
-import { APP_TYPE, ASSETS_INCLUDE_EXTENSIONS } from "./app.const";
+import { APP_TYPE, ASSETS_INCLUDE_EXTENSIONS } from "./app.const.ts";
 
 import type { Plugin, PluginOption } from "vite";
 
 import { defineConfig as viteConfig } from "vite";
 
-import vite from "./vite/vite";
-import resolve from "./vite/utils/resolve.util";
+import vite from "./vite/vite.ts";
+import resolve from "./vite/utils/resolve.util.ts";
 
 const DEV_PLUGINS: (Plugin<any> | Plugin<any>[])[] = [
   vite.plugins.webFont([]),
-  vite.plugins.reactSwc(),
+  vite.plugins.react(),
 ];
 
 const PROD_PLUGINS: (Plugin<any> | PluginOption[])[] = [
   vite.plugins.webFont([]),
-  vite.plugins.reactSwc(),
-  vite.plugins.imageMin(),
+  vite.plugins.react(),
   vite.plugins.optimizeCssModule(),
 ];
 

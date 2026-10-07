@@ -1,12 +1,11 @@
-import build   from "./options/build.vite";
-import css     from "./options/css.vite";
-import resolve from "./options/resolve.vite";
-import server  from "./options/server.vite";
+import build   from "./options/build.vite.ts";
+import css     from "./options/css.vite.ts";
+import resolve from "./options/resolve.vite.ts";
+import server  from "./options/server.vite.ts";
 
-import imageMin            from "./plugins/image-min.vite";
-import optimizeCssModule   from "./plugins/optimize-css-module.vite";
-import reactSwc            from "./plugins/react-swc.vite";
-import webFont             from "./plugins/web-font.vite";
+import optimizeCssModule   from "./plugins/optimize-css-module.vite.ts";
+import react               from "./plugins/react.vite.ts";
+import webFont             from "./plugins/web-font.vite.ts";
 
 export default {
   options: {
@@ -16,9 +15,8 @@ export default {
     server,
   },
   plugins: {
-    imageMin,
     optimizeCssModule,
-    reactSwc,
+    react,
     webFont
   }
 };

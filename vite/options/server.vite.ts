@@ -1,6 +1,6 @@
 import type { ServerOptions } from "vite";
 
-import resolve from "../utils/resolve.util";
+import resolve from "../utils/resolve.util.ts";
 
 export default function(): ServerOptions {
   return {

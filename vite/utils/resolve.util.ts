@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { DIRNAME } from "../../app.const";
+import { DIRNAME } from "../../app.const.ts";
 
 export default function resolve(__path: string): string {
   return path.resolve(DIRNAME, __path);

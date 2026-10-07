@@ -62,7 +62,7 @@ export default function useAuth<E = undefined>(options: UseAuthOptions<E>): UseA
         const result = await scall<void, E>(async () => {
           await callback();
         });
-      
+
         if(result.getError()) {
           await handleFail(result.getError());
           return false;

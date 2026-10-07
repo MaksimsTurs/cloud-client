@@ -1,8 +1,5 @@
 package-lock.json
-bun.lock
+.env
 
 node_modules
-
 output
-
-.env

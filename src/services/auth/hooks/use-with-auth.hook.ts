@@ -35,7 +35,7 @@ export default function useWithAuth<E extends { code?: number }>(options: UseWit
 
     // First try to access user api endpoint.
     const firstTryResult = await makeApiRequest<D>(apiRequest);
-
+    
     if(!firstTryResult.getError()) {
       return new SCallResult<D, E>(firstTryResult.getData(), undefined);
     }
