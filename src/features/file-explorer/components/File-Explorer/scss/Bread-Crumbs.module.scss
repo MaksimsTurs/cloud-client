@@ -3,7 +3,7 @@
 
 .breadcrumbs_list {
   @include dis-flex(unset, unset, $gap-xs);
-  padding: $padding-xs 0 0 $padding-xs;
+  padding: 0 0 0 $padding-xs;
 
   .breadcrumbs_list_item {
     @include dis-flex(center, unset, $gap-xs);
