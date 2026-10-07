@@ -2,41 +2,41 @@
 @use "@scss/mixins" as *;
 
 .input_select_container {
-  @include dis-flex(null, null, $var-gap-xs, column);
+  @include dis-flex(null, null, $gap-xs, column);
   
   .input_select {
-    @include dis-flex(center, space-between, $var-gap-xxxxl);
-    padding: $var-padding-m $var-padding-l;
-    transition: background-color $var-transition-time-100ms ease;
-    box-shadow: 1px 3px 3px $var-box-shadow-color-black;
-    border-bottom: 1px solid $var-color-blue;
+    @include dis-flex(center, space-between, $gap-xxxxl);
+    padding: $padding-m $padding-l;
+    transition: background-color $transition-time-xs ease;
+    box-shadow: $box-shadow-container; 
+    border-bottom: 1px solid $color-blue-dark;
     cursor: pointer;
     position: relative;
 
     &:hover {
-      background-color: $var-color-grey-dark;
-      transition: background-color $var-transition-time-100ms ease;
+      background-color: $color-grey-dark;
+      transition: background-color $transition-time-xs ease;
     }
 
     .input_select_placeholder {
-      color: $var-color-grey-font;
+      color: $color-grey-font;
     }
 
     .input_select_dropdown {
       // + 1px to see border bottom
       @include pos-abs(top, left, calc(100% + 1px), 0, 1, 100%, fit-content);
       @include dis-flex(null, null, null, column);
-      transition: height $var-transition-time-250ms ease;
-      box-shadow: 0px 1px 3px $var-box-shadow-color-black;
+      transition: height $transition-time-s ease;
+      box-shadow: $box-shadow-container;
       display: none;
       background-color: #ffffff;
 
       > li {
-        padding: $var-padding-m $var-padding-l;
-        border-bottom: 1px solid $var-border-color-black;
+        padding: $padding-m $padding-l;
+        border-bottom: 1px solid $color-grey-dark;
 
         &:hover {
-          background-color: $var-background-color-black;
+          background-color: $color-grey-bright;
         }
       }
     }
@@ -53,8 +53,8 @@
   }
 
   .input_select__error {
-    border-bottom: 1px solid $var-border-color-red;
-    color: $var-border-color-red;
-    background-color: $var-background-color-red;
+    border-bottom: 1px solid $color-red-dark;
+    color: $color-red-dark;
+    background-color: $color-red-bright;
   }
 }

@@ -2,6 +2,6 @@
 @use "@scss/mixins" as *;
 
 .notification_toast_list {
-  @include pos-fixed(bottom, right, $var-margin-l, $var-margin-l, 1, fit-content);
-  @include dis-flex(normal, normal, $var-gap-xs, column-reverse);
+  @include pos-fixed(bottom, right, $margin-l, $margin-l, 1, fit-content);
+  @include dis-flex(normal, normal, $gap-xs, column-reverse);
 }

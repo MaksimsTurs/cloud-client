@@ -2,15 +2,15 @@
 @use "@scss/mixins" as *; 
 
 .file {
-  @include dis-flex(center, center, $var-gap-m);
-  font-size: $var-size-xs;
+  @include dis-flex(center, center, $gap-m);
+  font-size: $size-xs;
   transition: 
-    color $var-transition-time-100ms ease,
-    background-color $var-transition-time-100ms ease,
-    border $var-transition-time-100ms ease;
-  padding: $var-padding-l;
-  border: 1px solid $var-border-color-black;
-  height: calc($var-size-s * 6);
+    color $transition-time-xs ease,
+    background-color $transition-time-xs ease,
+    border $transition-time-xs ease;
+  padding: $padding-l;
+  border: 1px solid $color-grey-dark;
+  height: calc($size-s * 6);
   width: 100%;
   position: relative;
   cursor: pointer;
@@ -29,26 +29,26 @@
   }
 
   &:hover {
-    color: $var-color-blue;
-    background-color: $var-color-blue-hover;
-    border: 1px solid $var-color-blue;
+    color: $color-blue-dark;
+    background-color: $color-blue-bright;
+    border: 1px solid $color-blue-dark;
     transition: 
-      color $var-transition-time-100ms ease,
-      background-color $var-transition-time-100ms ease,
-      border $var-transition-time-100ms ease;
+      color $transition-time-xs ease,
+      background-color $transition-time-xs ease,
+      border $transition-time-xs ease;
   }
 }
 
 .file__selected {
-  border: 1px solid $var-color-blue;
+  border: 1px solid $color-blue-dark;
 
   > * {
-    color: $var-color-blue;
+    color: $color-blue-dark;
   }  
 }
 
 .file_statusbar {
   @include pos-abs(bottom, left, 0%, 0%, 1, 100%, fit-content);
-  background-color: $var-color-blue;
+  background-color: $color-blue-dark;
   color: #ffffff;
 }

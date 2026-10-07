@@ -2,23 +2,22 @@
 @use "@scss/mixins" as *;
 
 .media_controls_container {
-  @include dis-flex(center, none, $var-gap-xs);
-  border: 1px solid $var-border-color-black;
-  box-shadow: 0px 0px 4px $var-box-shadow-color-black-bright;
-  padding: $var-padding-s $var-padding-m;
+  @include dis-flex(center, none, $gap-xs);
+  border: 1px solid $color-grey-dark;
+  padding: $padding-s $padding-m;
   background-color: #ffffff;
 
   .media_data_container {
-    @include dis-flex(center, none, $var-gap-xs);
+    @include dis-flex(center, none, $gap-xs);
   }
 
   .media_time {
-    font-size: $var-font-xl;
-    color: $var-color-blue;
+    font-size: $font-xl;
+    color: $color-blue-dark;
     width: 80px;
   }
 
   > p, svg {
-    color: $var-color-blue;
+    color: $color-blue-dark;
   }
 }

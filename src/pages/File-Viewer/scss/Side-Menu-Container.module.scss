@@ -2,17 +2,16 @@
 @use "@scss/mixins" as *;
 
 .side_menu_container {
-  @include dis-flex(unset, unset, $var-gap-xs, column, unset, 1, 0);
-  border: 1px solid $var-border-color-black;
-  box-shadow: 0px 0px 4px $var-box-shadow-color-black-bright;
+  @include dis-flex(unset, unset, $gap-xs, column, unset, 0, 0);
+  border: 1px solid $color-grey-dark;
   margin: 1rem;
-  width: 25rem;
+  width: 30rem;
   background-color: #ffffff;
 
   > h3 {
-    font-size: $var-font-xxxxl;
-    color: $var-color-blue;
-    padding: $var-padding-m;
-    border-bottom: 1px solid $var-border-color-black;
+    font-size: $font-xxxxl;
+    color: $color-blue-dark;
+    padding: $padding-m;
+    border-bottom: 1px solid $color-grey-dark;
   }
 }

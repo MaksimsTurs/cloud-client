@@ -2,9 +2,9 @@
 @use "@scss/mixins" as *;
 
 .form_header {
-  font-size: $var-font-xxxxl;
+  font-size: $font-xxxxl;
+  border-bottom: 1px solid $color-grey-dark;
+  padding-bottom: $padding-m;
   font-weight: bolder;
   color: #000000;
-  border-bottom: 1px solid $var-border-color-black;
-  padding-bottom: $var-padding-m;
 }

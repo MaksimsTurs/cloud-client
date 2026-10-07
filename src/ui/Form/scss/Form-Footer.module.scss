@@ -2,5 +2,5 @@
 @use "@scss/mixins" as *;
 
 .form_footer {
-  @include dis-flex(center, unset, $var-gap-xs);
+  @include dis-flex(center, unset, $gap-xs);
 }

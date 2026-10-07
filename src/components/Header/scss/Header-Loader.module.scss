@@ -2,7 +2,7 @@
 @use "@scss/variables" as *; 
 
 .header_loader_container {
-  @include dis-flex(unset, unset, $var-gap-xs);
-  border-bottom: 1px solid $var-border-color-black;
-  padding: $var-padding-m $var-padding-l;
+  @include dis-flex(unset, unset, $gap-xs);
+  border-bottom: 1px solid $color-grey-dark;
+  padding: $padding-m $padding-l;
 }

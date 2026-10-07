@@ -3,26 +3,25 @@
 
 .modal_container {
   @include dis-flex(center, center);
-  @include pos-fixed(top, left, 0%, 0%, null, 100%, 100%);
-  z-index: 2;
-  padding: $var-padding-xxxxl;
+  @include pos-fixed(top, left, 0%, 0%, 2, 100%, 100%);
+  padding: $padding-xxxxl;
   background-color: #0000008a;
 
   .modal_body {
     @include dis-flex(null, null, null, column);
-    border: 1px solid $var-color-blue;
+    border: 1px solid $color-blue-dark;
     background-color: #ffffff;
     max-width: 100%;
 
     .modal_header {
-      @include dis-flex(center, space-between, $var-gap-xxxxl);
-      padding: $var-padding-s $var-padding-m;
-      border-bottom: 1px solid $var-border-color-black;
-      box-shadow: 1px 2px 2px $var-box-shadow-color-black;
+      @include dis-flex(center, space-between, $gap-xxxxl);
+      padding: $padding-s $padding-m;
+      box-shadow: $box-shadow-container;
+      border-bottom: 1px solid $color-grey-dark;
 
       > p {
         @include text-overflow();
-        font-size: $var-font-xl;
+        font-size: $font-xl;
       }
     }
     

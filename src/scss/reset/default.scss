@@ -37,15 +37,15 @@ header, main, footer {
 }
 
 main {
+  background-color: $color-grey-bright;
   display: flex;
   flex-direction: column;
   width: 100%;
   flex-grow: 1;
-  background-color: $var-background-color-black;
 }
 
 a {
-  color: $var-color-blue;
+  color: $color-blue-dark;
 	display: block;
 	text-decoration: none;
   flex-shrink: 0;

@@ -2,8 +2,8 @@
 @use "@scss/mixins" as *;
 
 .input_file_container {
+  gap: $gap-xs;
   display: grid;
-  gap: $var-gap-xs;
   grid-auto-columns: minmax(100px, auto);
   max-width: calc(10rem * 5);
   grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
@@ -25,20 +25,20 @@
     }
     
     .input_file_preview_header {
-      @include dis-flex(center, null, $var-gap-xs);
-      padding: $var-padding-xs $var-padding-s;
-      margin-bottom: $var-margin-xs;
-      border-bottom: 1px solid $var-border-color-black;
+      @include dis-flex(center, null, $gap-xs);
+      padding: $padding-xs $padding-s;
+      margin-bottom: $margin-xs;
+      border-bottom: 1px solid $color-grey-dark;
 
       > p {
         @include text-overflow();
       }
 
       .input_file_prevew_actions_section {
-        @include dis-flex(center, unset, $var-gap-xs);
+        @include dis-flex(center, unset, $gap-xs);
       
         > button:last-child {
-          color: $var-color-red;
+          color: $color-red-dark;
         }
       }
     }
@@ -46,43 +46,43 @@
 }
 
 .input_file_label {
-  @include dis-flex(center, center, $var-gap-xs);
-  padding: $var-padding-xxxxl;
-  color: $var-color-blue;
-  border-bottom: 1px solid $var-border-color-blue;
-  box-shadow: 1px 3px 3px $var-box-shadow-color-black;
-  transition: background-color $var-transition-time-100ms ease;
-  font-size: $var-font-l;
+  @include dis-flex(center, center, $gap-xs);
+  padding: $padding-xxxxl;
+  color: $color-blue-dark;
+  border-bottom: 1px solid $color-blue-dark;
+  box-shadow: $box-shadow-container;
+  transition: background-color $transition-time-xs ease;
+  font-size: $font-l;
   cursor: pointer;
   
   &:hover {
-    background-color: $var-color-grey-dark;
-    transition: background-color $var-transition-time-100ms ease;
+    background-color: $color-grey-dark;
+    transition: background-color $transition-time-xs ease;
   }
 }
 
 .input_file_label__error {
-  border-bottom: 1px solid $var-border-color-red;
-  background-color: $var-background-color-red;
-  color: $var-color-red;
+  border-bottom: 1px solid $color-red-dark;
+  background-color: $color-red-bright;
+  color: $color-red-dark;
 }
 
 .input_file_list {
   @include dis-flex(null, null, 0, column);
-  border-bottom: 1px solid $var-border-color-blue;
-  box-shadow: 1px 3px 3px $var-box-shadow-color-black;
-  transition: background-color $var-transition-time-100ms ease;
-  font-size: $var-font-l;
-  width: calc($var-size-xxxxl * 10);
+  border-bottom: 1px solid $color-blue-dark;
+  box-shadow: $box-shadow-container;
+  transition: background-color $transition-time-xs ease;
+  font-size: $font-l;
+  width: calc($size-xxxxl * 10);
   overflow-y: auto;
   max-height: calc(10 * 61px);
 
   .input_file_item {
     @include text-overflow();
-    @include dis-flex(center, space-between, $var-gap-xxxxl, row, nowrap, 1, 0);
-    padding: $var-padding-m;
+    @include dis-flex(center, space-between, $gap-xxxxl, row, nowrap, 1, 0);
+    padding: $padding-m;
+    border-bottom: 1px solid $color-grey-dark;
     background-color: #b6b6c833;
-    border-bottom: 1px solid $var-border-color-black;
 
     &:last-child {
       border-bottom: none;

@@ -2,15 +2,15 @@
 @use "@scss/mixins" as *;
 
 .side_menu_section {
-  @include dis-flex(unset, space-between, $var-gap-xl);
-  padding: 0 $var-padding-m $var-padding-s $var-padding-m;
-  border-bottom: 1px solid $var-border-color-black;
+  @include dis-flex(unset, space-between, $gap-xl);
+  padding: 0 $padding-m $padding-s $padding-m;
+  border-bottom: 1px solid $color-grey-dark;
 
   > p:first-child {
-    color: $var-color-blue;
+    color: $color-blue-dark;
   }
 
   > p:last-child {
-    color: #8e918f;
+    color: $color-grey-font;
   }
 }

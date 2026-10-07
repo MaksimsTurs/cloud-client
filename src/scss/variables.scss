@@ -1,94 +1,76 @@
-/* PADDING */
-$var-padding-xs:    0.25rem;
-$var-padding-s:     0.5rem;
-$var-padding-m:     0.75rem;
-$var-padding-l:     1rem;
-$var-padding-xl:    1.25rem;
-$var-padding-xxl:   1.5rem;
-$var-padding-xxxl:  1.75rem;
-$var-padding-xxxxl: 2rem;
-/* PADDING */
-/* MARGIN */
-$var-margin-xs:    0.25rem;
-$var-margin-s:     0.5rem;
-$var-margin-m:     0.75rem;
-$var-margin-l:     1rem;
-$var-margin-xl:    1.25rem;
-$var-margin-xxl:   1.5rem;
-$var-margin-xxxl:  1.75rem;
-$var-margin-xxxxl: 2rem;
-/* MARGIN */
-/* FONT */
-$var-font-xs:    0.5rem;
-$var-font-s:     0.65rem;
-$var-font-m:     0.8rem;
-$var-font-l:     0.95rem;
-$var-font-xl:    1.15rem;
-$var-font-xxl:   1.3rem;
-$var-font-xxxl:  1.45rem;
-$var-font-xxxxl: 1.6rem;
-/* FONT */
-/* GAP */
-$var-gap-xs:    0.5rem;
-$var-gap-s:     0.65rem;
-$var-gap-m:     0.8rem;
-$var-gap-l:     0.95rem;
-$var-gap-xl:    1.15rem;
-$var-gap-xxl:   1.3rem;
-$var-gap-xxxl:  1.45rem;
-$var-gap-xxxxl: 1.6rem;
-/* GAP */
-/* WIDTH AND HEIGHT */
-$var-size-xs:    0.9rem;
-$var-size-s:     1.15rem;
-$var-size-m:     1.4rem;
-$var-size-l:     1.65rem;
-$var-size-xl:    1.9rem;
-$var-size-xxl:   2.15rem;
-$var-size-xxxl:  2.4rem;
-$var-size-xxxxl: 2.65rem;
-/* WIDTH AND HEIGHT */
-/* BORDER RADIUS */
-$var-border-radius-xs:    5px;
-$var-border-radius-s:     6px;
-$var-border-radius-m:     7px;
-$var-border-radius-l:     8px;
-$var-border-radius-xl:    9px;
-$var-border-radius-xxl:   10px;
-$var-border-radius-xxxl:  11px;
-$var-border-radius-xxxxl: 12px;
-/* BORDER RADIUS */
-/* TRANSITION TIME */
-$var-transition-time-100ms:  100ms;
-$var-transition-time-250ms:  250ms;
-$var-transition-time-500ms:  500ms;
-$var-transition-time-1000ms: 1s;
-$var-transition-time-1500ms: 1.5s;
-/* TRANSITION TIME */
-/* BACKGROUND COLOR */
-$var-background-color-black: #00000013;
-$var-background-color-red: #55000033;
-$var-background-color-green: #21550033;
-/* BACKGROUND COLOR */
-/* COLOR */
-$var-color-blue: #002d7a;
-$var-color-blue-hover: #002d7826;
-$var-color-red: #500;
-$var-color-red-hover: #55000066;
-$var-color-green: #215500;
-$var-color-green-hover: #21550066;
-$var-color-grey-bright: rgb(232, 232, 232);
-$var-color-grey-dark: rgb(216, 216, 216);
-$var-color-grey-font: rgb(124, 124, 124);
-$var-color-disabled-bright: rgb(234, 234, 234);
-$var-color-disabled-dark: rgb(172, 172, 172);
-/* COLOR */
-/* BOX SHADOW COLOR */
-$var-box-shadow-color-black: #00000059;
-$var-box-shadow-color-black-bright: rgba(64, 64, 64, 0.5);
-/* BOX SHADOW COLOR */
-/* BOX SHADOW COLOR */
-$var-border-color-black: #00000033;
-$var-border-color-blue: $var-color-blue;
-$var-border-color-red: $var-color-red;
-/* BOX SHADOW COLOR */
+$padding-xs:    0.25rem;
+$padding-s:     0.5rem;
+$padding-m:     0.75rem;
+$padding-l:     1rem;
+$padding-xl:    1.25rem;
+$padding-xxl:   1.5rem;
+$padding-xxxl:  1.75rem;
+$padding-xxxxl: 2rem;
+
+$margin-xs:    0.25rem;
+$margin-s:     0.5rem;
+$margin-m:     0.75rem;
+$margin-l:     1rem;
+$margin-xl:    1.25rem;
+$margin-xxl:   1.5rem;
+$margin-xxxl:  1.75rem;
+$margin-xxxxl: 2rem;
+
+$font-xs:    0.5rem;
+$font-s:     0.65rem;
+$font-m:     0.8rem;
+$font-l:     0.95rem;
+$font-xl:    1.15rem;
+$font-xxl:   1.3rem;
+$font-xxxl:  1.45rem;
+$font-xxxxl: 1.6rem;
+
+$gap-xs:    0.5rem;
+$gap-s:     0.65rem;
+$gap-m:     0.8rem;
+$gap-l:     0.95rem;
+$gap-xl:    1.15rem;
+$gap-xxl:   1.3rem;
+$gap-xxxl:  1.45rem;
+$gap-xxxxl: 1.6rem;
+
+$size-xs:    0.9rem;
+$size-s:     1.15rem;
+$size-m:     1.4rem;
+$size-l:     1.65rem;
+$size-xl:    1.9rem;
+$size-xxl:   2.15rem;
+$size-xxxl:  2.4rem;
+$size-xxxxl: 2.65rem;
+
+$border-radius-xs:    5px;
+$border-radius-s:     6px;
+$border-radius-m:     7px;
+$border-radius-l:     8px;
+$border-radius-xl:    9px;
+$border-radius-xxl:   10px;
+$border-radius-xxxl:  11px;
+$border-radius-xxxxl: 12px;
+
+$transition-time-xs:    150ms;
+$transition-time-s:     300ms;
+$transition-time-m:     450ms;
+$transition-time-l:     600ms;
+$transition-time-xl:    750ms;
+$transition-time-xxl:   900ms;
+$transition-time-xxxl:  1.050s;
+$transition-time-xxxxl: 1.200s;
+
+$color-grey-font:       rgb(98, 98, 98);
+$color-blue-dark:       #002d7a;
+$color-blue-bright:     #002d7826;
+$color-red-dark:        #500;
+$color-red-bright:      #55000033;
+$color-grey-dark:       rgb(200, 200, 200);
+$color-grey-bright:     rgb(232, 232, 232);
+$color-disabled-bright: rgb(234, 234, 234);
+$color-disabled-dark:   rgb(172, 172, 172);
+
+$box-shadow-color-grey-bright: rgba(64, 64, 64, 0.5);
+
+$box-shadow-container: 1px 2px 3px rgba(64, 64, 64, 0.5);

@@ -2,10 +2,10 @@
 @use "@scss/mixins" as *;
 
 .input_error_message {
-  @include dis-flex(center, null, $var-gap-xs);
-  color: $var-color-red;
-  font-size: $var-font-l;
-  padding: $var-padding-s $var-padding-m;
-  background-color: $var-background-color-red;
+  @include dis-flex(center, null, $gap-xs);
+  color: $color-red-dark;
+  font-size: $font-l;
+  padding: $padding-s $padding-m;
+  background-color: $color-red-bright;
   word-break: break-all;
 }

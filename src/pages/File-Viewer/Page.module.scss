@@ -7,11 +7,11 @@
 
   .file_media_viewer {
     @include dis-flex(center, center, null, null, null, 1);
-    padding: $var-padding-xxxxl;
+    padding: $padding-xxxxl;
   }
 
   .file_text_viewer {
-    padding: $var-padding-l;
+    padding: $padding-l;
     flex-grow: 1;
   }
 }

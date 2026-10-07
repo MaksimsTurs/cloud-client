@@ -7,25 +7,25 @@
 
     .error_body {
       @include dis-flex(null, null, null, column);
-      border: 1px solid $var-border-color-black;
+      border: 1px solid $color-grey-font;
       width: 22.5rem;
 
 
     .error_header {
-      @include dis-flex(center, null, $var-gap-xs);
-      border-bottom: 1px solid $var-border-color-black;
-      background-color: $var-color-blue;
+      @include dis-flex(center, null, $gap-xs);
+      border-bottom: 1px solid $color-grey-dark;
+      background-color: $color-blue-dark;
+      padding: $padding-m $padding-l;
       color: #ffffff;
-      padding: $var-padding-m $var-padding-l;
 
       > h3 {
-        font-size: $var-font-xxxxl;
+        font-size: $font-xxxxl;
       }
     }
 
     .error_information {
-      @include dis-flex(null, null, $var-gap-l, column);
-      padding: $var-padding-l;
+      @include dis-flex(null, null, $gap-l, column);
+      padding: $padding-l;
     }
   }
 }

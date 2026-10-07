@@ -2,9 +2,9 @@
 @use "@scss/variables" as *; 
 
 .nav_container {
-  @include dis-flex(unset, space-between, $var-gap-xs, unset, unset, 1);
+  @include dis-flex(unset, space-between, $gap-xs, unset, unset, 1);
 
   > section {
-    @include dis-flex(unset, unset, $var-gap-xs);
+    @include dis-flex(unset, unset, $gap-xs);
   }
 }

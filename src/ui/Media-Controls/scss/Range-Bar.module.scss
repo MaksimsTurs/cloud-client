@@ -2,14 +2,14 @@
 @use "@scss/mixins" as *;
 
 .range_bar_container {
+  background-color: $color-blue-bright;
   width: 100px;
   height: 7px;
   position: relative;
   cursor: pointer;
-  background-color: $var-color-blue-hover;
 
   .range_bar {
     @include pos-abs(top, left, 0%, 0%, 1, 0px, 7px);
-    background-color: $var-color-blue;
+    background-color: $color-blue-dark;
   }
 }

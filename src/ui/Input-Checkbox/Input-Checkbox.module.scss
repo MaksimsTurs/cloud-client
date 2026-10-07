@@ -5,26 +5,26 @@
   @include dis-flex(null, null, 0, column);
 
   .input_checkbox_container {
-    @include dis-flex(center, null, $var-gap-xs);
-    color: $var-color-grey-font;
+    @include dis-flex(center, null, $gap-xs);
+    color: $color-grey-font;
 
     > input {
       &:hover ~ .input_checkbox,
       &:focus ~ .input_checkbox {
-        background-color: $var-color-grey-dark;
-        transition: background-color $var-transition-time-100ms ease;
+        background-color: $color-grey-dark;
+        transition: background-color $transition-time-xs ease;
       }
 
       &:checked ~ .input_checkbox {
-        padding: $var-padding-xs;
-        background-color: $var-color-blue !important;
+        padding: $padding-xs;
+        background-color: $color-blue-dark !important;
       }
     }
 
     .input_checkbox {
-      border-bottom: 1px solid $var-border-color-blue;
-      box-shadow: 1px 3px 3px $var-box-shadow-color-black;
-      transition: background-color $var-transition-time-100ms ease;  
+      border-bottom: 1px solid $color-blue-dark;
+      box-shadow: $box-shadow-container;
+      transition: background-color $transition-time-xs ease;  
       width: 25px;
       height: 25px;
       cursor: pointer;
@@ -35,13 +35,13 @@
      > input {
       &:hover,
       &:focus ~ .input_checkbox {
-        background-color: $var-background-color-red;
-        transition: background-color $var-transition-time-100ms ease;
+        background-color: $color-red-bright;
+        transition: background-color $transition-time-xs ease;
       }
     }
 
     .input_checkbox {
-      border-bottom: 1px solid $var-border-color-red;
+      border-bottom: 1px solid $color-red-dark;
     }   
   }
 }

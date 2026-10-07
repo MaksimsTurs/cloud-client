@@ -2,20 +2,20 @@
 @use "@scss/variables" as *;
 
 .alert_list_container {
-  background-color: $var-color-blue;
-  border-radius: $var-border-radius-m;
-  box-shadow: 1px 2px 1px $var-box-shadow-color-black;
+  background-color: $color-blue-dark;
+  border-radius: $border-radius-m;
+  box-shadow: $box-shadow-container;
   
   .alert_list_header {
-    @include dis-flex(center, unset, $var-gap-xs);
-    font-size: $var-font-xl;
-    padding: $var-padding-s;
+    @include dis-flex(center, unset, $gap-xs);
+    font-size: $font-xl;
+    padding: $padding-s;
     border-bottom: 1px solid #ffffff;
     color: #ffffff;
   }
   
   .alert_list {
+    padding: $padding-s;
     color: #ffffff;
-    padding: $var-padding-s;
   }
 }
