@@ -1,7 +1,7 @@
 @use "@scss/variables" as *; 
 @use "@scss/mixins" as *; 
 
-.folder_container {
+.folder {
   @include dis-flex(center, center, $var-gap-m);
   font-size: $var-size-xs;
   transition: 
@@ -39,7 +39,7 @@
   }
 }
 
-.folder_container_selected {
+.folder__selected {
   border: 1px solid $var-color-blue;
 
   > * {
@@ -47,7 +47,7 @@
   }  
 }
 
-.folder_selection_status {
+.folder_statusbar {
   @include pos-abs(bottom, left, 0%, 0%, 1, 100%, fit-content);
   background-color: $var-color-blue;
   color: #ffffff;

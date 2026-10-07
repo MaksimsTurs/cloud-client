@@ -1,7 +1,7 @@
 @use "@scss/variables" as *; 
 @use "@scss/mixins" as *; 
 
-.file_container {
+.file {
   @include dis-flex(center, center, $var-gap-m);
   font-size: $var-size-xs;
   transition: 
@@ -39,7 +39,7 @@
   }
 }
 
-.file_container_selected {
+.file__selected {
   border: 1px solid $var-color-blue;
 
   > * {
@@ -47,7 +47,7 @@
   }  
 }
 
-.file_selection_status {
+.file_statusbar {
   @include pos-abs(bottom, left, 0%, 0%, 1, 100%, fit-content);
   background-color: $var-color-blue;
   color: #ffffff;

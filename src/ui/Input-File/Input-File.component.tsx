@@ -88,7 +88,7 @@ export default function InputFile<T extends FieldValues>({ name, accept, options
   return(
     <Fragment>
       <div className={scss.input_file_container}>
-        <label className={`${error ? scss.input_file_label_error : ""} ${scss.input_file_label}`} htmlFor={name}>
+        <label className={`${error ? scss.input_file_label__error : ""} ${scss.input_file_label}`} htmlFor={name}>
           <DownloadIcon/>
           <input
             {...register(name, options)}
@@ -121,5 +121,5 @@ export default function InputFile<T extends FieldValues>({ name, accept, options
       </div>
       {error ? <InputErrorMessage message={error}/> : null} 
    </Fragment>
-  )
+  );
 };

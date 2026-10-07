@@ -20,11 +20,11 @@ export default function File({ file, isSelected }: FileProps): ReactNode {
     <button 
       onClick={openFile}
       data-item-id={file.id}
-      className={`${isSelected ? scss.file_container_selected : ""} ${scss.file_container}`}>
+      className={`${isSelected ? scss.file__selected : ""} ${scss.file}`}>
       {getIconByExtention(file.name)}
       <p>{file.name}</p>
       {isSelected ? 
-      <div className={scss.file_selection_status}>
+      <div className={scss.file_statusbar}>
         <CheckIcon/>
       </div> : null}
     </button>

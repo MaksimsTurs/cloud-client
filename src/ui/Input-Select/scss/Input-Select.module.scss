@@ -42,7 +42,7 @@
     }
   }
 
-  .input_select_active {
+  .input_select__active {
     .input_select_arrow {
       transform: rotate(90deg);
     }
@@ -52,7 +52,7 @@
     }
   }
 
-  .input_select_error {
+  .input_select__error {
     border-bottom: 1px solid $var-border-color-red;
     color: $var-border-color-red;
     background-color: $var-background-color-red;

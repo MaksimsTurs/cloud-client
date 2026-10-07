@@ -17,12 +17,12 @@ export default function Folder({ folder, isSelected }: FolderProps): ReactNode {
   return(
     <button 
       onClick={openFolder} 
-      className={`${isSelected ? scss.folder_container_selected : ""} ${scss.folder_container}`}
+      className={`${isSelected ? scss.folder__selected : ""} ${scss.folder}`}
       data-item-id={folder.id}>
       <FolderClosedIcon strokeWidth={1} size={25}/>
       <p>{folder.name}</p>
       {isSelected ? 
-      <div className={scss.folder_selection_status}>
+      <div className={scss.folder_statusbar}>
         <CheckIcon/>
       </div> : null}
     </button>

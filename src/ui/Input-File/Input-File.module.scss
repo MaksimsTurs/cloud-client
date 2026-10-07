@@ -61,7 +61,7 @@
   }
 }
 
-.input_file_label_error {
+.input_file_label__error {
   border-bottom: 1px solid $var-border-color-red;
   background-color: $var-background-color-red;
   color: $var-color-red;
@@ -92,8 +92,4 @@
       @include text-overflow();
     }
   }
-}
-
-.input_file_list_error {
-  border-bottom: 1px solid $var-border-color-red;
 }

@@ -60,8 +60,8 @@ export default function InputSelect<T extends FieldValues>({
           ref={childrenRef}
           className={`
             ${scss.input_select} 
-            ${isDropdownOpen ? scss.input_select_active : ""} 
-            ${error ? scss.input_select_error : ""}
+            ${isDropdownOpen ? scss.input_select__active : ""} 
+            ${error ? scss.input_select__error : ""}
           `}>
           {selectedChildren ? <section>{selectedChildren}</section> : <p className={scss.input_select_placeholder}>{placeholder}</p>}
           <ul className={scss.input_select_dropdown}>{children}</ul>
